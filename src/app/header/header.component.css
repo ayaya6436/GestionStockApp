@@ -1,0 +1,15 @@
+.navbar{
+    height: 100%;
+}
+.side-nav-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.rem;
+    cursor: pointer;
+}
+
+.side-nav-button:hover{
+    background-color: rgba(255,255,255,0.3);
+    border-radius: 10px;
+}

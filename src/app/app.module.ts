@@ -8,6 +8,14 @@ import { EntreeComponent } from './entree/entree.component';
 import { SortieComponent } from './sortie/sortie.component';
 import { StockComponent } from './stock/stock.component';
 import { FournisseurComponent } from './fournisseur/fournisseur.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+//importation de toolbar (materialAngular)
+import {MatToolbarModule} from '@angular/material/toolbar';
+//importation de Icon (materialAngular)
+import {MatIconModule} from '@angular/material/icon';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { HeaderComponent } from './header/header.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -16,11 +24,17 @@ import { FournisseurComponent } from './fournisseur/fournisseur.component';
     EntreeComponent,
     SortieComponent,
     StockComponent,
-    FournisseurComponent
+    FournisseurComponent,
+    DashboardComponent,
+    HeaderComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
