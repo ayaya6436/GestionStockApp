@@ -1,0 +1,81 @@
+:root{
+    --couleur_violet: #9D4EDD;
+    --couleur_noire: #0000;
+    --couleur_blanc: #FFFFFF;
+    --couleur_gris: #F2F2F2;
+
+}
+.bodyFormulaire{
+    background: #9D4EDD;
+    justify-content: center;
+    margin: auto;
+   
+}
+
+.formulaireSortie {
+    border: solid 1px #000000;
+    background: #F2F2F2;
+    justify-content: center;
+    width: 50%;
+    margin: auto;
+    padding: 10px;
+    border-radius: 10px;
+    height: 70vh;
+    
+}
+h2{
+    text-align: center;
+    font-weight: bold;
+    text-shadow: black 0.1em 0.2em 0.2em;
+}
+
+.block1{
+    border: solid 1px #000000;
+    display: flex;
+    margin-bottom: 10%;
+    margin-left: 10px;
+    
+}
+.block2{
+    border: solid 1px #000000;
+    display: flex;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    margin-left: 10px;
+    
+}
+.block3{
+
+    border: solid 1px #000000;
+    display: flex;
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 70%;
+
+}
+label{
+    font-weight: bold;
+}
+input{
+    margin-right: 10px;
+    border: #F2F2F2 2px solid;
+    border-radius: 5px;
+    height: 40px;
+    width: 200px;
+}
+#descrInput{
+    width: 300px;
+}
+#button{
+    background: #9D4EDD;
+    border-radius: 5px;
+    color: #FFFFFF;
+    font-weight: bold;
+    padding: 10px;
+    margin-left: 55%;
+    cursor: pointer;
+    width: 80px;
+    height: 30px;
+    float: right;
+    margin-top: 7%;
+}

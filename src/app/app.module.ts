@@ -8,6 +8,7 @@ import { EntreeComponent } from './entree/entree.component';
 import { SortieComponent } from './sortie/sortie.component';
 import { StockComponent } from './stock/stock.component';
 import { FournisseurComponent } from './fournisseur/fournisseur.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FournisseurComponent } from './fournisseur/fournisseur.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
