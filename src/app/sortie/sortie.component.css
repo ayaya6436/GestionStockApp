@@ -9,12 +9,16 @@
 .bodyFormulaire{
     background: var(--couleur_blanc);
     justify-content: center;
-    margin: auto;
+    margin-top: 80px;
+    
    
 }
 
 .formulaireSortie {
-    border: #0000 1px solid;
+    border: red 3px solid;
+    margin-top: 20px;
+    font-family: 'Inter',sans-serif;
+    
     background: var(--couleur_blanc);
     justify-content: center;
     width: 50%;
@@ -26,17 +30,20 @@
     
 }
 
-img{
+.icone{
    border: #0000 5px solid;
-    height: 20px;
-    width: 20px;
+    height: 10px;
+    width: 10px;
     float: right;
+    margin-right: 10px;
+    margin-bottom: 10px;
     &:hover{
         cursor: pointer;
         color: red;
     }
 }
 h2{
+
     text-align: center;
     font-weight: bold;
     text-shadow: black 0.1em 0.2em 0.2em;
@@ -45,7 +52,7 @@ h2{
 .block1{
     display: flex;
     margin-bottom: 10%;
-    margin-left: 10px;
+    
     
 }
 .block2{
@@ -73,22 +80,34 @@ input{
     height: 30px;
     width: 200px;
     background: var(--couleur_inputbackground);
+    &::placeholder{
+        color: var(--couleur_violet);
+        opacity: 1;
+        font-family: 'Inter',sans-serif;
+        margin-left: 10px;
+    }
 }
 #descrInput{
     width: 300px;
 }
-#button{
+button{
     background: #9D4EDD;
     border-radius: 5px;
     color: #FFFFFF;
     font-weight: bold;
     padding: 10px;
-    margin-left: 55%;
+    margin-left: 40%;
     cursor: pointer;
-    width: 150px;
+    width: 200px;
     height: 30px;
-    float: right;
+    text-align: center;
     margin-top: 7%;
-    border: #0000 1px solid;
+    border: red 1px solid;
+    -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+  cursor: pointer;
+  display: inline-block;
     
 }

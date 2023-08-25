@@ -9,5 +9,6 @@ export class AppComponent {
  
   title = 'gestionStockApp';
   sideBarStatus : boolean = false;
+  
 
 }

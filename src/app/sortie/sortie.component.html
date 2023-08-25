@@ -1,42 +1,42 @@
-
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <div class="bodyFormulaire">
-    <form >
+    <form [formGroup]="sortieProduit" (ngSubmit)="onSubmit()">
         <div class="formulaireSortie">
-            <i class="fa-xmark"></i>
+            <i class="fas fa-xmark fa-1.5x icone"></i>
             <!-- <img src="/src/assets/xmark-solid.svg" alt=""> -->
-            <h2>Effectuée une Sorties de Produits</h2>
+            <h2>Effectuer une Sorties de Produits</h2>
             <div class="block1">
                 <div>
-                    <label>Quantité</label><br>
-                        <input type="text" name="quantite" placeholder="quantite"required> 
+                    <label for="name">Quantité</label><br>
+                        <input id="name" type="number" name="quantite" formControlName="quantite" placeholder="Quantite"required> 
+                    
                 </div>
                 <div>
-                    <label>Prix Unitaire</label><br>
-                        <input type="text" name="prix_unitaire" placeholder="prix unitaire" required>
+                    <label for="name">Prix Unitaire</label><br>
+                        <input id="name" type="number" name="prix_unitaire" formControlName="prix_unitaire" placeholder="Prix unitaire" required>
                     </div>
                 <div> 
-                    <label>Montant </label><br>
-                        <input type="text" name="montant" placeholder="montant" required> 
+                    <label for="name">Montant </label><br>
+                        <input id="name" type="number" name="montant" formControlName="montant" placeholder="Montant" required> 
                 </div>
             </div>
             <div class="block2">
                 <div>
-                <label>Dates</label><br>
-                     <input type="date" name="date" placeholder="saisissez la date du jour" required>
+                <label for="name">Dates</label><br>
+                     <input id="name" type="date" name="date" formControlName="date" placeholder="Saisissez la date du jour" required>
                 </div>
  
                 <div>
-                 <label>Produits</label><br>
-                   <input type="text" name="produit" placeholder="produit" required>
+                 <label for="name">Produits</label><br>
+                   <input id="name" type="text" name="produit" formControlName="produit" placeholder="Produit" required>
                 </div>
              </div>
             <div class="block3">
                 <div>
-                <label>Description</label><br>
-                    <input id="descrInput" type="text" name="description" placeholder="ajoutez une description" required> 
+                <label for="name">Description</label><br>
+                    <input id="name" id="descrInput" type="text" name="description" formControlName="description" placeholder="Ajoutez une description" required> 
                     </div>
-                <button id="button" type="submit">Validée</button>
+                <button id="button" type="submit" [disabled]="!sortieProduit.valid">Valider</button>
             </div>
         </div>
     </form>
