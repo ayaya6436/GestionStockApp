@@ -7,10 +7,10 @@ import { SortieComponent } from './sortie/sortie.component';
 
 //Routing entre les differentes pages
 const routes: Routes = [
-  {path: '',component:DashboardComponent},
-  {path: '/produit',component:ProduitComponent},
-  {path:'/entree',component:EntreeComponent},
-  {path:'/sortie',component:SortieComponent},
+  {path: '../dashboard',component:DashboardComponent},
+  {path: '../produit',component:ProduitComponent},
+  {path:'../entree',component:EntreeComponent},
+  {path:'../sortie',component:SortieComponent},
 ];
 
 @NgModule({
