@@ -1,0 +1,45 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    height: 60px; /* Ajustez la hauteur selon vos besoins */
+    padding: 0 10px;
+}
+
+.side-nav-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    cursor: pointer;
+    height: 100%;
+}
+
+.side-nav-button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+.form-control {
+    border-radius: 10px;
+}
+
+.navbar-toggler {
+    border: none;
+    background: transparent;
+}
+
+
+/* Ajoutez ces styles à votre fichier CSS */
+
+/* Pour centrer la barre de recherche */
+.form-center {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Pour placer l'icône d'alerte à la fin */
+.alert-icon {
+    margin-left: auto;
+}
