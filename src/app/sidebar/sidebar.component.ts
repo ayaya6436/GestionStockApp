@@ -23,16 +23,16 @@ export class SidebarComponent implements OnInit{
     {
       number: '3',
       name: 'Entree',
-      icon: 'fa-solid fa-house',
+      icon: 'fa-solid fa-arrow-up-right-from-square',
     },
 
     {
       number: '4',
       name: 'Sortie',
-      icon: 'fa-solid fa-house',
+      icon: 'fa-solid fa-share-from-square',
     },
   ];
-
+ 
   constructor(){
 
   }
