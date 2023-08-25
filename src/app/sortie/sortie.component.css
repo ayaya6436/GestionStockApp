@@ -3,18 +3,19 @@
     --couleur_noire: #0000;
     --couleur_blanc: #FFFFFF;
     --couleur_gris: #F2F2F2;
+    --couleur_inputbackground: #EFEBEB;
 
 }
 .bodyFormulaire{
-    background: #9D4EDD;
+    background: var(--couleur_blanc);
     justify-content: center;
     margin: auto;
    
 }
 
 .formulaireSortie {
-    border: solid 1px #000000;
-    background: #F2F2F2;
+    border: #0000 1px solid;
+    background: var(--couleur_blanc);
     justify-content: center;
     width: 50%;
     margin: auto;
@@ -22,6 +23,18 @@
     border-radius: 10px;
     height: 70vh;
     
+    
+}
+
+img{
+   border: #0000 5px solid;
+    height: 20px;
+    width: 20px;
+    float: right;
+    &:hover{
+        cursor: pointer;
+        color: red;
+    }
 }
 h2{
     text-align: center;
@@ -30,14 +43,12 @@ h2{
 }
 
 .block1{
-    border: solid 1px #000000;
     display: flex;
     margin-bottom: 10%;
     margin-left: 10px;
     
 }
 .block2{
-    border: solid 1px #000000;
     display: flex;
     margin-top: 10%;
     margin-bottom: 10%;
@@ -45,23 +56,23 @@ h2{
     
 }
 .block3{
-
-    border: solid 1px #000000;
     display: flex;
     margin-top: 10px;
     margin-left: 10px;
     width: 70%;
+    border: #0000 1px solid;
 
 }
 label{
     font-weight: bold;
 }
 input{
-    margin-right: 10px;
-    border: #F2F2F2 2px solid;
-    border-radius: 5px;
-    height: 40px;
+    margin-right: 30px;
+    border: #afacac 1px solid;
+    border-radius: 10px;
+    height: 30px;
     width: 200px;
+    background: var(--couleur_inputbackground);
 }
 #descrInput{
     width: 300px;
@@ -74,8 +85,10 @@ input{
     padding: 10px;
     margin-left: 55%;
     cursor: pointer;
-    width: 80px;
+    width: 150px;
     height: 30px;
     float: right;
     margin-top: 7%;
+    border: #0000 1px solid;
+    
 }
