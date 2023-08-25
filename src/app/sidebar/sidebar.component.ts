@@ -12,24 +12,28 @@ export class SidebarComponent implements OnInit{
       number: '1',
       name: 'Dashboard',
       icon: 'fa-solid fa-house',
+      path: 'dashboard'
     },
 
     {
       number: '2',
       name: 'Produits',
       icon: 'fa-solid fa-box',
+      path: 'produit'
     },
 
     {
       number: '3',
       name: 'Entree',
       icon: 'fa-solid fa-arrow-up-right-from-square',
+      path: 'entree'
     },
 
     {
       number: '4',
-      name: 'Sortie',
+      name: 'Sortie',Component: 'sortie',
       icon: 'fa-solid fa-share-from-square',
+      path:'sortie'
     },
   ];
  
