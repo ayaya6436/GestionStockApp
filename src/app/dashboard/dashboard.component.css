@@ -1,0 +1,126 @@
+
+.reactangle1 {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 614px;
+    height: 346px;
+    background: #d9d9d9;
+    background-blend-mode: normal;
+    box-shadow: inset 0px 4px 53px rgba(0,0,0,0.17);
+    border-radius: 16px;
+    margin-top: 20px;
+  }
+
+  .bienvenues {
+    position: absolute;
+    left: 24.5px;
+    top: 34px;
+    width: 324px;
+    height: 24px;
+    font-family: "League Spartan";
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: center;
+  }
+  
+  /* .ellipse {
+    position: absolute;
+    left: 15%;
+    top: 22%;
+    width: 158px;
+    height: 154px;
+    border: 1px solid ;
+    background: #9d4edd;
+    background-blend-mode: normal;
+    
+  } */
+
+  /* a {
+    position: absolute;
+    left: 120px;
+    top: 169px;
+    width: 62px;
+    height: 24px;
+    font-family: "League Spartan";
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 24px;
+    text-align: center;
+  }
+   */
+   .circle-wrap {
+    margin: 50px auto;
+    width: 150px;
+    height: 150px;
+    background: #e6e2e7;
+    border-radius: 50%;
+    margin-left: 15%;
+    margin-top: 15%;
+    
+  }
+
+  .circle-wrap .circle .mask,
+.circle-wrap .circle .fill {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  border-radius: 50%;
+
+}
+
+.circle-wrap .circle .mask {
+    clip: rect(0px, 150px, 150px, 75px);
+  }
+
+  .circle-wrap .circle .mask .fill {
+    clip: rect(0px, 75px, 150px, 0px);
+    background-color: #9D4EDD;
+  }
+  .circle-wrap .circle .mask.full,
+  .circle-wrap .circle .fill {
+    animation: fill ease-in-out 3s;
+    transform: rotate(160deg);
+  }
+  
+  @keyframes fill {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(126deg);
+    }
+  }
+
+  .circle-wrap .inside-circle {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: #fff;
+    line-height: 130px;
+    text-align: center;
+    margin-top: 10px;
+    margin-left: 10px;
+    position: absolute;
+    z-index: 100;
+    font-weight: 700;
+    font-size: 2em;
+  }
+
+  .statistique {
+    position: absolute;
+    left: 20px;
+    top: 276px;
+    width: 251px;
+    height: 24px;
+    font-family: "League Spartan";
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 24px;
+    text-align: center;
+  }
+  
+  /* svg image */
+  
+  

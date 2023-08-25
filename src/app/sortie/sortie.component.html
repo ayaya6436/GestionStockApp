@@ -1,1 +1,43 @@
-<p>sortie works!</p>
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+<div class="bodyFormulaire">
+    <form >
+        <div class="formulaireSortie">
+            <i class="fa-xmark"></i>
+            <!-- <img src="/src/assets/xmark-solid.svg" alt=""> -->
+            <h2>Effectuée une Sorties de Produits</h2>
+            <div class="block1">
+                <div>
+                    <label>Quantité</label><br>
+                        <input type="text" name="quantite" placeholder="quantite"required> 
+                </div>
+                <div>
+                    <label>Prix Unitaire</label><br>
+                        <input type="text" name="prix_unitaire" placeholder="prix unitaire" required>
+                    </div>
+                <div> 
+                    <label>Montant </label><br>
+                        <input type="text" name="montant" placeholder="montant" required> 
+                </div>
+            </div>
+            <div class="block2">
+                <div>
+                <label>Dates</label><br>
+                     <input type="date" name="date" placeholder="saisissez la date du jour" required>
+                </div>
+ 
+                <div>
+                 <label>Produits</label><br>
+                   <input type="text" name="produit" placeholder="produit" required>
+                </div>
+             </div>
+            <div class="block3">
+                <div>
+                <label>Description</label><br>
+                    <input id="descrInput" type="text" name="description" placeholder="ajoutez une description" required> 
+                    </div>
+                <button id="button" type="submit">Validée</button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,94 @@
+:root{
+    --couleur_violet: #9D4EDD;
+    --couleur_noire: #0000;
+    --couleur_blanc: #FFFFFF;
+    --couleur_gris: #F2F2F2;
+    --couleur_inputbackground: #EFEBEB;
+
+}
+.bodyFormulaire{
+    background: var(--couleur_blanc);
+    justify-content: center;
+    margin: auto;
+   
+}
+
+.formulaireSortie {
+    border: #0000 1px solid;
+    background: var(--couleur_blanc);
+    justify-content: center;
+    width: 50%;
+    margin: auto;
+    padding: 10px;
+    border-radius: 10px;
+    height: 70vh;
+    
+    
+}
+
+img{
+   border: #0000 5px solid;
+    height: 20px;
+    width: 20px;
+    float: right;
+    &:hover{
+        cursor: pointer;
+        color: red;
+    }
+}
+h2{
+    text-align: center;
+    font-weight: bold;
+    text-shadow: black 0.1em 0.2em 0.2em;
+}
+
+.block1{
+    display: flex;
+    margin-bottom: 10%;
+    margin-left: 10px;
+    
+}
+.block2{
+    display: flex;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    margin-left: 10px;
+    
+}
+.block3{
+    display: flex;
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 70%;
+    border: #0000 1px solid;
+
+}
+label{
+    font-weight: bold;
+}
+input{
+    margin-right: 30px;
+    border: #afacac 1px solid;
+    border-radius: 10px;
+    height: 30px;
+    width: 200px;
+    background: var(--couleur_inputbackground);
+}
+#descrInput{
+    width: 300px;
+}
+#button{
+    background: #9D4EDD;
+    border-radius: 5px;
+    color: #FFFFFF;
+    font-weight: bold;
+    padding: 10px;
+    margin-left: 55%;
+    cursor: pointer;
+    width: 150px;
+    height: 30px;
+    float: right;
+    margin-top: 7%;
+    border: #0000 1px solid;
+    
+}

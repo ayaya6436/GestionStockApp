@@ -2,32 +2,7 @@
   <app-header (sideNavToggled)="sideBarStatus = $event;"></app-header>
   <main>
     <app-sidebar [sideBarStatus]="sideBarStatus" [ngClass]=" {'app-side-nav-open':sideBarStatus}"></app-sidebar>
-
     <div class="display-area"[ngClass]="{'display-area-shrink':sideBarStatus}">
-      <div class="reactangle1">
-          <div class="bienvenues">Bienvenue sur YoGestion</div>
-           <div class="circle-wrap">
-            <div class="circle">
-              
-              <div class="mask full">
-                <div class="fill"></div>
-              </div>
-             
-              <div class="mask half">
-                <div class="fill"></div>
-              </div>
-              
-              <div class="inside-circle">
-                70%
-              </div>
-              
-            </div>
-            <div class="statistique">Statistiques des ventes</div>
-            <div id="vector" *ngFor="let item of list">
-              <img src="{{item.image}}" alt="">
-            </div>
-      </div>
-    </div>
   </div>
-  <router-outlet></router-outlet>
 </main>
+<router-outlet></router-outlet>
