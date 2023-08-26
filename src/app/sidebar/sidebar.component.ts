@@ -35,6 +35,13 @@ export class SidebarComponent implements OnInit{
       icon: 'fa-solid fa-share-from-square',
       path: 'sortie' 
     },
+
+    {
+      number: '5',
+      name: 'Fournisseur',
+      icon: 'fa-solid fa-user',
+      path: 'fournisseur' 
+    },
   ];
  
   constructor(){

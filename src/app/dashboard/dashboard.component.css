@@ -1,31 +1,35 @@
-
+/* .container {
+  display: flex;
+  flex-direction: column;
+} */
 .reactangle1 {
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    width: 614px;
-    height: 346px;
-    background: #d9d9d9;
-    background-blend-mode: normal;
-    box-shadow: inset 0px 4px 53px rgba(0,0,0,0.17);
-    border-radius: 16px;
-    margin-top: 20px;
-  }
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 614px;
+  height: 346px;
+  background: #d9d9d9;
+  background-blend-mode: normal;
+  box-shadow: inset 0px 4px 53px rgba(0, 0, 0, 0.17);
+  border-radius: 16px;
+  margin-top: 5%;
+  margin-left: 20%;
+}
 
-  .bienvenues {
-    position: absolute;
-    left: 24.5px;
-    top: 34px;
-    width: 324px;
-    height: 24px;
-    font-family: "League Spartan";
-    font-size: 30px;
-    font-weight: 400;
-    line-height: 24px;
-    text-align: center;
-  }
-  
-  /* .ellipse {
+.bienvenues {
+  position: absolute;
+  left: 24.5px;
+  top: 34px;
+  width: 324px;
+  height: 24px;
+  font-family: "League Spartan";
+  font-size: 30px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: center;
+}
+
+/* .ellipse {
     position: absolute;
     left: 15%;
     top: 22%;
@@ -37,7 +41,7 @@
     
   } */
 
-  /* a {
+/* a {
     position: absolute;
     left: 120px;
     top: 169px;
@@ -50,77 +54,338 @@
     text-align: center;
   }
    */
-   .circle-wrap {
-    margin: 50px auto;
-    width: 150px;
-    height: 150px;
-    background: #e6e2e7;
-    border-radius: 50%;
-    margin-left: 15%;
-    margin-top: 15%;
-    
-  }
+.circle-wrap {
+  margin: 50px auto;
+  width: 150px;
+  height: 150px;
+  background: #e6e2e7;
+  border-radius: 50%;
+  margin-left: 15%;
+  margin-top: 15%;
+}
 
-  .circle-wrap .circle .mask,
+.circle-wrap .circle .mask,
 .circle-wrap .circle .fill {
   width: 150px;
   height: 150px;
   position: absolute;
   border-radius: 50%;
-
 }
 
 .circle-wrap .circle .mask {
-    clip: rect(0px, 150px, 150px, 75px);
-  }
+  clip: rect(0px, 150px, 150px, 75px);
+}
 
-  .circle-wrap .circle .mask .fill {
-    clip: rect(0px, 75px, 150px, 0px);
-    background-color: #9D4EDD;
-  }
-  .circle-wrap .circle .mask.full,
-  .circle-wrap .circle .fill {
-    animation: fill ease-in-out 3s;
-    transform: rotate(160deg);
-  }
-  
-  @keyframes fill {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(126deg);
-    }
-  }
+.circle-wrap .circle .mask .fill {
+  clip: rect(0px, 75px, 150px, 0px);
+  background-color: #9d4edd;
+}
+.circle-wrap .circle .mask.full,
+.circle-wrap .circle .fill {
+  animation: fill ease-in-out 3s;
+  transform: rotate(160deg);
+}
 
-  .circle-wrap .inside-circle {
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    background: #fff;
-    line-height: 130px;
-    text-align: center;
-    margin-top: 10px;
-    margin-left: 10px;
-    position: absolute;
-    z-index: 100;
-    font-weight: 700;
-    font-size: 2em;
+@keyframes fill {
+  0% {
+    transform: rotate(0deg);
   }
+  100% {
+    transform: rotate(126deg);
+  }
+}
 
-  .statistique {
-    position: absolute;
-    left: 20px;
-    top: 276px;
-    width: 251px;
-    height: 24px;
-    font-family: "League Spartan";
-    font-size: 25px;
-    font-weight: 400;
-    line-height: 24px;
-    text-align: center;
+.circle-wrap .inside-circle {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: #fff;
+  line-height: 130px;
+  text-align: center;
+  margin-top: 10px;
+  margin-left: 10px;
+  position: absolute;
+  z-index: 100;
+  font-weight: 700;
+  font-size: 2em;
+}
+
+.statistique {
+  position: absolute;
+  left: 20px;
+  top: 276px;
+  width: 251px;
+  height: 24px;
+  font-family: "League Spartan";
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: center;
+}
+
+/* svg image */
+.vector img {
+  width: 400px;
+  height: 200px;
+  margin-left: 90%;
+}
+
+.rectangle2 {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 400px;
+  height: 346px;
+  background: #d9d9d9;
+  background-blend-mode: normal;
+  box-shadow: inset 0px 4px 53px rgba(0, 0, 0, 0.17);
+  border-radius: 16px;
+  margin-left: 60%;
+  margin-top: 5%;
+}
+
+.ellipse2 {
+  position: absolute;
+  left: 840.54px;
+  top: 6.61px;
+  width: 134.8px;
+  height: 126.83px;
+  background: #9d4edd;
+  background-blend-mode: normal;
+}
+
+/* .venteTotal {
+  position: absolute;
+  left: 964.77px;
+  top: 391.07px;
+  width: 302.65px;
+  height: 31.71px;
+  font-family: "LeagueSpartan-Regular";
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: center;
+ 
+  
+} */
+.k {
+  position: absolute;
+  left: 848.47px;
+  top: 51.53px;
+  width: 116.3px;
+  height: 33.03px;
+  color: #ffffff;
+  font-family: "LeagueSpartan-Regular";
+  font-size: 32px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: center;
+}
+
+.circle-wrap2 {
+  margin: 50px auto;
+  width: 150px;
+  height: 150px;
+
+  border-radius: 50%;
+  margin-left: 15%;
+  margin-top: 15%;
+}
+
+/* .circle-wrap2 .circle2 .mask2,
+.circle-wrap2 .circle2 .fill2 {
+width: 150px;
+height: 150px;
+position: absolute;
+border-radius: 50%;
+
+}
+
+.circle-wrap2 .circle2 .mask2 {
+  clip: rect(0px, 150px, 150px, 75px);
+} */
+
+/* .circle-wrap2 .circle2 .mask2 .fill2 {
+  clip: rect(0px, 75px, 150px, 0px);
+  background-color: #9D4EDD;
+}
+.circle-wrap2 .circle2 .mask2.full2,
+.circle-wrap2 .circle2 .fill2 {
+  animation: fill ease-in-out 3s;
+  transform: rotate(160deg);
+}
+
+@keyframes fill2 {
+  0% {
+    transform: rotate(0deg);
   }
-  
-  /* svg image */
-  
-  
+  100% {
+    transform: rotate(126deg);
+  }
+} */
+
+.circle-wrap2 .inside-circle2 {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background-color: #9d4edd;
+  color: white;
+  line-height: 130px;
+  text-align: center;
+  margin-top: -13%;
+  margin-left: -14%;
+  position: absolute;
+  z-index: 100;
+  font-weight: 700;
+  font-size: 2em;
+}
+
+.vector2 img {
+  width: 260px;
+  height: 200px;
+  margin-left: 50%;
+  margin-top: -29%;
+}
+.vente {
+  position: absolute;
+  left: 80px;
+  top: 276px;
+  width: 251px;
+  height: 24px;
+  font-family: "League Spartan";
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: center;
+}
+
+.row2 {
+  display: flex;
+  flex-direction: row;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+}
+/* .rectangle3 {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 400px;
+  height: 160px;
+  background: #d9d9d9;
+  background-blend-mode: normal;
+  box-shadow: inset 0px 4px 53px rgba(0,0,0,0.17);
+  border-radius: 16px;
+  margin-left: 60%;
+  margin-top: 29%;
+} */
+
+.rectangle3 {
+  position: absolute;
+  left: 40%;
+  top: 494.12px;
+  width: 350px;
+  height: 200px;
+  background: #d9d9d9;
+  background-blend-mode: normal;
+  box-shadow: inset 0px 4px 53px rgba(0, 0, 0, 0.17);
+  border-radius: 16px;
+}
+
+.vectorPoint {
+  position: absolute;
+  left: 831.29px;
+  top: 524.5px;
+  width: 9.29px;
+  height: 32px;
+  background: #000000;
+  background-blend-mode: normal;
+}
+
+.circle-wrap3 {
+  margin: 50px auto;
+  width: 80px;
+  height: 80px;
+
+  border-radius: 50%;
+  margin-left: 15%;
+  margin-top: 15%;
+}
+
+.circle-wrap3 .inside-circle3 {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #9d4edd;
+  color: white;
+  line-height: 130px;
+  text-align: center;
+  margin-top: -13%;
+  margin-left: -14%;
+  position: absolute;
+  z-index: 100;
+  font-weight: 700;
+  font-size: 2em;
+}
+
+.vector3 img {
+  width: 35px;
+  margin-top: -100%;
+}
+i {
+  position: absolute;
+  left: 300px;
+  top: 20px;
+  color: #000000;
+}
+
+.nombre {
+  position: absolute;
+  left: 50px;
+  top: 160px;
+  width: 251px;
+  height: 24px;
+  font-family: "League Spartan";
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: center;
+}
+
+.chiffre {
+  position: absolute;
+  left: 50px;
+  top: 120px;
+  width: 251px;
+  height: 24px;
+  font-family: "League Spartan";
+  font-size: 25px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: center;
+}
+
+.rectangle4 {
+  position: absolute;
+  left: 300.49px;
+  top: 494.12px;
+  width: 350px;
+  height: 200px;
+  background: #d9d9d9;
+  background-blend-mode: normal;
+  box-shadow: inset 0px 4px 53px rgba(0, 0, 0, 0.17);
+  border-radius: 16px;
+}
+
+.rectangle5 {
+  position: absolute;
+  left: 65%;
+  top: 494.12px;
+  width: 350px;
+  height: 200px;
+  background: #d9d9d9;
+  background-blend-mode: normal;
+  box-shadow: inset 0px 4px 53px rgba(0, 0, 0, 0.17);
+  border-radius: 16px;
+}

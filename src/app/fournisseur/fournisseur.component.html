@@ -1,1 +1,86 @@
-<p>fournisseur works!</p>
+<div class="container" style="margin: 10% 0 0 20%">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <button
+        class="btn text-light"
+        style="background-color: #9d4edd;margin-right: 56%;" 
+        type="button"
+  
+      >
+      <i class="fa-solid fa-list"></i>Liste des fournisseurs
+      </button>
+      <button
+        class="btn text-light mx-4"
+        style="background-color: #9d4edd"
+        type="button"
+      >
+      <i class="fa-solid fa-filter"></i> Filter
+      </button>
+      <button
+        class="btn me-md-2 text-light"
+        type="button"
+        style="background-color: #9d4edd"
+      >
+      <i class="fa-solid fa-plus"></i>Ajouter un fournisseur
+      </button>
+    </div>
+    <hr style="color: #9d4edd" />
+    <div class="text-center" style="font-size: 25px;">Date:</div>
+    <hr style="color: #9d4edd" />
+  
+    <table class="table table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">N</th>
+          <th scope="col">Nom</th>
+          <th scope="col">Prenom</th>
+          <th scope="col">Email</th>
+          <th scope="col">Age</th>
+          <th scope="col">Telephone</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+  
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td>Mark</td>
+          <td>Otto</td>
+          <td>@mdo</td>
+          <td>@mdo</td>
+          <td>@mdo</td>
+          <td>
+            <button class="btn"><i class="fas fa-edit"></i></button>
+            <button class="btn"><i class="fas fa-trash"></i></button>
+            <button class="btn"><i class="fa-regular fa-eye"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  
+  <!-- Modal -->
+  
+  <div class="modal-header" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+     <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">heading</h5>
+                <span data-bs-demiss="modal" aria-label="class" class="class-btn1">X</span>
+              </div>
+
+              <div class="modal-body">
+                <div class="form-box">
+                    <form [formGroup]="fournisseurForm" (ngSubmit)="submit();">
+                        <div class="form-group">
+                            <label for="">Nom</label>
+                            <input type="text" placeholder="Nom du fournisseur" formControlName="nom" class="form-control mt-3 mb-3">
+                        </div>
+
+                        <button type="submit" class="btn" data-bs-demiss="modal">Enregistrer</button>
+                    </form>
+                </div>
+              </div>
+          </div>
+     </div>
+  </div>

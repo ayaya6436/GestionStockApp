@@ -13,7 +13,30 @@ list=[
     name:'imageVectorDashbaoard',
     image:'../assets/images/undraw_empty_cart_co35.svg'
   }
+  
 ];
+
+list1=[
+
+    {
+      number : '2',
+      name:'imageVectorDashbaoard',
+      image:'../assets/images/courbe.png'
+    }
+  
+];
+
+
+list2=[
+
+  {
+    number : '3',
+    name:'imageVectorDashbaoard',
+    image:'../assets/images/chariot.png'
+  }
+
+];
+
 
 constructor(){
   
