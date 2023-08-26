@@ -17,6 +17,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ReactiveFormsModule } from "@angular/forms";
+import { MatDialogModule} from '@angular/material/dialog';
+import { PopupComponent } from './popup/popup.component';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +31,8 @@ import { ReactiveFormsModule } from "@angular/forms";
     FournisseurComponent,
     DashboardComponent,
     HeaderComponent,
-    SidebarComponent
+    SidebarComponent,
+    PopupComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,8 @@ import { ReactiveFormsModule } from "@angular/forms";
     BrowserAnimationsModule,
     MatToolbarModule,
     MatIconModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

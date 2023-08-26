@@ -1,4 +1,4 @@
-/* :root{
+:root{
     --couleur_violet: #9D4EDD;
     --couleur_noire: #0000;
     --couleur_blanc: #FFFFFF;
@@ -110,33 +110,4 @@ button{
   cursor: pointer;
   display: inline-block;
     
-} */
-
-table{
-    
-    font-family: 'Inter',sans-serif;
-    
-    background: var(--couleur_blanc);
-    width: 80%;
-    
-    padding: 10px;
-    margin-left: 10%;
-    margin-top: 20px;
-
-    border-collapse: collapse;
-}
-th, td {
-
-    border: 2px solid orange;
-
-  }
-
-.consectetur{
-    justify-content: center;
-    margin-top: 20px;
-    border: 1px solid red;
-}
-.classButton{
-    margin-top: 20px;
-    font-style: italic;
 }

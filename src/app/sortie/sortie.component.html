@@ -1,43 +1,34 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-<div class="bodyFormulaire">
-    <form [formGroup]="sortieProduit" (ngSubmit)="onSubmit()">
-        <div class="formulaireSortie">
-            <i class="fas fa-xmark fa-1.5x icone"></i>
-            <!-- <img src="/src/assets/xmark-solid.svg" alt=""> -->
-            <h2>Effectuer une Sorties de Produits</h2>
-            <div class="block1">
-                <div>
-                    <label for="name">Quantité</label><br>
-                        <input id="name" type="number" name="quantite" formControlName="quantite" placeholder="Quantite"required> 
-                    
-                </div>
-                <div>
-                    <label for="name">Prix Unitaire</label><br>
-                        <input id="name" type="number" name="prix_unitaire" formControlName="prix_unitaire" placeholder="Prix unitaire" required>
-                    </div>
-                <div> 
-                    <label for="name">Montant </label><br>
-                        <input id="name" type="number" name="montant" formControlName="montant" placeholder="Montant" required> 
-                </div>
-            </div>
-            <div class="block2">
-                <div>
-                <label for="name">Dates</label><br>
-                     <input id="name" type="date" name="date" formControlName="date" placeholder="Saisissez la date du jour" required>
-                </div>
- 
-                <div>
-                 <label for="name">Produits</label><br>
-                   <input id="name" type="text" name="produit" formControlName="produit" placeholder="Produit" required>
-                </div>
-             </div>
-            <div class="block3">
-                <div>
-                <label for="name">Description</label><br>
-                    <input id="name" id="descrInput" type="text" name="description" formControlName="description" placeholder="Ajoutez une description" required> 
-                    </div>
-                <button id="button" type="submit" [disabled]="!sortieProduit.valid">Valider</button>
-            </div>
-        </div>
-    </form>
+<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium cumque 
+    inventore, consectetur quos iste placeat vel optio odit. Unde ea sequi beatae rerum debitis 
+    est exercitationem libero perferendis adipisci doloribus!</p>
+    <!-- <app-popup style="display: none;" (formDataSubmitted)="handleFormData($event)"></app-popup> -->
+<div class="consectetur">
+    <div class="classButton">
+    <button style=" margin-left: 80%; background-color: #9D4EDD;" (click)="openPopup()">Effectuer une Sortie</button>
+    </div>
+
+
+    <!-- tableau pour afficher les sortieProduit effectuer  -->
+<div style="height: 900px;">
+    <table>
+        <tr>
+            <!-- <span class="Entete"> -->
+                <th>Dates</th>
+                <th>Description</th>
+                <th>Produits</th>
+                <th>Quantites</th>
+                <th>Prix Unitaire</th>
+                <th>Montant</th>
+            <!-- </span> -->
+        </tr>
+        <tr *ngFor="let sortieProduit of sortie">
+            <td>{{ sortieProduit.date | date:'mediumDate' }}</td>
+            <td>{{ sortieProduit.description }}</td>
+            <td>{{ sortieProduit.produit }}</td>
+            <td>{{ sortieProduit.quantite }}</td>
+            <td>{{ sortieProduit.prix_unitaire }}</td>
+            <td>{{ sortieProduit.montant }}</td>
+            </tr>
+      </table>
+</div>
 </div>
