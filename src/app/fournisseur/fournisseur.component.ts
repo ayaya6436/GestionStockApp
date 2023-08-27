@@ -11,6 +11,7 @@ export class FournisseurComponent implements OnInit {
 fournisseurForm:FormGroup|any;
 fournisseurs: Fournisseur[] = [];
 selectedFournisseur: Fournisseur | undefined;
+currentDate= new Date();
 isedit: boolean=false;
 ngOnInit():void{
 }
@@ -49,4 +50,6 @@ addmodel(fournisseur?: Fournisseur) {
     this.selectedFournisseur = undefined;
     this.isedit = false;
   }
+}
+
 }

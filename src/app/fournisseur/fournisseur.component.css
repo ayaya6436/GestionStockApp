@@ -1,0 +1,25 @@
+.close-btn1:hover{
+    background-color: red;
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+    margin-top:-10px ;
+
+}
+
+.close-btn1{
+   
+    margin-bottom:90px ;
+    
+
+}
+
+.modal-header h2{
+
+    margin-left: 20%;
+    font-weight: bold;
+    text-shadow: black 0.1em 0.2em 0.2em;
+    font-size: 30px;
+
+    
+}

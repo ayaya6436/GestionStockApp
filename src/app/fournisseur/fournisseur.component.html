@@ -8,6 +8,7 @@
       >
       <i class="fa-solid fa-list"></i>Liste des fournisseurs
       </button>
+      
       <button
         class="btn text-light mx-4"
         style="background-color: #9d4edd"
@@ -15,6 +16,7 @@
       >
       <i class="fa-solid fa-filter"></i> Filter
       </button>
+      
       <button
         class="btn me-md-2 text-light"
         type="button"
@@ -28,7 +30,7 @@
       </button>
     </div>
     <hr style="color: #9d4edd" />
-    <div class="text-center" style="font-size: 25px;">Date:</div>
+    <div class="text-center" style="font-size: 25px;">Date:{{currentDate | date:'yyyy-MM-dd'}}</div>
     <hr style="color: #9d4edd" />
   
     <table class="table table table-striped">
@@ -69,8 +71,8 @@
      <div class="modal-dialog">
           <div class="modal-content">
               <div class="modal-header">
-                <h2 class="modal-title text-center" id="exampleModalLabel">Ajouter un fournisseur</h2>
-                <span data-bs-dismiss="modal" aria-label="class" class="close-btn1 bg-danger p-2 rounded-circle">X</span>
+                <h2 class="modal-title " id="exampleModalLabel">Ajouter un fournisseur</h2>
+                <span data-bs-dismiss="modal" aria-label="class" class="close-btn1 p-2 ">X</span>
               </div>
 
               <div class="modal-body">
@@ -95,9 +97,7 @@
                             <input type="text" placeholder="Telephone du fournisseur" formControlName="telephone" class="form-control mt-3 mb-3">
                         </div>
 
-                       
-
-                        <button style="background-color: #9d4edd; color:white"  type="submit" class="btn" data-bs-demiss="modal">{{ isedit ? 'Update' : 'Enregistrer' }}</button>
+                        <button style="background-color: #9d4edd; color:white"  type="submit" class="btn" data-bs-demiss="modal">Enregistrer</button>
                     </form>
                 </div>
               </div>
