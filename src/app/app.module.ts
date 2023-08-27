@@ -19,6 +19,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { ReactiveFormsModule } from "@angular/forms";
 import { MatDialogModule} from '@angular/material/dialog';
 import { PopupComponent } from './popup/popup.component';
+import { PopupProduitComponent } from './popup-produit/popup-produit.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { PopupComponent } from './popup/popup.component';
     DashboardComponent,
     HeaderComponent,
     SidebarComponent,
-    PopupComponent
+    PopupComponent,
+    PopupProduitComponent
   ],
   imports: [
     BrowserModule,
