@@ -19,8 +19,12 @@
         class="btn me-md-2 text-light"
         type="button"
         style="background-color: #9d4edd"
+        
+        data-bs-target="#exampleModal" 
+        data-bs-toggle="modal"
+        (click)="addmodel()"
       >
-      <i class="fa-solid fa-plus"></i>Ajouter un fournisseur
+      <i class="fa-solid fa-plus" ></i>Ajouter un fournisseur
       </button>
     </div>
     <hr style="color: #9d4edd" />
@@ -34,23 +38,23 @@
           <th scope="col">Nom</th>
           <th scope="col">Prenom</th>
           <th scope="col">Email</th>
-          <th scope="col">Age</th>
           <th scope="col">Telephone</th>
           <th scope="col">Actions</th>
         </tr>
       </thead>
   
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td>@mdo</td>
-          <td>@mdo</td>
+        <tr *ngFor="let fournisseur of fournisseurs; let i = index">
+            <th scope="row">{{ i + 1 }}</th>
+            <td>{{ fournisseur.nom }}</td>
+            <td>{{ fournisseur.prenom }}</td>
+            <td>{{ fournisseur.email }}</td>
+            <td>{{ fournisseur.telephone }}</td>
           <td>
-            <button class="btn"><i class="fas fa-edit"></i></button>
-            <button class="btn"><i class="fas fa-trash"></i></button>
+       
+        <button class="btn" (click)="addmodel(fournisseur)"><i data-bs-target="#exampleModal" data-bs-toggle="modal" class="fas fa-edit" ></i></button>
+        
+        <button class="btn " (click)="deleteFournisseur(i)"><i data-bs-target="#exampleModal" data-bs-toggle="modal" class="fas fa-trash"></i></button>
             <button class="btn"><i class="fa-regular fa-eye"></i></button>
           </td>
         </tr>
@@ -61,12 +65,12 @@
   
   <!-- Modal -->
   
-  <div class="modal-header" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
      <div class="modal-dialog">
           <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">heading</h5>
-                <span data-bs-demiss="modal" aria-label="class" class="class-btn1">X</span>
+                <h2 class="modal-title text-center" id="exampleModalLabel">Ajouter un fournisseur</h2>
+                <span data-bs-dismiss="modal" aria-label="class" class="close-btn1 bg-danger p-2 rounded-circle">X</span>
               </div>
 
               <div class="modal-body">
@@ -77,7 +81,23 @@
                             <input type="text" placeholder="Nom du fournisseur" formControlName="nom" class="form-control mt-3 mb-3">
                         </div>
 
-                        <button type="submit" class="btn" data-bs-demiss="modal">Enregistrer</button>
+                        <div class="form-group">
+                            <label for="">Prenom</label>
+                            <input type="text" placeholder="Prenom du fournisseur" formControlName="prenom" class="form-control mt-3 mb-3">
+                        </div>
+
+                         <div class="form-group">
+                            <label for="">Email</label>
+                            <input type="text" placeholder="Email du fournisseur" formControlName="email" class="form-control mt-3 mb-3">
+                        </div>
+                        <div class="form-group">
+                            <label for="">Telephone</label>
+                            <input type="text" placeholder="Telephone du fournisseur" formControlName="telephone" class="form-control mt-3 mb-3">
+                        </div>
+
+                       
+
+                        <button style="background-color: #9d4edd; color:white"  type="submit" class="btn" data-bs-demiss="modal">{{ isedit ? 'Update' : 'Enregistrer' }}</button>
                     </form>
                 </div>
               </div>
