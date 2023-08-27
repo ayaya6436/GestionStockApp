@@ -50,5 +50,3 @@ addmodel(fournisseur?: Fournisseur) {
     this.isedit = false;
   }
 }
-
-}
