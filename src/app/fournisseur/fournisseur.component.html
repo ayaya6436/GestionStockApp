@@ -4,9 +4,10 @@
         class="btn text-light"
         style="background-color: #9d4edd;margin-right: 56%;" 
         type="button"
+        (click)="imprimerListe()"
   
       >
-      <i class="fa-solid fa-list"></i>Liste des fournisseurs
+      <i class="fa-solid fa-list"></i>Imprimer
       </button>
       
       <button
@@ -56,7 +57,7 @@
        
         <button class="btn" (click)="addmodel(fournisseur)"><i data-bs-target="#exampleModal" data-bs-toggle="modal" class="fas fa-edit" ></i></button>
         
-        <button class="btn " (click)="deleteFournisseur(i)"><i data-bs-target="#exampleModal" data-bs-toggle="modal" class="fas fa-trash"></i></button>
+        <button class="btn " (click)="deleteFournisseur(i)"><i data-bs-toggle="modal" class="fas fa-trash"></i></button>
             <button class="btn"><i class="fa-regular fa-eye"></i></button>
           </td>
         </tr>
@@ -104,3 +105,5 @@
           </div>
      </div>
   </div>
+
+
