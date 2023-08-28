@@ -64,9 +64,29 @@ viewDetails(fournisseur: Fournisseur) {
   this.selectedFournisseurDetails = fournisseur;
 }
 
-imprimerListe() {
-  window.print();
+printListeFournisseur() {
+  var printWindow = window.open('', '_blank');
+  var divToPrint = document.getElementById('divPrint');
+
+  if (divToPrint) {
+    const content = divToPrint.innerHTML;
+
+    printWindow!.document.write(`
+      <html>
+        <head>
+          <title>Imprimer la liste des fournisseurs</title>
+        </head>
+        <body>
+          ${content}
+        </body>
+      </html>
+    `);
+
+    printWindow!.print();
+    printWindow!.close();
+  }
 }
+
 
 
 

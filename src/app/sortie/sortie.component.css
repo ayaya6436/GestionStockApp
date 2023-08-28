@@ -1,4 +1,29 @@
-/* :root{
+.close-btn1:hover{
+    background-color: red;
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+    margin-top:-10px ;
+
+}
+
+.close-btn1{
+   
+    margin-bottom:90px ;
+    
+
+}
+
+.modal-header h2{
+
+    margin-left: 20%;
+    font-weight: bold;
+    text-shadow: black 0.1em 0.2em 0.2em;
+    font-size: 30px;
+
+    
+}
+:root{
     --couleur_violet: #9D4EDD;
     --couleur_noire: #0000;
     --couleur_blanc: #FFFFFF;
@@ -13,7 +38,7 @@
    
 }
 
-.formulaireSortie {
+.exampleModal {
     border: red 3px solid;
     margin-top: 20px;
     font-family: 'Inter',sans-serif;
@@ -75,9 +100,9 @@ input{
     border-radius: 10px;
     height: 30px;
     width: 200px;
-    background: var(--couleur_inputbackground);
+    background: #EFEBEB;
     &::placeholder{
-        color: var(--couleur_violet);
+        color: #9D4EDD;
         opacity: 1;
         font-family: 'Inter',sans-serif;
         margin-left: 10px;
@@ -86,53 +111,24 @@ input{
 #descrInput{
     width: 300px;
 }
-button{
-    background: #9D4EDD;
+#bbutton{
+    
+    background:#9d4edd6a ;
     border-radius: 5px;
     color: #FFFFFF;
     letter-spacing: 0.1em;
     padding: 10px;
     margin-left: 40%;
-    cursor: pointer;
+    cursor: pointer ;
     width: 200px;
     height: 30px;
     float: right;
     margin-top: 7%;
+    margin-bottom: 20px;
     border: red 1px solid;
-    -webkit-transition: all 0.5s;
-  -moz-transition: all 0.5s;
-  -o-transition: all 0.5s;
-  transition: all 0.5s;
-  cursor: pointer;
-  display: inline-block;
+    &:hover{
+        cursor: pointer;
+        background: #9D4EDD;
+    }
     
-} */
-
-table{
-    
-    font-family: 'Inter',sans-serif;
-    
-    background: var(--couleur_blanc);
-    width: 80%;
-    
-    padding: 10px;
-    margin-left: 10%;
-    margin-top: 20px;
-
-    border-collapse: collapse;
-}
-th, td {
-
-    border: 2px solid orange;
-
-  }
-
-.consectetur{
-    justify-content: center;
-    margin-top: 20px;
-    border: 1px solid red;
-}
-.classButton{
-    margin-top: 20px;
-    font-style: italic;
 }

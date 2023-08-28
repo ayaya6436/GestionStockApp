@@ -1,10 +1,10 @@
-<div class="container" style="margin: 10% 0 0 20%">
+<div class="container" style="position: relative; width: 100%; margin-top: 10%; margin-left: 10% 0 0 20%">
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
       <button
         class="btn text-light"
         style="background-color: #9d4edd;margin-right: 56%;" 
         type="button"
-        (click)="imprimerListe()"
+        (click)="printListeFournisseur()"
   
       >
       <i class="fa-solid fa-list"></i>Imprimer
@@ -34,7 +34,7 @@
     <div class="text-center" style="font-size: 25px;">Date:{{currentDate | date:'yyyy-MM-dd'}}</div>
     <hr style="color: #9d4edd" />
   
-    <table class="table table table-striped">
+    <table class="table table table-striped" style="width:100%" id="divPrint" >
       <thead>
         <tr>
           <th scope="col">N</th>
@@ -58,7 +58,7 @@
         <button class="btn" (click)="addmodel(fournisseur)"><i data-bs-target="#exampleModal" data-bs-toggle="modal" class="fas fa-edit" ></i></button>
         
         <button class="btn " (click)="deleteFournisseur(i)"><i data-bs-toggle="modal" class="fas fa-trash"></i></button>
-            <button class="btn" data-bs-target="#exampleModal2" data-bs-toggle="modal" (click)="viewDetails(fournisseur)"><i class="fa-regular fa-eye"></i></button>
+            <button class="btn" data-bs-target="#detailsModal" data-bs-toggle="modal" (click)="viewDetails(fournisseur)"><i class="fa-regular fa-eye"></i></button>
           </td>
         </tr>
       </tbody>
@@ -66,7 +66,7 @@
   </div>
   
   
-  <!-- Modal -->
+  <!-- Modal form fournisseurs -->
   
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
      <div class="modal-dialog">
@@ -110,9 +110,9 @@
 
 
 
-  <!-- Modal -->
+  <!-- Modal details-->
 
-<div class="modal fade" id="detailsModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -132,3 +132,4 @@
     </div>
   </div>
   
+
