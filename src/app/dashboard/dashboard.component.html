@@ -1,24 +1,79 @@
-<div class="reactangle1">
-    <div class="bienvenues">Bienvenue sur YoGestion</div>
-     <div class="circle-wrap">
-      <div class="circle">
-        
-        <div class="mask full">
-          <div class="fill"></div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="reactangle1">
+        <div class="bienvenues">Bienvenue sur YoGestion</div>
+        <div class="circle-wrap">
+          <div class="circle">
+            <div class="mask full">
+              <div class="fill"></div>
+            </div>
+
+            <div class="mask half">
+              <div class="fill"></div>
+            </div>
+
+            <div class="inside-circle">70%</div>
+          </div>
+          <div class="statistique">Statistiques des ventes</div>
+          <div class="vector" *ngFor="let item of list">
+            <img src="{{ item.image }}" alt="image personnage" />
+          </div>
         </div>
-       
-        <div class="mask half">
-          <div class="fill"></div>
-        </div>
-        
-        <div class="inside-circle">
-          70%
-        </div>
-        
       </div>
-      <div class="statistique">Statistiques des ventes</div>
-      <div id="vector" *ngFor="let item of list">
-        <img src="{{item.image}}" alt="">
+    </div>
+
+    <div class="col-md-6">
+      <div class="rectangle2">
+        <div class="circle-wrap2">
+          <div class="inside-circle2">100k</div>
+          <div class="vector2" *ngFor="let item of list1">
+            <img src="{{ item.image }}" alt="image de la courbe" />
+          </div>
+        </div>
+        <div class="vente">vente Total</div>
       </div>
-</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="col-md-4">
+      <div class="rectangle3">
+        <div class="circle-wrap3">
+          <div class="inside-circle3 vector3" *ngFor="let item of list2">
+            <img src="{{ item.image }}" alt="image de la courbe" />
+            <i class="fa-solid fa-ellipsis-vertical"></i>
+          </div>
+          <div class="chiffre">30</div>
+          <div class="nombre">Nombre de produits</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="rectangle4">
+      <div class="circle-wrap3">
+        <div class="inside-circle3 vector3" *ngFor="let item of list2">
+          <img src="{{ item.image }}" alt="image de la courbe" />
+          <i class="fa-solid fa-ellipsis-vertical"></i>
+        </div>
+        <div class="chiffre">30</div>
+        <div class="nombre">Nombre de produits</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div class="rectangle5">
+      <div class="circle-wrap3">
+        <div class="inside-circle3 vector3" *ngFor="let item of list2">
+          <img src="{{ item.image }}" alt="image de la courbe" />
+          <i class="fa-solid fa-ellipsis-vertical"></i>
+        </div>
+        <div class="chiffre">30</div>
+        <div class="nombre">Nombre de produits</div>
+      </div>
+    </div>
+  </div>
 </div>

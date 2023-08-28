@@ -1,1 +1,48 @@
-<p>stock works!</p>
+<div class="container" style="position: fixed; width: 100%; margin-top: 10%; margin-left: 10%; ">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button class="btn text-light" style="background-color: #9d4edd;margin-right: 54%;" type="button">
+            <i class="fa-solid fa-list" ></i> Impression
+        </button>
+
+        <!-- <button class="btn text-light mx-4" style="background-color: #9d4edd" type="button" >
+            <i class="fa-solid fa-filter"></i> Filter
+        </button> -->
+
+    </div>
+    <hr style="color: #9d4edd" />
+    <div class="text-center" style="font-size: 25px;">Date:{{currentDate | date:'yyyy-MM-dd'}}</div>
+    <hr style="color: #9d4edd" />
+
+    <table class="table table table-striped">
+        <thead>
+            <tr>
+                <th>Numero</th>
+                <th>Dates</th>
+                <th>Description</th>
+                <th>Produits</th>
+                <th>Quantites</th>
+                <th>Prix Unitaire</th>
+                <th>Montant</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let stockProduit of stockEntree, let i = index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ stockProduit.date | date:'mediumDate' }}</td>
+                <td>{{ stockProduit.description }}</td>
+                <td>{{ stockProduit.produit }}</td>
+                <td>{{ stockProduit.quantite }}</td>
+                <td>{{ stockProduit.prix_unitaire }}</td>
+                <td>{{ stockProduit.montant }}</td>
+                <!-- <td>
+                    <button class="btn" (click)="addmodel(entreeProduit)"><i data-bs-target="#exampleModal"
+                            data-bs-toggle="modal" class="fas fa-edit"></i></button>
+                    <button class="btn "><i data-bs-target="#exampleModal" data-bs-toggle="modal"
+                            class="fas fa-trash"></i></button>
+                    <button class="btn"><i class="fa-regular fa-eye"></i></button>
+                </td> -->
+            </tr>
+        </tbody>
+    </table>
+</div>

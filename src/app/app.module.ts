@@ -1,5 +1,8 @@
+import { ToastrModule } from 'ngx-toastr';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { ReactiveFormsModule } from '@angular/forms';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,11 +19,8 @@ import {MatIconModule} from '@angular/material/icon';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { ReactiveFormsModule } from "@angular/forms";
-import { MatDialogModule} from '@angular/material/dialog';
-import { PopupComponent } from './popup/popup.component';
-import { PopupProduitComponent } from './popup-produit/popup-produit.component';
-
+import { UserComponent } from './user/user.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -33,8 +33,7 @@ import { PopupProduitComponent } from './popup-produit/popup-produit.component';
     DashboardComponent,
     HeaderComponent,
     SidebarComponent,
-    PopupComponent,
-    PopupProduitComponent
+    UserComponent
   ],
   imports: [
     BrowserModule,
@@ -43,9 +42,14 @@ import { PopupProduitComponent } from './popup-produit/popup-produit.component';
     MatToolbarModule,
     MatIconModule,
     ReactiveFormsModule,
-    MatDialogModule
+    HttpClientModule,
+    ToastrModule.forRoot({
+      closeButton:true,
+      timeOut:50000,
+      progressBar:true
+    })
   ],
-  providers: [],
+  providers: [], 
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,34 +1,119 @@
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium cumque 
-    inventore, consectetur quos iste placeat vel optio odit. Unde ea sequi beatae rerum debitis 
-    est exercitationem libero perferendis adipisci doloribus!</p>
-    <!-- <app-popup style="display: none;" (formDataSubmitted)="handleFormData($event)"></app-popup> -->
-<div class="consectetur">
-    <div class="classButton">
-    <button style=" margin-left: 80%; background-color: #9D4EDD;" (click)="openPopup()">Effectuer une Sortie</button>
+
+<div class="container" style="position: relative; width: 100%; margin-top: 10%; margin-left: 10%; ">
+    <div  class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button class="btn text-light" style="background-color: #9d4edd;margin-right: 54%;" type="button">
+            <i class="fa-solid fa-list" ></i> Impression
+        </button>
+
+        <button class="btn text-light mx-4" style="background-color: #9d4edd" type="button">
+            <i class="fa-solid fa-filter"></i> Filter
+        </button>
+
+        <button class="btn me-md-2 text-light" type="button" style="background-color: #9d4edd"
+            data-bs-target="#exampleModal" data-bs-toggle="modal" (click)="addmodel()">
+            <i class="fa-solid fa-plus" ></i> Effectuer une sortie
+        </button>
     </div>
+    <hr style="color: #9d4edd" />
+    <div class="text-center" style="font-size: 25px;">Date:{{currentDate | date:'yyyy-MM-dd'}}</div>
+    <hr style="color: #9d4edd" />
 
-
-    <!-- tableau pour afficher les sortieProduit effectuer  -->
-<div style="height: 900px;">
-    <table>
-        <tr>
-            <!-- <span class="Entete"> -->
+    <table class="table table table-striped">
+        <thead>
+            <tr>
+                <th>Numero</th>
+                <th>Stock correspondant</th>
                 <th>Dates</th>
                 <th>Description</th>
                 <th>Produits</th>
                 <th>Quantites</th>
                 <th>Prix Unitaire</th>
                 <th>Montant</th>
-            <!-- </span> -->
-        </tr>
-        <tr *ngFor="let sortieProduit of sortie">
-            <td>{{ sortieProduit.date | date:'mediumDate' }}</td>
-            <td>{{ sortieProduit.description }}</td>
-            <td>{{ sortieProduit.produit }}</td>
-            <td>{{ sortieProduit.quantite }}</td>
-            <td>{{ sortieProduit.prix_unitaire }}</td>
-            <td>{{ sortieProduit.montant }}</td>
+                <th>Actions</th>
             </tr>
-      </table>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let sortieProduit of sorties, let i = index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ sortieProduit.date | date:'mediumDate' }}</td>
+                <td>{{ sortieProduit.number_stock }}</td>
+                <td>{{ sortieProduit.description }}</td>
+                <td>{{ sortieProduit.produit }}</td>
+                <td>{{ sortieProduit.quantite }}</td>
+                <td>{{ sortieProduit.prix_unitaire }}</td>
+                <td>{{ sortieProduit.montant }}</td>
+                <td>
+                    <button class="btn" (click)="addmodel(sortieProduit)"><i data-bs-target="#exampleModal"
+                            data-bs-toggle="modal" class="fas fa-edit"></i></button>
+                    <button class="btn "><i data-bs-target="#exampleModal" data-bs-toggle="modal"
+                            class="fas fa-trash"></i></button>
+                    <button class="btn"><i class="fa-regular fa-eye"></i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
+
+<div style="background-color: #f3f2f323; " class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div  class="modal-dialog">
+        <div class="modal-content">
+            <form style="width: min-content; background-color: #ffff; margin-right: 50%;border: #dadada 1px solid; border-radius: 5px;" [formGroup]="sortieProduit" (ngSubmit)="submit()">
+                <div style="margin-bottom: 0px;" class="formulaireSortie">
+                    <div class="modal-header">
+                        <h2 class="modal-title " id="exampleModalLabel">Effectuer une sortie</h2>
+                        <span data-bs-dismiss="modal" aria-label="class" class="close-btn1 p-2 ">X</span>
+                    </div>
+                    
+                    <div style="margin: 20px;" class="block1">
+                        <div>
+                            <label for="name">Quantité</label><br>
+                            <input id="name" type="number" name="quantite" formControlName="quantite"
+                                placeholder="Quantite" required>
+
+                        </div>
+                        <div>
+                            <label for="name">Prix Unitaire</label><br>
+                            <input id="name" type="number" name="prix_unitaire" formControlName="prix_unitaire"
+                                placeholder="Prix unitaire" required>
+                        </div>
+                        <div>
+                            <label for="name">Montant </label><br>
+                            <input id="name" type="number" name="montant" formControlName="montant"
+                                placeholder="Montant" required>
+                        </div>
+                    </div>
+                    <div style="margin: 20px;" class="block2">
+                        <div>
+                            <label for="name">Dates</label><br>
+                            <input id="name" type="date" name="date" formControlName="date"
+                                placeholder="Saisissez la date du jour" required>
+                        </div>
+
+                        <div>
+                            <label for="name">Produits</label><br>
+                            <input id="name" type="text" name="produit" formControlName="produit" placeholder="Produit"
+                                required>
+                        </div>
+
+                        <div>
+                            <label for="name">Numero du stock</label><br>
+                            <input id="number_stock" type="number" name="number_stock" formControlName="number_stock" placeholder="Numero du stock correspondant "
+                                required>
+                        </div>
+                    </div>
+                    <div style="margin: 20px; align-items: center;" class="block3">
+                        <div>
+                            <label for="name">Description</label><br>
+                            <input id="name" id="descrInput" type="text" name="description"
+                                formControlName="description" placeholder="Ajoutez une description" required>
+                        </div>
+                    
+                        <button  id="bbutton" type="submit" [disabled]="!sortieProduit.valid">Valider</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
+<!-- style="position: fixed; width: 100%; margin-top: 5%; margin-left: 7%;border: #9d4edd 1px solid; " -->
