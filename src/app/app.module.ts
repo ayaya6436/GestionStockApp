@@ -45,7 +45,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     ToastrModule.forRoot({
       closeButton:true,
-      timeOut:5000,
+      timeOut:1000,
       progressBar:true,
       
      

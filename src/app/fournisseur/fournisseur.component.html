@@ -58,7 +58,7 @@
         <button class="btn" (click)="addmodel(fournisseur)"><i data-bs-target="#exampleModal" data-bs-toggle="modal" class="fas fa-edit" ></i></button>
         
         <button class="btn " (click)="deleteFournisseur(i)"><i data-bs-toggle="modal" class="fas fa-trash"></i></button>
-            <button class="btn"><i class="fa-regular fa-eye"></i></button>
+            <button class="btn" data-bs-target="#exampleModal2" data-bs-toggle="modal" (click)="viewDetails(fournisseur)"><i class="fa-regular fa-eye"></i></button>
           </td>
         </tr>
       </tbody>
@@ -107,3 +107,28 @@
   </div>
 
 
+
+
+
+  <!-- Modal -->
+
+<div class="modal fade" id="detailsModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="exampleModalLabel">Détails du fournisseur</h2>
+          <span data-bs-dismiss="modal" aria-label="class" class="close-btn1 p-2 ">X</span>
+        </div>
+  
+        <div class="modal-body">
+          <div *ngIf="selectedFournisseurDetails">
+            <p><strong>Nom:</strong> {{ selectedFournisseurDetails.nom }}</p>
+            <p><strong>Prenom:</strong> {{ selectedFournisseurDetails.prenom }}</p>
+            <p><strong>Email:</strong> {{ selectedFournisseurDetails.email }}</p>
+            <p><strong>Téléphone:</strong> {{ selectedFournisseurDetails.telephone }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

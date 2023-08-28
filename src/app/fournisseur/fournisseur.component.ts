@@ -13,6 +13,7 @@ export class FournisseurComponent implements OnInit {
 fournisseurForm:FormGroup|any;
 fournisseurs: Fournisseur[] = [];
 selectedFournisseur: Fournisseur | undefined;
+selectedFournisseurDetails: Fournisseur | undefined;
 currentDate= new Date();
 isedit: boolean=false;
 ngOnInit():void{
@@ -57,6 +58,10 @@ addmodel(fournisseur?: Fournisseur) {
     this.selectedFournisseur = undefined;
     this.isedit = false;
   }
+}
+
+viewDetails(fournisseur: Fournisseur) {
+  this.selectedFournisseurDetails = fournisseur;
 }
 
 imprimerListe() {
