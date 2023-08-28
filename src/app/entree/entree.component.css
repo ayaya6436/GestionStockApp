@@ -1,0 +1,138 @@
+.close-btn1:hover{
+    background-color: red;
+    cursor: pointer;
+    height: 30px;
+    width: 30px;
+    margin-top:-10px ;
+
+}
+
+.close-btn1{
+   
+    margin-bottom:90px ;
+    
+
+}
+
+.modal-header h2{
+
+    margin-left: 20%;
+    font-weight: bold;
+    text-shadow: black 0.1em 0.2em 0.2em;
+    font-size: 30px;
+
+    
+}
+:root{
+    --couleur_violet: #9D4EDD;
+    --couleur_noire: #0000;
+    --couleur_blanc: #FFFFFF;
+    --couleur_gris: #F2F2F2;
+    --couleur_inputbackground: #EFEBEB;
+
+}
+.bodyFormulaire{
+    background: var(--couleur_blanc);
+    justify-content: center;
+    margin-top: 80px;
+    
+   
+}
+
+.exampleModal {
+    border: red 3px solid;
+    margin-top: 20px;
+    font-family: 'Inter',sans-serif;
+    
+    background: var(--couleur_blanc);
+    justify-content: center;
+    width: 50%;
+    margin: auto;
+    padding: 10px;
+    border-radius: 10px;
+    height: 70vh;
+    
+    
+}
+
+.icone{
+   border: #0000 5px solid;
+    height: 10px;
+    width: 10px;
+    float: right;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    &:hover{
+        cursor: pointer;
+        color: red;
+    }
+}
+h2{
+
+    text-align: center;
+    font-weight: bold;
+    text-shadow: black 0.1em 0.2em 0.2em;
+}
+
+.block1{
+    display: flex;
+    margin-bottom: 10%;
+    
+    
+}
+.block2{
+    display: flex;
+    margin-top: 10%;
+    margin-bottom: 10%;
+    margin-left: 10px;
+    
+}
+.block3{
+    display: flex;
+    margin-top: 10px;
+    margin-left: 10px;
+    width: 70%;
+    border: #0000 1px solid;
+
+}
+label{
+    font-weight: bold;
+}
+input{
+    margin-right: 30px;
+    border: #afacac 1px solid;
+    border-radius: 10px;
+    height: 30px;
+    width: 200px;
+    background: #EFEBEB;
+    &::placeholder{
+        color: #9D4EDD;
+        opacity: 1;
+        font-family: 'Inter',sans-serif;
+        margin-left: 10px;
+    }
+}
+#descrInput{
+    width: 300px;
+}
+#bbutton{
+    
+    background:#9d4edd6a ;
+    border-radius: 5px;
+    color: #FFFFFF;
+    letter-spacing: 0.1em;
+    padding: 10px;
+    margin-left: 40%;
+    cursor: pointer ;
+    width: 200px;
+    height: 30px;
+    text-align: center;
+    margin-top: 7%;
+    margin-bottom: 20px;
+    border: red 1px solid;
+    &:hover{
+        cursor: pointer;
+        background: #9D4EDD;
+    }
+    
+}

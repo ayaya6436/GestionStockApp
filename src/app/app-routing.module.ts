@@ -6,6 +6,7 @@ import { EntreeComponent } from './entree/entree.component';
 import { SortieComponent } from './sortie/sortie.component';
 import { UserComponent } from './user/user.component';
 import { FournisseurComponent } from './fournisseur/fournisseur.component';
+import { StockComponent } from './stock/stock.component';
 
 //Routing entre les differentes pages
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path:'sortie',component:SortieComponent},
   {path:'user',component:UserComponent},
   {path:'fournisseur',component:FournisseurComponent},
+  {path:'stock',component:StockComponent},
 ];
 
 @NgModule({

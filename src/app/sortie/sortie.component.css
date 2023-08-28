@@ -1,4 +1,4 @@
-:root{
+/* :root{
     --couleur_violet: #9D4EDD;
     --couleur_noire: #0000;
     --couleur_blanc: #FFFFFF;
@@ -14,7 +14,10 @@
 }
 
 .formulaireSortie {
-    border: #0000 1px solid;
+    border: red 3px solid;
+    margin-top: 20px;
+    font-family: 'Inter',sans-serif;
+    
     background: var(--couleur_blanc);
     justify-content: center;
     width: 50%;
@@ -73,22 +76,63 @@ input{
     height: 30px;
     width: 200px;
     background: var(--couleur_inputbackground);
+    &::placeholder{
+        color: var(--couleur_violet);
+        opacity: 1;
+        font-family: 'Inter',sans-serif;
+        margin-left: 10px;
+    }
 }
 #descrInput{
     width: 300px;
 }
-#button{
+button{
     background: #9D4EDD;
     border-radius: 5px;
     color: #FFFFFF;
-    font-weight: bold;
+    letter-spacing: 0.1em;
     padding: 10px;
-    margin-left: 55%;
+    margin-left: 40%;
     cursor: pointer;
-    width: 150px;
+    width: 200px;
     height: 30px;
     float: right;
     margin-top: 7%;
-    border: #0000 1px solid;
+    border: red 1px solid;
+    -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+  cursor: pointer;
+  display: inline-block;
     
+} */
+
+table{
+    
+    font-family: 'Inter',sans-serif;
+    
+    background: var(--couleur_blanc);
+    width: 80%;
+    
+    padding: 10px;
+    margin-left: 10%;
+    margin-top: 20px;
+
+    border-collapse: collapse;
+}
+th, td {
+
+    border: 2px solid orange;
+
+  }
+
+.consectetur{
+    justify-content: center;
+    margin-top: 20px;
+    border: 1px solid red;
+}
+.classButton{
+    margin-top: 20px;
+    font-style: italic;
 }
