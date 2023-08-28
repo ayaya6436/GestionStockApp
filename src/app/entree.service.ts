@@ -1,11 +1,20 @@
 import { Injectable } from '@angular/core';
+import { Entree } from './entree/entree.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EntreeService {
-  private key: "entreeStocks";
+  // private key: 'entreeStocks';
+
+  entreeStockSessions: Entree[]= [];
 
   constructor() { }
-  save
+  
+  saveDataEntree(data: Entree){
+    this.entreeStockSessions.push(data);
+  }
+  getDataEntree(){
+    return this.entreeStockSessions;
+  }
 }

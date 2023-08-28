@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogRef } from '@angular/cdk/dialog';
 import { Sortie } from './sortie.model';
 import { StockService } from '../stock.service';
+import { SortieService } from '../sortie.service';
 
 
 @Component({
@@ -17,11 +18,14 @@ export class SortieComponent implements OnInit {
   selectedSortie: Sortie | undefined;
   currentDate = new Date();
   isedit: boolean = false;
-  ngOnInit(): void {
+  ngOnInit() {
+    this.sortieService.getDataSortie();
   }
 
-  constructor(private fb: FormBuilder,private stockService : StockService) {
-    
+  constructor(private fb: FormBuilder, private stockService: StockService, private sortieService: SortieService) {
+    // stockService = new StockService;
+    // this.stockService.stocks.findIndex(stock => stock.id === this.sortieService.sortieProduitService.findIndex(sortieProduitService=> sortieProduitService.number_stock))
+
     this.sortieProduit = this.fb.group({
       date: [new Date(), Validators.required],
       quantite: [0, Validators.required],
@@ -32,18 +36,48 @@ export class SortieComponent implements OnInit {
       description: ['', Validators.required],
 
     });
+
   }
+  //   elementStock(){
+
+  // }
   submit() {
+    console.log("dfghjkl");
     if (this.sortieProduit.valid) {
-      const newSortie: Sortie = this.sortieProduit.value;
-      if (this.isedit && this.selectedSortie) {
-        Object.assign(this.selectedSortie, newSortie);
-      } else {
-        this.sorties.push(newSortie);
+      const numberSockValue = this.sortieService.getIdSortie();
+      if (numberSockValue !== undefined) {
+        const stockExist = this.stockService.getStockById();
+        if (stockExist != null) {
+          const montantStock = this.stockService.getStockById();
+          let montant = montantStock?.montant;
+          // if(montant != null){
+          const sortieMontant = this.sortieService.getIdSortie();
+          let monontantsortie = sortieMontant?.montant;
+          // if(sortieMontant != null){
+
+          const soustractionMontant = montant! - monontantsortie!;
+          this.stockService.updateStock(soustractionMontant);
+        }
+
+
       }
-      this.sortieProduit.reset();
-      this.selectedSortie = undefined;
-      this.isedit = false;
+
+
+      //if (this.sortieProduit.valid) {
+        const newSortie: Sortie = this.sortieProduit.value;
+        if (this.isedit && this.selectedSortie) {
+          Object.assign(this.selectedSortie, newSortie);
+          console.log("je suis dans element stock");
+        } else {
+          this.sorties.push(newSortie);
+        }
+        console.log(newSortie);
+        this.sortieService.saveDataSortie(newSortie);
+        this.sortieProduit.reset();
+        this.selectedSortie = undefined;
+        this.isedit = false;
+      //}
+      
     }
   }
 
@@ -52,6 +86,7 @@ export class SortieComponent implements OnInit {
   }
 
   addmodel(sortie?: Sortie) {
+
     if (sortie) {
       this.selectedSortie = { ...sortie };
       this.isedit = true;
@@ -60,6 +95,7 @@ export class SortieComponent implements OnInit {
       this.isedit = false;
     }
   }
+
 
 
   //   constructor(private dialog: MatDialog) {}
