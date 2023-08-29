@@ -32,6 +32,7 @@ import { RegisterComponent } from './register/register.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +48,8 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
     LoginComponent,
     RegisterComponent,
     ForgotPasswordComponent,
-    VerifyEmailComponent
+    VerifyEmailComponent,
+ 
   ],
   imports: [
     BrowserModule,

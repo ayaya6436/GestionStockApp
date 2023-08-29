@@ -97,4 +97,8 @@ export class AuthService {
       alert(err.message);
     });
   }
+//info users
+  getLoggedInUserInfo(){
+
+  }
 }

@@ -12,6 +12,8 @@ import { RegisterComponent } from './register/register.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
+
+
 //Routing entre les differentes pages
 const routes: Routes = [
   {path: '',redirectTo: 'login',pathMatch:'full'},
@@ -26,6 +28,7 @@ const routes: Routes = [
   {path:'stock',component:StockComponent},
   {path:'verify-email',component:VerifyEmailComponent},
   {path:'forgot-password',component:ForgotPasswordComponent},
+  
 ];
 
 @NgModule({

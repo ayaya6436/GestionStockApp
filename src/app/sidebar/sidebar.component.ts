@@ -48,6 +48,11 @@ export class SidebarComponent implements OnInit{
       name: 'Stock',
       icon: 'fa-solid fa-user',
       path: 'stock'  
+    }, {
+      number: '7',
+      name: 'User',
+      icon: 'fa-solid fa-user',
+      path: 'user'  
     },
   ];
  

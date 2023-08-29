@@ -1,45 +1,83 @@
-
-
 <body>
-    <div class="container mt-5">
-      <div class="row shadow">
-        <div class="col-lg-10 col-xl-9 mx-auto">
-          <div class="card flex-row my-5 border-0  rounded-3 overflow-hidden">
-            <div class="card-img-left d-none d-md-flex">
-              <img src="../assets/images/loginImage.png" alt="">
-            </div>
-            <div class="card-body p-4 p-sm-5">
-              <h5 class="card-title text-center mb-5 fw-light" style="font-size: 60px; font-weight: bold;">Conexion</h5>
-              <form>
-  
-                <div class="form-group mb-3">
-                    <label for="">Email</label>
-                    <input type="email" placeholder="Email de l'utilisateur" name="email" [(ngModel)]="email" class="form-control mt-3 mb-3">
-                </div>
-  
-                <div class="mb-3">
-                    <label for="">Mot de passe</label>
-                    <input type="password" placeholder="Mot de passe" name="password" [(ngModel)]="password" class="form-control mt-3 mb-3">
-                </div>
-  
-  
-                <button style="background-color: #9d4edd; color:white"  type="submit" class="btn" data-bs-demiss="modal" (click)="login()" >Se Connecter</button>
-                <a class="d-block text-center mt-2 small" href="../register" style="font-size: 18px;">Avez vous un compte ? <span class="text-danger">S'inscrire</span></a>
-                <a class="d-block text-center mt-2 small" href="../forgot-password" style="font-size: 18px; color:black; text-decoration: none;">Mot de passe oublie?</a>
-   
-                <hr class="my-4">
-  
-                <div class="d-grid mb-2">
-                  <a (click)="ConnexionGoogle()" class="btn btn-lg btn-google btn-login fw-bold text-uppercase" type="submit">
-                    <i class="fab fa-google me-2"></i> Se Connecter avec Google
-                  </a>
-                </div>
-  
-              </form>
-            </div>
+  <div class="container mt-5">
+    <div class="row shadow">
+       <!-- Image à gauche -->
+       <div class="col-lg-6 col-md-12" style="background-color: #9d4edd;">
+        <div class="card-img-left d-flex justify-content-center align-items-center">
+          <img src="../assets/images/loginImage.png" alt="Image de connexion" class="img-fluid">
+        </div>
+      </div>
+
+      <div class="col-lg-6 col-md-12">
+        <div class="card flex-row my-5 border-0 rounded-3 overflow-hidden">
+          <div class="card-body p-4 p-sm-5">
+            <h5
+              class="card-title text-center mb-5 fw-light"
+              style="font-size: 60px; font-weight: bold"
+            >
+              Conexion
+            </h5>
+            <form>
+              <div class="form-group mb-3">
+                <label for="">Email</label>
+                <input
+                  type="email"
+                  placeholder="Email de l'utilisateur"
+                  name="email"
+                  [(ngModel)]="email"
+                  class="form-control mt-3 mb-3"
+                />
+              </div>
+
+              <div class="mb-3">
+                <label for="">Mot de passe</label>
+                <input
+                  type="password"
+                  placeholder="Mot de passe"
+                  name="password"
+                  [(ngModel)]="password"
+                  class="form-control mt-3 mb-3"
+                />
+              </div>
+
+              <button
+                style="background-color: #9d4edd; color: white"
+                type="submit"
+                class="btn"
+                data-bs-demiss="modal"
+                (click)="login()"
+              >
+                Se Connecter
+              </button>
+              <a
+                class="d-block text-center mt-2 small"
+                href="../register"
+                style="font-size: 18px"
+                >Avez vous un compte ?
+                <span class="text-danger">S'inscrire</span></a
+              >
+              <a
+                class="d-block text-center mt-2 small"
+                href="../forgot-password"
+                style="font-size: 18px; color: black; text-decoration: none"
+                >Mot de passe oublie?</a
+              >
+
+              <hr class="my-4" />
+
+              <div class="d-grid mb-2">
+                <a
+                  (click)="ConnexionGoogle()"
+                  class="btn btn-lg btn-google btn-login fw-bold text-uppercase"
+                  type="submit"
+                >
+                  <i class="fab fa-google me-2"></i> Se Connecter avec Google
+                </a>
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </div>
-  </body>
-  
+  </div>
+</body>
