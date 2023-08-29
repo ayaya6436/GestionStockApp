@@ -7,9 +7,14 @@ import { SortieComponent } from './sortie/sortie.component';
 import { UserComponent } from './user/user.component';
 import { FournisseurComponent } from './fournisseur/fournisseur.component';
 import { StockComponent } from './stock/stock.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 //Routing entre les differentes pages
 const routes: Routes = [
+  {path: '',redirectTo: 'login',pathMatch:'full'},
+  {path: 'login',component:LoginComponent},
+  {path: 'register',component:RegisterComponent},
   {path: 'dashboard',component:DashboardComponent},
   {path: 'produit',component:ProduitComponent},
   {path:'entree',component:EntreeComponent},
