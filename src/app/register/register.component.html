@@ -1,43 +1,40 @@
-<div class="container">
-    <div class="droite" *ngFor="let item of list">
-        <img src="{{item.image}}" alt="image de connexion" >
-    </div>
-    <div class="gauche row mt-5">
-        <div class="col"></div>
-        <div class="col-4">
-            <div class="card shadow">
-                <div class="card-body">
-                    <form>
-                        <div class="mb-3">
-                            <h4 class="text-dark text-muted">Inscription</h4>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Nom</label>
-                            <input type="nom" placeholder="Nom de l'utilisateur" name="nom" [(ngModel)]="nom" class="form-control mt-3 mb-3">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="">Prenom</label>
-                            <input type="prenom" placeholder="Prenom de l'utilisateur" name="email" [(ngModel)]="prenom" class="form-control mt-3 mb-3">
-                        </div>
-                        <div class="form-group">
-                            <label for="">Email</label>
-                            <input type="email" placeholder="Email de l'utilisateur" name="email" [(ngModel)]="email" class="form-control mt-3 mb-3">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="">Mot de passe</label>
-                            <input type="password" placeholder="Mot de passe" name="password" [(ngModel)]="password" class="form-control mt-3 mb-3">
-                        </div>
-                        <button style="background-color: #9d4edd; color:white"  type="submit" class="btn" data-bs-demiss="modal" (onclick)="register()" >Se Connecter</button>
-                        <div class="col-md-6">
-                            <a href="/login" style="text-decoration: none;">Vous Avez un compte ? <span class="text-danger">Inscription</span></a>
-                        </div>
-                        
-                    </form>
-                </div>
-            </div>
+<div class="container mt-5">
+    <div class="row shadow ">
+  
+      <!-- Image à gauche -->
+      <div class="col-lg-6 col-md-12">
+        <div class="card-img-left d-flex justify-content-center align-items-center">
+          <img src="../assets/images/loginImage.png" alt="Image de connexion" class="img-fluid">
         </div>
-
+      </div>
+  
+      <!-- Formulaire d'Inscription -->
+      <div class="col-lg-6 col-md-12">
+        <div class="card-body p-4 p-sm-5">
+          <h5 class="card-title text-center mb-5 fw-light" style="font-size: 60px; font-weight: bold;">Inscription</h5>
+          <form>
+            <div class="form-group mb-3">
+              <label for="">Nom</label>
+              <input type="nom" placeholder="Nom de l'utilisateur" name="nom" [(ngModel)]="nom" class="form-control mt-3 mb-3">
+            </div>
+            <div class="form-group mb-3">
+              <label for="">Prenom</label>
+              <input type="prenom" placeholder="Prenom de l'utilisateur" name="prenom" [(ngModel)]="prenom" class="form-control mt-3 mb-3">
+            </div>
+            <div class="form-group mb-3">
+              <label for="">Email</label>
+              <input type="email" placeholder="Email de l'utilisateur" name="email" [(ngModel)]="email" class="form-control mt-3 mb-3">
+            </div>
+            <div class="form-group mb-3">
+              <label for="">Mot de passe</label>
+              <input type="password" placeholder="Mot de passe" name="password" [(ngModel)]="password" class="form-control mt-3 mb-3">
+            </div>
+            <button style="background-color: #9d4edd; color:white" type="submit" class="btn" data-bs-demiss="modal" (click)="register()">S'inscrire</button>
+            <a class="d-block text-center mt-2 small" href="/login"  style="font-size: 18px; ">Vous avez un compte ? <span class="text-danger">Connexion</span></a>
+          </form>
+        </div>
+      </div>
+    
     </div>
-</div>
+  </div>
+  

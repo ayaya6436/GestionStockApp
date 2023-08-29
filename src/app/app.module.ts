@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {AngularFireModule} from '@angular/fire/compat';
-
+import { environment } from '../environments/environment'; 
 
 
 
@@ -24,7 +24,7 @@ import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { UserComponent } from './user/user.component';
 import { HttpClientModule } from '@angular/common/http';
- import { environment } from '../environments/environment';
+//  import { environment } from '../environments/environment';
 
 
 import { LoginComponent } from './login/login.component';

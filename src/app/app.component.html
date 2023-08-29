@@ -1,8 +1,10 @@
-<div  class="container-fluid g-0">
-  <app-header (sideNavToggled)="sideBarStatus = $event;"></app-header>
+<!-- si on est sur la pa login on cache header et le sidebar -->
+<div class="container-fluid g-0">
+  <app-header *ngIf="sideBarStatus" (sideNavToggled)="sideBarStatus = $event;"></app-header>
   <main>
-    <app-sidebar [sideBarStatus]="sideBarStatus" [ngClass]=" {'app-side-nav-open':sideBarStatus}"></app-sidebar>
-    <div class="display-area"[ngClass]="{'display-area-shrink':sideBarStatus}">
-  </div>
-</main>
-<router-outlet></router-outlet>
+    <app-sidebar *ngIf="sideBarStatus" [sideBarStatus]="sideBarStatus" [ngClass]="{'app-side-nav-open': sideBarStatus}"></app-sidebar>
+    <div class="display-area" [ngClass]="{'display-area-shrink': sideBarStatus}">
+    </div>
+  </main>
+  <router-outlet></router-outlet>
+</div>

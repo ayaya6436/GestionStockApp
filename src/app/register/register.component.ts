@@ -16,6 +16,8 @@ export class RegisterComponent implements OnInit {
     }
     
   ];
+  showHeaderAndSidebar: boolean = false;
+
 
   //les attributs
   email: string='';
@@ -24,7 +26,7 @@ export class RegisterComponent implements OnInit {
   prenom: string='';
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.showHeaderAndSidebar = false;
   }
   constructor(private auth : AuthService){}
 
@@ -47,7 +49,7 @@ export class RegisterComponent implements OnInit {
       return;
 
     }
-    this.auth.register(this.email, this.password);
+    this.auth.register(this.email, this.password, this.nom, this.prenom);
     this.email = '';
     this.password = '';
     this.nom = '';

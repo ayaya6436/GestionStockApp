@@ -19,10 +19,11 @@ export class LoginComponent implements OnInit {
 //les attributs
   email: string='';
   password: string='';
+  showHeaderAndSidebar: boolean = false;
 
   constructor(private auth: AuthService){}
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.showHeaderAndSidebar = false;
   }
 
   login(){

@@ -24,18 +24,29 @@ export class AuthService {
   }
 
   //register methode
-
-  register(email:string,password:string){
-    this.fireauth.createUserWithEmailAndPassword(email,password).then( ()=>{
-      alert("Inscription successful");
-      this.router.navigate(['/login']);
-
-    }, err=>{
+  register(email: string, password: string, nom: string, prenom: string) {
+    this.fireauth.createUserWithEmailAndPassword(email, password).then((userCredential) => {
+      if (userCredential && userCredential.user) {
+        const user = userCredential.user;
+        user.updateProfile({
+          displayName: nom + ' ' + prenom
+        }).then(() => {
+          alert("Inscription successful");
+          this.router.navigate(['/login']);
+        }).catch((err) => {
+          alert(err.message);
+          this.router.navigate(['/register']);
+        });
+      } else {
+        alert("An error occurred during registration.");
+        this.router.navigate(['/register']);
+      }
+    }).catch((err) => {
       alert(err.message);
       this.router.navigate(['/register']);
-    })
+    });
   }
-
+  
   //deconnexion
 
   logout(){
