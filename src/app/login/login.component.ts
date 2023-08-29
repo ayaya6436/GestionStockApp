@@ -43,4 +43,8 @@ export class LoginComponent implements OnInit {
 
   }
 
+  ConnexionGoogle(){
+    this.auth.ConnexionGoogleUser();
+  }
+
 }

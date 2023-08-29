@@ -9,12 +9,15 @@ import { Component, OnInit } from '@angular/core';
 export class ForgotPasswordComponent implements OnInit {
 
   email: string ='';
+  showHeaderAndSidebar: boolean = false;
+
 
   constructor(private  auth :AuthService){
 
   }
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    this.showHeaderAndSidebar = false;
+
 
   }
 
