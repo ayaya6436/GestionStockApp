@@ -14,9 +14,16 @@ export class AuthService {
 
   // login methode
   login(email: string, password: string){
-    this.fireauth.signInWithEmailAndPassword(email, password).then(() => {
+    this.fireauth.signInWithEmailAndPassword(email, password).then(res => {
       localStorage.setItem('token','true');
-      this.router.navigate(['dashboard']);
+
+      if(res.user?.emailVerified==true){
+        this.router.navigate(['dashboard']);
+
+      }else{
+      this.router.navigate(['/verify-email']);
+
+      }
     },err=>{
         alert(err.message);
         this.router.navigate(['/login']);
@@ -33,6 +40,7 @@ export class AuthService {
         }).then(() => {
           alert("Inscription successful");
           this.router.navigate(['/login']);
+          this.sendEmailForValidation(user);
         }).catch((err) => {
           alert(err.message);
           this.router.navigate(['/register']);
@@ -57,6 +65,27 @@ export class AuthService {
     }, err=>{
       alert(err.message);
     
+    })
+  }
+
+  //forgotPassword
+  forgotPassword(email: string){
+    this.fireauth.sendPasswordResetEmail(email).then( ()=>{
+      this.router.navigate(['/verify-email']);
+    
+ 
+     }, err=>{
+       alert(err.message);
+     
+     })
+  }
+
+  //send email
+  sendEmailForValidation(user:any){
+    user.sendEmailForValidation().then((res:any)=>{
+      this.router.navigate(['/verify-email']);
+    },(err:any)=>{
+      alert(err.message);
     })
   }
 }
