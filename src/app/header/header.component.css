@@ -1,7 +1,7 @@
 .navbar {
     display: flex;
     align-items: center;
-    height: 60px; /* Ajustez la hauteur selon vos besoins */
+    height: 60px; 
     padding: 0 10px;
 }
 
