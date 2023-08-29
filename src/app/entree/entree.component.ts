@@ -16,6 +16,7 @@ export class EntreeComponent implements OnInit {
   selectedEntree: Entree | undefined;
   currentDate = new Date();
   isedit: boolean = false;
+ 
 
 
   ngOnInit(): void {
@@ -68,9 +69,6 @@ export class EntreeComponent implements OnInit {
         prix_unitaire: newEntree.prix_unitaire,
         montant: newEntree.montant
       }
-      
-
-      
 
       const saveEntree: Entree ={
         date: new Date(),
@@ -85,8 +83,6 @@ export class EntreeComponent implements OnInit {
       //this.entrees.push(newEntree);
       this.stockService.saveData(stok);
       //sessionStorage.setItem("entreeDonner", JSON.stringify(this.entrees));
-
-
     }
   }
 
@@ -103,6 +99,4 @@ export class EntreeComponent implements OnInit {
       this.isedit = false;
     }
   }
-
-
 }
