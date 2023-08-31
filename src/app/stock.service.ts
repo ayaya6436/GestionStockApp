@@ -24,26 +24,33 @@ export class StockService {
     sessionStorage.setItem('lastStockId', this.lastId.toString());
      sessionStorage.setItem(this.key, JSON.stringify(data));
   }
-  getStockById(): Stock | undefined {
-    return this.stocks.find(stock => stock.id === this.lastId);
+  getStockById(isId: number): Stock | undefined {
+    return this.stocks.find(stock => stock.id === isId);
 
   }
-  updateStock(montant : number){
-    let stock = this.getStockById();
+  updateStock(stockTrouver: number, montant : number){
+    let stock = this.getStockById(stockTrouver);
     const index = this.stocks.findIndex(stoc => stoc.id == stock?.id);
     this.stocks[index].montant=montant;
 
   }
+  updateQuantite( stockTrouver: number, quantite: number,){
+    let stock = this.getStockById(quantite);
+    const index = this.stocks.findIndex(stoc => stoc.id == stock?.id);
+    this.stocks[index].quantite=quantite;
+  }
   // getMontantStockById(): Stock | undefined {
   //   return this.stocks.find(stock=> stock.)
-  
+  // }
   getData(){
     return this.stocks;
-  //   const donneStocker = sessionStorage.getItem(this.key) || null;
-  //   if(donneStocker) {
-  //     return JSON.parse(donneStocker);
-  // }else{
-  //   return null;
-  // }
+  
+}
+
+getStockProduit(produit: String){
+  
+    const index = this.stocks.findIndex(stoc => stoc.produit == produit);
+    this.stocks[index].produit=produit;
 }
 }
+

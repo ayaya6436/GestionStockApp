@@ -1,12 +1,13 @@
-<div class="container" style="margin: 10% 0 0 20%">
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+<div class="container" style="position: relative; width: 100%; margin-top: 10%; margin-left: 10% 0 0 20%">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end" style="margin-left: 17%;">
       <button
         class="btn text-light"
         style="background-color: #9d4edd;margin-right: 56%;" 
         type="button"
+        (click)="printListeFournisseur()"
   
       >
-      <i class="fa-solid fa-list"></i>Liste des fournisseurs
+      <i class="fa-solid fa-list"></i>Imprimer
       </button>
       
       <button
@@ -29,11 +30,12 @@
       <i class="fa-solid fa-plus" ></i>Ajouter un fournisseur
       </button>
     </div>
-    <hr style="color: #9d4edd" />
+    <hr style="color: #9d4edd;margin-left: 10%;" />
     <div class="text-center" style="font-size: 25px;">Date:{{currentDate | date:'yyyy-MM-dd'}}</div>
-    <hr style="color: #9d4edd" />
+    <hr style="color: #9d4edd;margin-left: 10%;" />
   
-    <table class="table table table-striped">
+    <table class="table table table-striped" style="width:100%;" id="divPrint" style="margin-left: 10%;" >
+    
       <thead>
         <tr>
           <th scope="col">N</th>
@@ -56,8 +58,8 @@
        
         <button class="btn" (click)="addmodel(fournisseur)"><i data-bs-target="#exampleModal" data-bs-toggle="modal" class="fas fa-edit" ></i></button>
         
-        <button class="btn " (click)="deleteFournisseur(i)"><i data-bs-target="#exampleModal" data-bs-toggle="modal" class="fas fa-trash"></i></button>
-            <button class="btn"><i class="fa-regular fa-eye"></i></button>
+        <button class="btn " (click)="deleteFournisseur(i)"><i data-bs-toggle="modal" class="fas fa-trash"></i></button>
+            <button class="btn" data-bs-target="#detailsModal" data-bs-toggle="modal" (click)="viewDetails(fournisseur)"><i class="fa-regular fa-eye"></i></button>
           </td>
         </tr>
       </tbody>
@@ -65,7 +67,7 @@
   </div>
   
   
-  <!-- Modal -->
+  <!-- Modal form fournisseurs -->
   
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
      <div class="modal-dialog">
@@ -104,3 +106,31 @@
           </div>
      </div>
   </div>
+
+
+
+
+
+  <!-- Modal details-->
+
+<div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 class="modal-title" id="exampleModalLabel">Détails du fournisseur</h2>
+          <span data-bs-dismiss="modal" aria-label="class" class="close-btn1 p-2 ">X</span>
+        </div>
+  
+        <div class="modal-body">
+          <div *ngIf="selectedFournisseurDetails">
+            <p><strong>Nom:</strong> {{ selectedFournisseurDetails.nom }}</p>
+            <p><strong>Prenom:</strong> {{ selectedFournisseurDetails.prenom }}</p>
+            <p><strong>Email:</strong> {{ selectedFournisseurDetails.email }}</p>
+            <p><strong>Téléphone:</strong> {{ selectedFournisseurDetails.telephone }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+

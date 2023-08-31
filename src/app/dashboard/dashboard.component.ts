@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../shared/auth.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -44,4 +45,5 @@ constructor(){
 ngOnInit(): void {
   throw new Error('Method not implemented.');
 }
+
 }

@@ -1,7 +1,11 @@
 import { ToastrModule } from 'ngx-toastr';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {AngularFireModule} from '@angular/fire/compat';
+import { environment } from '../environments/environment'; 
+import { CommonModule } from '@angular/common';
+
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -21,6 +25,14 @@ import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { UserComponent } from './user/user.component';
 import { HttpClientModule } from '@angular/common/http';
+//  import { environment } from '../environments/environment';
+
+
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { VerifyEmailComponent } from './verify-email/verify-email.component';
+
 
 @NgModule({
   declarations: [
@@ -33,7 +45,12 @@ import { HttpClientModule } from '@angular/common/http';
     DashboardComponent,
     HeaderComponent,
     SidebarComponent,
-    UserComponent
+    UserComponent,
+    LoginComponent,
+    RegisterComponent,
+    ForgotPasswordComponent,
+    VerifyEmailComponent,
+ 
   ],
   imports: [
     BrowserModule,
@@ -45,9 +62,12 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule,
     ToastrModule.forRoot({
       closeButton:true,
-      timeOut:50000,
+      timeOut:500,
       progressBar:true
-    })
+    }),
+    AngularFireModule.initializeApp(environment.firebase),
+    FormsModule,
+    CommonModule
   ],
   providers: [], 
   bootstrap: [AppComponent]

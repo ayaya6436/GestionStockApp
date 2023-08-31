@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AuthService } from '../shared/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,7 @@ export class HeaderComponent implements OnInit {
   @Output() sideNavToggled = new EventEmitter<boolean>();
   menuStatus: boolean = false;
 
-  constructor(){
+  constructor(private auth: AuthService){
 
   }
   ngOnInit(): void {
@@ -19,5 +20,7 @@ export class HeaderComponent implements OnInit {
     this.menuStatus = !this.menuStatus;
     this.sideNavToggled.emit(this.menuStatus);
   }
-
+  logoutUser(){
+    this.auth.logout();
+  }
 }

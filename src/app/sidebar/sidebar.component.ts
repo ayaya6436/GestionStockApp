@@ -31,7 +31,7 @@ export class SidebarComponent implements OnInit{
 
     {
       number: '4',
-      name: 'Sortie',Component: 'sortie',
+      name: 'Sortie',
       icon: 'fa-solid fa-share-from-square',
       path: 'sortie' 
     },
@@ -48,6 +48,11 @@ export class SidebarComponent implements OnInit{
       name: 'Stock',
       icon: 'fa-solid fa-user',
       path: 'stock'  
+    }, {
+      number: '7',
+      name: 'User',
+      icon: 'fa-solid fa-user',
+      path: 'user'  
     },
   ];
  

@@ -1,5 +1,5 @@
 export interface Entree{
-    // id: number;
+    id: number;
     date: Date;
     description: String;
     produit: String;

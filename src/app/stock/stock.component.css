@@ -1,0 +1,28 @@
+
+
+table {
+    border-left: 10%;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 90%;
+    border: #afacac 1px solid;
+  }
+  
+   td, th {
+    border: #afacac 1px solid;
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    border: #afacac 1px solid;
+    background-color: #dddddd;
+  }
+
+  #detailsModal{
+    margin-left: 20%;
+    height: fit-content;
+
+    
+  }

@@ -37,6 +37,7 @@ app-sidebar{
 
 .app-side-nav-open{
     width: 250px;
+    opacity: 0.9;
 }
 
 .display-area{
