@@ -27,8 +27,8 @@
         </thead>
 
         <tbody>
-            <tr *ngFor="let stockProduit of stockEntree, let i = index">
-                <th scope="row">{{ i + 1 }}</th>
+            <tr *ngFor="let stockProduit of stockEntree">
+                <th scope="row">{{ stockProduit.id }}</th>
                 <td>{{ stockProduit.date | date:'mediumDate' }}</td>
                 <td>{{ stockProduit.description }}</td>
                 <td>{{ stockProduit.produit }}</td>

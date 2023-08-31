@@ -1,48 +1,166 @@
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
-<div class="bodyFormulaire" mat-dialog-content>
-    <form [formGroup]="popupProduitForm" (ngSubmit)="onSubmit()">
-        <div class="formulaireSortie">
-            <i class="fas fa-xmark fa-1.5x icone"></i>
-             <img src="/src/assets/xmark-solid.svg" alt=""> 
-            <h2>Effectuer une Sorties de Produits</h2>
-            <div class="block1">
-                <div>
-                    <label for="name">Numero</label><br>
-                        <input id="name" type="number" name="numero" formControlName="numero" placeholder="Numero d'identification du produit" required>
-                    </div>
-                <div> 
-                    <label for="name">Nom </label><br>
-                        <input id="name" type="text" name="nom" formControlName="nom" placeholder="Saisissez le nom du produit" required> 
-                </div>
-                <div>
-                    <label for="name">Description</label><br>
-                         <input id="name" type="text" name="description" formControlName="description" placeholder="Saisissez une description" required>
-                </div>
-            </div>
-             <div class="block2">
-                <div>
-                <label for="name">Description</label><br>
-                     <input id="name" type="text" name="description" formControlName="description" placeholder="Saisissez une description" required>
-                </div>
- 
-                <div>
-                 <label for="name">Produits</label><br>
-                   <input id="name" type="text" name="produit" formControlName="produit" placeholder="Produit" required>
-                </div>
-             </div>
-            <div class="block3">
-                <div>
-                <label for="name">Description</label><br>
-                    <input id="name" id="descrInput" type="text" name="description" formControlName="description" placeholder="Ajoutez une description" required> 
-                    </div> 
-                <button id="button" type="submit" [disabled]="!popupProduitForm.valid">Valider</button>
-            </div>
-       
-    </form>
+<div class="container" style="position: relative; width: 100%; margin-top: 10%; margin-left: 10%; ">
+    <div  class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button class="btn text-light" style="background-color: #9d4edd;margin-right: 54%;" type="button">
+            <i class="fa-solid fa-list" ></i> Impression
+        </button>
+
+        <button class="btn text-light mx-4" style="background-color: #9d4edd" type="button">
+            <i class="fa-solid fa-filter"></i> Filter
+        </button>
+
+        <button class="btn me-md-2 text-light" type="button" style="background-color: #9d4edd"
+            data-bs-target="#exampleModal" data-bs-toggle="modal" (click)="addmodel()">
+            <i class="fa-solid fa-plus" ></i> Ajouter un produit
+        </button>
+    </div>
+    <hr style="color: #9d4edd" />
+    <div class="text-center" style="font-size: 25px;">Date:{{currentDate | date:'yyyy-MM-dd'}}</div>
+    <hr style="color: #9d4edd" />
+
+    <table class="table table table-striped">
+        <thead>
+            <tr>
+                <th>Identifiant</th>
+                <th>Dates d'ajout</th>
+                <th>Description</th>
+                <th>Nom</th>
+                <th>Quantites</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let ajoutProduit of produitTab, let i = index">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ ajoutProduit.date | date:'mediumDate' }}</td>
+                <td>{{ ajoutProduit.nom }}</td>
+                <td>{{ ajoutProduit.description }}</td>
+                <td>{{ ajoutProduit.quantite }}</td>
+                <td>
+                    <button class="btn" (click)="addmodel(ajoutProduit)"><i data-bs-target="#exampleModal"
+                            data-bs-toggle="modal" class="fas fa-edit"></i></button>
+                    <button class="btn "><i data-bs-target="#exampleModal" data-bs-toggle="modal"
+                            class="fas fa-trash"></i></button>
+                    <button class="btn"><i class="fa-regular fa-eye"></i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
- 
-<div mat-dialog-actions>
-    <button (click)="closePopup()" color="#9D4EDD">Fermer</button>
-    <button color = "#9D4EDD" >Annuler</button>
+
+<div id="formPopup" style="background-color: #f3f2f323; " class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div  class="modal-dialog">
+        <div class="modal-content">
+            <form style="width: min-content; background-color: #ffff; margin-right: 50%;border: #dadada 1px solid; border-radius: 5px;" [formGroup]="ajoutProduit" (ngSubmit)="submit()">
+                <div style="margin-bottom: 0px;" class="formulaireSortie">
+                    <div class="modal-header">
+                        <h2 class="modal-title " id="exampleModalLabel">Ajouter un produit</h2>
+                        <span data-bs-dismiss="modal" aria-label="class" class="close-btn1 p-2 ">X</span>
+                    </div>
+                    
+                    <div style="margin: 20px;" class="block1">
+                        <div>
+                            <label for="name">Identifiant</label><br>
+                            <input id="name" type="number" name="id" formControlName="id"
+                                placeholder="id" required>
+
+                        </div>
+                        <div>
+                            <label for="name">Nom</label><br>
+                            <input id="name" type="text" name="nom" formControlName="nom"
+                                placeholder="Saisissez le nom du produit" required>
+                        </div>
+                        <div>
+                            <label for="name">Quantite</label><br>
+                            <input id="name" type="text" name="quantite" formControlName="quantite"
+                                placeholder="Saisissez la quantite" required>
+                        </div>
+                        
+                    </div>
+                    <div style="margin: 20px;" class="block2">
+                        <div>
+                            <label for="name">Dates d'ajout</label><br>
+                            <input id="name" type="date" name="date" formControlName="date"
+                                placeholder="Saisissez la date du jour" required>
+                        </div>
+
+                    </div>
+                    <div style="margin: 20px; align-items: center;" class="block3">
+                        <div>
+                            <label for="name">Description</label><br>
+                            <input id="name" id="descrInput" type="text" name="description"
+                                formControlName="description" placeholder="Ajoutez une description" required>
+                        </div>
+                    
+                        <button  id="bbutton" type="submit" [disabled]="!ajoutProduit.valid">Valider</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- style="position: fixed; width: 100%; margin-top: 5%; margin-left: 7%;border: #9d4edd 1px solid; " -->
+
+<!-- formulaire de detail de produit -->
+<!-- <div style="background-color: #f3f2f323; " class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div  class="modal-dialog">
+        <div class="modal-content">
+            <form style="width: min-content; background-color: #ffff; margin-right: 50%;border: #dadada 1px solid; border-radius: 5px;" [formGroup]="sortieProduit" (ngSubmit)="submit()">
+                <div style="margin-bottom: 0px;" class="formulaireSortie">
+                    <div class="modal-header">
+                        <h2 class="modal-title " id="exampleModalLabel">Effectuer une sortie</h2>
+                        <span data-bs-dismiss="modal" aria-label="class" class="close-btn1 p-2 ">X</span>
+                    </div>
+                    
+                    <div style="margin: 20px;" class="block1">
+                        <div>
+                            <label for="name">Quantité</label><br>
+                            <input id="name" type="number" name="quantite" formControlName="quantite"
+                                placeholder="Quantite" required>
+
+                        </div>
+                        <div>
+                            <label for="name">Prix Unitaire</label><br>
+                            <input id="name" type="number" name="prix_unitaire" formControlName="prix_unitaire"
+                                placeholder="Prix unitaire" required>
+                        </div>
+                        <div>
+                            <label for="name">Montant </label><br>
+                            <input id="name" type="number" name="montant" formControlName="montant"
+                                placeholder="Montant" required>
+                        </div>
+                    </div>
+                    <div style="margin: 20px;" class="block2">
+                        <div>
+                            <label for="name">Dates</label><br>
+                            <input id="name" type="date" name="date" formControlName="date"
+                                placeholder="Saisissez la date du jour" required>
+                        </div>
+
+                        <div>
+                            <label for="name">Produits</label><br>
+                            <input id="name" type="text" name="produit" formControlName="produit" placeholder="Produit"
+                                required>
+                        </div>
+
+                        <div>
+                            <label for="name">Numero du stock</label><br>
+                            <input id="number_stock" type="number" name="number_stock" formControlName="number_stock" placeholder="Numero du stock correspondant "
+                                required>
+                        </div>
+                    </div>
+                    <div style="margin: 20px; align-items: center;" class="block3">
+                        <div>
+                            <label for="name">Description</label><br>
+                            <input id="name" id="descrInput" type="text" name="description"
+                                formControlName="description" placeholder="Ajoutez une description" required>
+                        </div>
+                    
+                        <button  id="bbutton" type="submit" [disabled]="sortieProduit.valid">Valider</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>  -->

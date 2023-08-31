@@ -18,24 +18,7 @@ export class StockComponent implements OnInit {
     this.stockEntree = this.stockService.getData();
   }
   
-  // loadStockData(){
-  //   this.stockEntree = this.stockService.getData() || [];
-  //   console.log(this.stockEntree);
-  // }
- 
-  // onClickA() {
-  //   const newStockEntry: Stock = {
-  //     // Initialiser les propriétés de la nouvelle entrée ici
-  //     date: new Date(),
-  //     quantite: 0,
-  //     prix_unitaire: 0,
-  //     montant: 0,
-  //     produit: '',
-  //     description: ''
-  //   };
 
-  //   this.stockEntree.push(newStockEntry);
-  //   console.log(newStockEntry);
 
 
 }
