@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+
 
 import {GoogleAuthProvider,GithubAuthProvider,FacebookAuthProvider} from '@angular/fire/auth';
 @Injectable({
@@ -98,7 +100,7 @@ export class AuthService {
     });
   }
 //info users
-  getLoggedInUserInfo(){
-
-  }
+getLoggedInUserInfo(): Observable<any>{
+  return this.fireauth.authState; // Renvoie l'observable de l'état d'authentification
+}
 }

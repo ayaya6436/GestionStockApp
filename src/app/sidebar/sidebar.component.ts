@@ -1,4 +1,8 @@
+
 import { Component, Input, OnInit } from '@angular/core';
+import { AuthService } from '../shared/auth.service'; 
+
+
 
 @Component({
   selector: 'app-sidebar',
@@ -7,6 +11,9 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit{
   @Input() sideBarStatus: boolean = false;
+  isSidebarReduced: boolean = false;
+  user: any;
+
   list=[
     {
       number: '1',
@@ -46,20 +53,20 @@ export class SidebarComponent implements OnInit{
     {
       number: '6',
       name: 'Stock',
-      icon: 'fa-solid fa-user',
+      icon: 'fa-solid fa-boxes-stacked',
       path: 'stock'  
-    }, {
-      number: '7',
-      name: 'User',
-      icon: 'fa-solid fa-user',
-      path: 'user'  
-    },
+    }, 
   ];
+  constructor( private authService: AuthService) {}
+  ngOnInit() {
+    // Utilisez le service AuthService pour obtenir les données de l'utilisateur depuis Firebase
+    this.authService.getLoggedInUserInfo().subscribe(user => {
+      this.user = user;
+    });
+  }
+
+  
  
-  constructor(){
 
-  }
-  ngOnInit():void{
-
-  }
+  
 }
