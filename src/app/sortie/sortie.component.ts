@@ -58,7 +58,7 @@ export class SortieComponent implements OnInit {
 
         const newSortie: Sortie = this.sortieProduit.value;
         if(!this.isedit){
-          newSortie.id = this.generatorIdService.generateNewId();
+          newSortie.id = this.generatorIdService.generateNewId(this.sortieProduit.value.id);
         }
         console.log(newSortie.id,"id trouver")
         if (this.isedit && this.selectedSortie) {

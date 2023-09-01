@@ -143,4 +143,11 @@ getElementSortie(){
 
 }
 
+// :::::::::::::::::::::::::::::::::::::
+
+updateQuantiteProduit(idP: number, quantite : number){
+  const index = this.produitTabs.findIndex(pro => pro.id == idP);
+    this.produitTabs[index].quantite = this.produitTabs[index].quantite + quantite;
+
+}
 }

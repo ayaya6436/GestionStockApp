@@ -84,17 +84,17 @@
                     </div>
                     <div style="margin: 20px;" class="block2">
                         <div>
-                            <label for="name">Dates</label><br>
-                            <input id="name" type="date" name="date" formControlName="date"
-                                placeholder="Saisissez la date du jour" required>
+                            <label for="name">Description</label><br>
+                            <input id="name" id="descrInput" type="text" name="description"
+                                formControlName="description" placeholder="Ajoutez une description" required>
                         </div>
 
                         <div>
                             <label for="name">Produits correspondant</label><br>
-                            <!-- <select name="produit" id="produitId" formControlName="produit">
+                            <select name="produit" id="produitId" formControlName="produit">
                                 <option *ngFor="let produit of produits" [value]="produit.id">
                                     {{ produit.nom }}</option>
-                            </select> -->
+                            </select> 
                             <input id="name" type="number" name="produit"  formControlName="produit" placeholder="Produit"
                                 required>
                         </div>
@@ -106,10 +106,10 @@
                         </div>
                     </div>
                     <div style="margin: 20px; align-items: center;" class="block3">
-                        <div>
-                            <label for="name">Description</label><br>
-                            <input id="name" id="descrInput" type="text" name="description"
-                                formControlName="description" placeholder="Ajoutez une description" required>
+                        <div style="display: none;">
+                            <label for="name">Dates</label><br>
+                            <input id="name" type="date" name="date" formControlName="date"
+                                placeholder="Saisissez la date du jour" required>
                         </div>
                         <button  id="bbutton" type="submit">Valider</button>
                     </div>

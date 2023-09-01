@@ -36,7 +36,7 @@
         <tbody>
             <tr *ngFor="let sortieProduit of sorties, let i = index">
                 <th scope="row">{{ sortieProduit.id}}</th>
-                <td>{{ sortieProduit.date | date:'mediumDate' }}</td>
+                <td>{{ sortieProduit.date | date }}</td>
                 <td>{{ sortieProduit.number_stock }}</td>
                 <td>{{ sortieProduit.description }}</td>
                 <td>{{ sortieProduit.produit }}</td>

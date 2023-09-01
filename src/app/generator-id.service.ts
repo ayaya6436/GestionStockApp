@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class GeneratorIdService {
   private lastId = 0;
 
-  generateNewId(): number {
+  generateNewId(id: number): number {
     this.lastId++;
     return this.lastId;
   }

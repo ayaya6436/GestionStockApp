@@ -19,7 +19,8 @@
                 <th>Numero</th>
                 <th>Dates</th>
                 <th>Description</th>
-                <th>Produits</th>
+                <th>Fournisseur</th>
+                <th>Produits conserner</th>
                 <th>Quantites</th>
                 <th>Prix Unitaire</th>
                 <th>Montant</th>
@@ -31,6 +32,7 @@
                 <th scope="row">{{ stockProduit.id }}</th>
                 <td>{{ stockProduit.date | date:'mediumDate' }}</td>
                 <td>{{ stockProduit.description }}</td>
+                <td>{{ stockProduit.fournisseur }}</td>
                 <td>{{ stockProduit.produit }}</td>
                 <td>{{ stockProduit.quantite }}</td>
                 <td>{{ stockProduit.prix_unitaire }}</td>

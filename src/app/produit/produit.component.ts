@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { DetailProduit, Produit } from './produit.model';
 import { ProduitService } from '../produit.service';
 import { GeneratorIdService } from '../generator-id.service';
@@ -7,6 +7,7 @@ import { SortieService } from '../sortie.service';
 import { EntreeService } from '../entree.service';
 import { StockService } from '../stock.service';
 import { ToastrService } from 'ngx-toastr';
+import { MyErrorStateMatcher } from '../sortie/validationInput/validation';
 
 @Component({
   selector: 'app-produit',
@@ -14,6 +15,10 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./produit.component.css']
 })
 export class ProduitComponent implements OnInit {
+// quantiteControl = new FormControl('', [Validators.required, Validators.name]);
+
+  matcher = new MyErrorStateMatcher();
+
   ajoutProduit: FormGroup;
   produitTab: Produit[] = [];
   detailTabe: DetailProduit[] =[]; //
@@ -21,7 +26,7 @@ export class ProduitComponent implements OnInit {
   selectedProduit: Produit | undefined;
   currentDate = new Date();
   isedit: boolean = false;
-  vueProduit : any;
+  vueProduit : any[] = [];
 
 
   ngOnInit(): void {
@@ -58,7 +63,7 @@ export class ProduitComponent implements OnInit {
         const newProduit = this.ajoutProduit.value;
         // console.log(newProduit.nom + "donnees trouver");
         if (!this.isedit) {
-          newProduit.id = this.generatorIdService.generateNewId();
+          newProduit.id = this.generatorIdService.generateNewId(this.ajoutProduit.value.id);
           console.log(newProduit.id + " id trouver");
         }
 
@@ -91,18 +96,41 @@ export class ProduitComponent implements OnInit {
 
   //formulaire de detail de produit
   viewDetails(ajoutProduit: Produit) {
-    let entre = this.entreeService.getEntreByProduit(ajoutProduit.id);
+
+    //let entre = this.entreeService.getEntreByProduit(ajoutProduit.id);
+    let entres = this.entreeService.getAllEntreByProduit(ajoutProduit.id);
     let sortie = this.sortieService.getSortieByProduit(ajoutProduit.id);
-    this.vueProduit = {
-      date : ajoutProduit.date,
-      nom : ajoutProduit.nom,
-      quantite : entre?.quantite,
-      prix : entre?.montant,
-      montant : entre?.montant,
-      stockQuantite : sortie?.quantite,
-      stockPrix : sortie?.prix_unitaire,
-      stockMontant : sortie?.montant
-    }
+    let stocks = this.stockService.getAllStockByProduit(ajoutProduit.id);
+    entres.forEach(entre =>{
+      this.vueProduit.push(
+        {
+          date : ajoutProduit.date,
+          nom : ajoutProduit.nom,
+    
+          // detail entree par produit
+          entreeQuantite : entre?.quantite,
+          entreePrix : entre?.prix_unitaire,
+          entreMontant : entre?.montant,
+    
+          // detail sortie par produit
+          sortieQuantite : null,
+          sortiePrix : null,
+          sortieMontant : null,
+    
+          // detail entree par produit
+          stockQuantite : null,
+          stockPrix : null,
+          stockMontant : null,
+        }
+      );
+    });
+    let i=0;
+    stocks.forEach(stock =>{
+      this.vueProduit[i].stockQuantite = stock.quantite;
+      this.vueProduit[i].stockPrix = stock.prix_unitaire;
+      this.vueProduit[i].stockMontant = stock.montant;
+      i++;
+    });
 
   }
 

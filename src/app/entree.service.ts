@@ -83,4 +83,8 @@ export class EntreeService {
   getEntreByProduit(idProduit : any){
     return this.entree.find(entre => entre.produit == idProduit);
   }
+
+  getAllEntreByProduit(idProduit : any){
+    return this.entree.filter(entre => entre.produit == idProduit);
+  }
 }

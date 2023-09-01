@@ -6,4 +6,5 @@ export interface Stock{
     quantite: number;
     prix_unitaire: number;
     montant: number;
+    fournisseur: String;
     }

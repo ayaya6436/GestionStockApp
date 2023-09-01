@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Stock } from './stock/stock.model';
+import { Produit } from './produit/produit.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,12 +10,13 @@ export class StockService {
   private lastId: number = 0;
 
   stocks: Stock[] = [];
+  produitTab: Produit[]= [];
 
   constructor() {
-    const lastIdStock = sessionStorage.getItem('lastStockId');
-    if (lastIdStock) {
-      this.lastId = parseInt(lastIdStock, 10);
-    }
+    // const lastIdStock = sessionStorage.getItem('lastStockId');
+    // if (lastIdStock) {
+    //   this.lastId = parseInt(lastIdStock, 10);
+    // }
   }
 
   saveData(data: Stock) {
@@ -24,8 +26,8 @@ export class StockService {
     sessionStorage.setItem('lastStockId', this.lastId.toString());
     sessionStorage.setItem(this.key, JSON.stringify(data));
   }
-  getStockById(isId: number): Stock | undefined {
-    return this.stocks.find(stock => stock.id === isId);
+  getStockById(isId: number) {
+    return this.stocks.find(stock => stock.id == isId);
 
   }
   getStockByNom(produit: number) {
@@ -66,20 +68,37 @@ export class StockService {
   }
 
   newMontant(id: number, montant: number) {
-    let stock = this.getStockById(id);
-    const index = this.stocks.findIndex(stoc => stoc.produit == stock?.produit);
+    let produitTab = this.getProduitById(id);
+    const index = this.stocks.findIndex(stoc => stoc.produit == produitTab?.id);
     console.log(this.stocks[index])
-    this.stocks[index].montant = montant;
+    //this.stocks[index].montant = montant;
+
+  }
+
+  getProduitById(id: number) {
+    return this.produitTab.find(produit => produit.id == id);
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////
   updateEntreeNewMontant( ProduitId: number, montant: number) {
-    let prodTab = this.getStockById(ProduitId);
-    console.log(prodTab + ": " + "produit id trouver");
-    const index = this.stocks.findIndex(stoc => stoc.produit  == prodTab?.id);
+    let produitTab = this.getProduitById(ProduitId);
+    console.log(produitTab + ": " + "produit id trouver");
+    const index = this.stocks.findIndex(stoc => stoc.produit  == produitTab?.id);
     console.log(index + ": " + "produit trouver");
-    // this.entree[index].montant = montant;
+     this.stocks[index].montant = montant;
     console.log(this.stocks[index]+": " + "idex trouver");
-  
 }
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+  getStockByIdProduit(idP : number){
+    return this.stocks.find(stoc => stoc.produit == idP)
+  }
+
+  updateOldStock(stock : Stock){
+    const index = this.stocks.findIndex(stk => stk.id == stock.id);
+    this.stocks[index] = stock;
+  }
+
+  getAllStockByProduit(idProduit : any){
+    return this.stocks.filter(stock=> stock.produit == idProduit);
+  }
 }
