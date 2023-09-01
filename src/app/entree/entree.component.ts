@@ -4,6 +4,11 @@ import { Entree } from './entree.model';
 import { StockService } from '../stock.service';
 import { Stock } from '../stock/stock.model';
 import { EntreeService } from '../entree.service';
+import { ProduitService } from '../produit.service';
+import { ProduitComponent } from '../produit/produit.component';
+import { Produit } from '../produit/produit.model';
+import { ToastrService } from 'ngx-toastr';
+import { GeneratorIdService } from '../generator-id.service';
 
 @Component({
   selector: 'app-entree',
@@ -11,78 +16,121 @@ import { EntreeService } from '../entree.service';
   styleUrls: ['./entree.component.css']
 })
 export class EntreeComponent implements OnInit {
-  entreeProduit: FormGroup | any;
+  entreeProduit: FormGroup;
   entrees: Entree[] = [];
   selectedEntree: Entree | undefined;
   currentDate = new Date();
   isedit: boolean = false;
- 
+  //toastr: any;
+  produits: Produit[] = [];
+
 
 
   ngOnInit(): void {
-    // const stokerDonner = sessionStorage.getItem("entreeDonner");
-    // if (stokerDonner) {
-    //   this.entrees = JSON.parse(stokerDonner);
-    // }
     this.entrees = this.entreeService.getDataEntree();
+    this.produits = this.produitService.getDataProduit();
+
   }
 
-  constructor(private fb: FormBuilder, private stockService: StockService, private entreeService: EntreeService) {
+  constructor(private fb: FormBuilder, private stockService: StockService, private entreeService: EntreeService, private produitService: ProduitService, private generatorIdService: GeneratorIdService) {
 
     this.entreeProduit = this.fb.group({
-      // numero: [0, Validators.required],
+      id: [0, Validators.required],
       date: [new Date(), Validators.required],
       quantite: [0, Validators.required],
       prix_unitaire: [0, Validators.required],
-      montant: [0, Validators.required],
-      produit: ['', Validators.required],
+      produit: ["", Validators.required],
       fournisseur: ['', Validators.required],
       description: ['', Validators.required],
 
     });
   }
   submit() {
+    let montant;
     if (this.entreeProduit.valid) {
-      // let ids = sessionStorage.getItem("stockEntrees")?.length;
-      // if (ids == null) {
-      //   ids = 0;
-      // }
-      // console.log(ids + 1);
-      // this.entreeProduit.id = ids + 1;
-      
-      const newEntree: Entree = this.entreeProduit.value;
-      if (this.isedit && this.selectedEntree) {
-        Object.assign(this.selectedEntree, newEntree);
-      } else {
+      const quantiteEntrant = this.entreeProduit.value.quantite;
+      const prixUnitaire = this.entreeProduit.value.prix_unitaire;
+      const montant = quantiteEntrant * prixUnitaire;
+
+      const produitExist = this.produitService.getProduitId(this.entreeProduit.value.produit);
+      console.log(this.entreeProduit.value.produit+ ":"+"je trouver un produit");
+
+      if (produitExist != null) { 
+        console.log("je suis dedans");
+        this.entreeProduit.value.id = this.generatorIdService.generateNewId();
+        console.log(this.entreeProduit.value.id, "id entree trouver")
+        const newEntree: Entree = this.entreeProduit.value;
+       
+       
+
+        const saveEntree: Entree = {
+          id: newEntree.id,
+          date: new Date(),
+          description: newEntree.description,
+          produit: newEntree.produit,
+          fournisseur: newEntree.fournisseur,
+          quantite: newEntree.quantite,
+          prix_unitaire: newEntree.prix_unitaire,
+          montant: montant as unknown as number
+        }
+        this.entreeService.saveDataEntree(saveEntree);
+        
+        this.entreeService.updateEntreeNewMontant(produitExist.id, montant)
+        
+        console.log(montant + "montant nouveau entree trouver");
         
 
-      }
-      this.entreeProduit.reset();
-      this.selectedEntree = undefined;
-      this.isedit = false;
-      const stok: Stock = {
-        id: 0,
-        date: new Date(),
-        description: newEntree.description,
-        produit: newEntree.produit,
-        quantite: newEntree.quantite,
-        prix_unitaire: newEntree.prix_unitaire,
-        montant: newEntree.montant
+        
+        this.entreeProduit.value.id = this.generatorIdService.generateNewId();
+        console.log(this.entreeProduit.value.id, "id entree trouver")
+        const StockExist = this.stockService.getStockById(this.entreeProduit.value.produit);
+        if (StockExist != null) {
+
+          const newQuantiStockExist = StockExist.quantite + this.entreeProduit.value.quantite;
+          const montStockExist =  StockExist.montant;
+
+          const newMontantstock = StockExist.quantite * StockExist.prix_unitaire;
+          const updatedStockMontant = newMontantstock + montStockExist;
+
+          const stok: Stock = {
+            id: newEntree.id,
+            date: new Date(),
+            description: newEntree.description,
+            produit: newEntree.produit,
+            quantite: newEntree.quantite,
+            prix_unitaire: newEntree.prix_unitaire,
+            montant: newEntree.montant
+          }
+          this.stockService.saveData(stok);
+          this.stockService.newMontant(StockExist.id, updatedStockMontant);
+          console.log(updatedStockMontant + "montant stock trouver");
+          this.stockService.getQuantity(StockExist.produit, newQuantiStockExist);
+          console.log(newQuantiStockExist + "quantite stock trouver");
+        }else{
+          const newStock: Stock = {
+            id: newEntree.id,
+            date: new Date(),
+            description: newEntree.description,
+            produit: newEntree.produit,
+            quantite: newEntree.quantite,
+            prix_unitaire: newEntree.prix_unitaire,
+            montant: newEntree.montant
+          }
+          this.stockService.saveData(newStock);
+          this.stockService.updateEntreeNewMontant(newStock.id, montant);
+          //this.stockService.getQuantity(newStock.produit, newStock.quantite);
+          console.log(newStock.quantite + "quantite stock trouver");
+        }
+
+        console.log("je passe");
+        
+        //sessionStorage.setItem("entreeDonner", JSON.stringify(this.entrees));
       }
 
-      const saveEntree: Entree ={
-        date: new Date(),
-        description: newEntree.description,
-        produit: newEntree.produit,
-        fournisseur: newEntree.fournisseur,
-        quantite: newEntree.quantite,
-        prix_unitaire: newEntree.prix_unitaire,
-        montant: newEntree.montant
-      }
-      this.entreeService.saveDataEntree(saveEntree);
-      //this.entrees.push(newEntree);
-      this.stockService.saveData(stok);
-      //sessionStorage.setItem("entreeDonner", JSON.stringify(this.entrees));
+    } else {
+      console.log("error")
+      // this.toastr.success('Fournisseur mis à jour avec succès !', 'Succès');
+
     }
   }
 
@@ -97,6 +145,29 @@ export class EntreeComponent implements OnInit {
     } else {
       this.selectedEntree = undefined;
       this.isedit = false;
+    }
+  }
+
+  printListeFournisseur() {
+    var printWindow = window.open('', '_blank');
+    var divToPrint = document.getElementById('divPrint');
+
+    if (divToPrint) {
+      const content = divToPrint.innerHTML;
+
+      printWindow!.document.write(`
+        <html>
+          <head>
+            <title>Imprimer la liste des fournisseurs</title>
+          </head>
+          <body>
+            ${content}
+          </body>
+        </html>
+      `);
+
+      printWindow!.print();
+      printWindow!.close();
     }
   }
 }

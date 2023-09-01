@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Produit } from './produit.model';
+import { DetailProduit, Produit } from './produit.model';
 import { ProduitService } from '../produit.service';
 import { GeneratorIdService } from '../generator-id.service';
 import { SortieService } from '../sortie.service';
 import { EntreeService } from '../entree.service';
 import { StockService } from '../stock.service';
-import { Subject } from 'rxjs';
-
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-produit',
@@ -17,27 +16,21 @@ import { Subject } from 'rxjs';
 export class ProduitComponent implements OnInit {
   ajoutProduit: FormGroup;
   produitTab: Produit[] = [];
+  detailTabe: DetailProduit[] =[]; //
+  selectedProduitDetails: Produit | undefined;
   selectedProduit: Produit | undefined;
   currentDate = new Date();
   isedit: boolean = false;
+  vueProduit : any;
+
 
   
-  dtoptions: DataTables.Settings={}
-  dtTrigger:Subject<any> = new Subject<any>();
+ 
 
   ngOnInit():void{
     this.produitTab = this.produitService.getDataProduit();
-    this.dtoptions={
-      pagingType:'full_numbers',
-      searching:true,
-      lengthChange:false
-      
-     
-    }
-  }
-  
 
-  
+  }
   constructor(
     private fb: FormBuilder, 
     private produitService: ProduitService, 
@@ -45,6 +38,7 @@ export class ProduitComponent implements OnInit {
     private sortieService: SortieService,
     private entreeService: EntreeService,
     private stockService: StockService,
+    private toastr: ToastrService
     
     ) {
 
@@ -55,18 +49,12 @@ export class ProduitComponent implements OnInit {
       nom: ['', Validators.required],
       description: ['', Validators.required],
     });
-    
   }
 
 
   submit() {
     if (this.ajoutProduit.valid) {
-      // let ids = sessionStorage.getItem("stockEntrees")?.length;
-      // if (ids == null) {
-      //   ids = 0;
-      // }
-      // console.log(ids + 1);
-      // this.entreeProduit.id = ids + 1;
+      const produitExists = this.produitService.getProduitNom(this.ajoutProduit.value.nom);
 
       console.log(produitExists + "je trouver produit")
       if (produitExists == null || produitExists == undefined) {
@@ -91,20 +79,12 @@ export class ProduitComponent implements OnInit {
         console.log(saveProduit + ": donnees trouver avec succees");
         // this.ajoutProduit.reset();
         
-        this.dtTrigger.next(null);
+       
       }
-      
-     this.produitService.saveDataProuit(saveProduit);
-     
     }
-    console.log( "donnees trouvees");
   }
   addmodel(ajoutProduit?: Produit) {
-    var form = document.getElementById('formPopup');
-    if (form) {
-      form.style.display = "block";
-    }
-    
+
     if (ajoutProduit) {
       this.selectedProduit = { ...ajoutProduit };
       this.isedit = true;
@@ -115,5 +95,46 @@ export class ProduitComponent implements OnInit {
   }
 
   //formulaire de detail de produit
-  
+  viewDetails(ajoutProduit: Produit) {
+    let entre = this.entreeService.getEntreByProduit(ajoutProduit.id);
+    let sortie = this.sortieService.getSortieByProduit(ajoutProduit.id);
+    this.vueProduit = {
+      date : ajoutProduit.date,
+      nom : ajoutProduit.nom,
+      quantite : entre?.quantite,
+      prix : entre?.montant,
+      montant : entre?.montant,
+      stockQuantite : sortie?.quantite,
+      stockPrix : sortie?.prix_unitaire,
+      stockMontant : sortie?.montant
+    }
+
+  }
+
+  deleteProduit(index: number) {
+    this.produitTab.splice(index, 1);
+    this.toastr.success('Fournisseur Supprimer avec succès !', 'Warning');
+  }
+  printListeFournisseur() {
+    var printWindow = window.open('', '_blank');
+    var divToPrint = document.getElementById('divPrint');
+
+    if (divToPrint) {
+      const content = divToPrint.innerHTML;
+
+      printWindow!.document.write(`
+        <html>
+          <head>
+            <title>Imprimer la liste des fournisseurs</title>
+          </head>
+          <body>
+            ${content}
+          </body>
+        </html>
+      `);
+
+      printWindow!.print();
+      printWindow!.close();
+    }
+  }
 }
