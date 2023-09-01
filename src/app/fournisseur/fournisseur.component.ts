@@ -16,7 +16,10 @@ selectedFournisseur: Fournisseur | undefined;
 selectedFournisseurDetails: Fournisseur | undefined;
 currentDate= new Date();
 isedit: boolean=false;
+
+// dtoptions: DataTables.Settings={}
 ngOnInit():void{
+ 
 }
 
 constructor(private fb: FormBuilder,private toastr: ToastrService) {

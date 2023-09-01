@@ -35,7 +35,7 @@ export class ProduitComponent implements OnInit {
     private sortieService: SortieService,
     private entreeService: EntreeService,
     private stockService: StockService,
-    private toastr: ToastrService
+    
     
     ) {
 
@@ -108,7 +108,7 @@ export class ProduitComponent implements OnInit {
 
   deleteProduit(index: number) {
     this.produitTab.splice(index, 1);
-    this.toastr.success('Fournisseur Supprimer avec succès !', 'Warning');
+    // this.toastr.success('Fournisseur Supprimer avec succès !', 'Warning');
   }
   printListeFournisseur() {
     var printWindow = window.open('', '_blank');
