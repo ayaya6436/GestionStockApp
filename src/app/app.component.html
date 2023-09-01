@@ -1,10 +1,20 @@
-<!-- si on est sur la pa login on cache header et le sidebar -->
+<app-user></app-user>
+
 <div class="container-fluid g-0">
-  <app-header *ngIf="sideBarStatus" (sideNavToggled)="sideBarStatus = $event;"></app-header>
+  <!-- Utilise *ngIf pour afficher le header seulement lorsque showHeader est vrai -->
+  <app-header
+    *ngIf="showHeader"
+    (sideNavToggleClicked)="handleSideNavToggle($event)"
+  ></app-header>
   <main>
-    <app-sidebar *ngIf="sideBarStatus" [sideBarStatus]="sideBarStatus" [ngClass]="{'app-side-nav-open': sideBarStatus}"></app-sidebar>
+    <!-- Utilise *ngIf pour afficher la sidebar seulement lorsque sideBarStatus est vrai -->
+    <app-sidebar
+      *ngIf="sideBarStatus"
+      [ngClass]="{'app-side-nav-open': sideBarStatus}"
+    ></app-sidebar>
     <div class="display-area" [ngClass]="{'display-area-shrink': sideBarStatus}">
     </div>
   </main>
   <router-outlet></router-outlet>
 </div>
+

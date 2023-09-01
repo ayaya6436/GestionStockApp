@@ -24,9 +24,15 @@ export class SortieService {
     return this.sortieProduitService;
   }
 
-  getSortieProduit(nomProduit: String){
+  getSortieProduit(nomProduit: number){
     const lignProduit = this.sortieProduitService.find(tab => tab.produit === nomProduit);
     return lignProduit;
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////////////////
+
+  getSortieByProduit(idProduit : any){
+    return this.sortieProduitService.find(sortie => sortie.produit == idProduit);
   }
   
 

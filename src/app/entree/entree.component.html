@@ -90,8 +90,12 @@
                         </div>
 
                         <div>
-                            <label for="name">Produits</label><br>
-                            <input id="name" type="text" name="produit" formControlName="produit" placeholder="Produit"
+                            <label for="name">Produits correspondant</label><br>
+                            <!-- <select name="produit" id="produitId" formControlName="produit">
+                                <option *ngFor="let produit of produits" [value]="produit.id">
+                                    {{ produit.nom }}</option>
+                            </select> -->
+                            <input id="name" type="number" name="produit"  formControlName="produit" placeholder="Produit"
                                 required>
                         </div>
 

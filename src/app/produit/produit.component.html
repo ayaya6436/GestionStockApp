@@ -1,6 +1,7 @@
 <div class="container" style="position: relative; width: 100%; margin-top: 10%; margin-left: 10%; ">
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <button (click)="printListeFournisseur()" class="btn text-light" style="background-color: #9d4edd;margin-right: 54%;" type="button">
+        <button (click)="printListeFournisseur()" class="btn text-light"
+            style="background-color: #9d4edd;margin-right: 54%;" type="button">
             <i class="fa-solid fa-list"></i> Impression
         </button>
 
@@ -51,9 +52,15 @@
         </tbody>
     </table>
 </div>
+<!-- <<<<<<<<< Temporary merge branch 1
+ 
+<div mat-dialog-actions>
+    <button (click)="closePopup()" color="#9D4EDD">Fermer</button>
+    <button color = "#9D4EDD" >Annuler</button>
+</div>  -->
 
-<!-- Modal pour ajouter un produit -->
-<div style="background-color: #f3f2f323; " class="modal fade" id="exampleModal" tabindex="-1"
+
+<div id="formPopup" style="background-color: #f3f2f323; " class="modal fade" id="exampleModal" tabindex="-1"
     aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -106,7 +113,7 @@
         </div>
     </div>
 </div>
-                    <!-- detaits produits -->
+<!-- style="position: fixed; width: 100%; margin-top: 5%; margin-left: 7%;border: #9d4edd 1px solid; " -->
 
 <div style="background-color: #f3f2f323; width: fit-content; " class="modal fade" id="detailsModal" tabindex="-1"
     aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
@@ -122,9 +129,9 @@
                         <tr>
                             <th>date</th>
                             <th>produit</th>
-                            <th colspan="3"  style="text-align: center;">entree</th>
-                            <th colspan="3"  style="text-align: center;">sorties</th>
-                            <th colspan="3"  style="text-align: center;">stock</th>
+                            <th colspan="3" style="text-align: center;">entree</th>
+                            <th colspan="3" style="text-align: center;">sorties</th>
+                            <th colspan="3" style="text-align: center;">stock</th>
                         </tr>
                         <tr>
                             <th></th>
@@ -141,23 +148,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- <tr *ngFor="let detail of detailData">
-                            <td>{{ detail.date }}</td>
-                            <td>{{ selectedProduitDetails.nom }}</td>
-                            <td>{{ detail.entree.quantite }}</td>
-                            <td>{{ detail.entree.prix }}</td>
-                            <td>{{ detail.entree.montant }}</td>
-                            <td>{{ detail.sortie.quantite }}</td>
-                            <td>{{ detail.sortie.prix }}</td>
-                            <td>{{ detail.sortie.montant }}</td>
-                            <td>{{ detail.stock.quantite }}</td>
-                            <td>{{ detail.stock.prix }}</td>
-                            <td>{{ detail.stock.montant }}</td>
-                          </tr> -->
+                        <tr>
+                            <td>{{ vueProduit.date | date:'mediumDate' }}</td>
+                            <td>{{ vueProduit.nom }}</td>
+                            <td>{{ vueProduit.quantite }}</td>
+                            <td>{{ vueProduit.prix }}</td>
+                            <td>{{ vueProduit.montant }}</td>
+                            <td>{{ vueProduit.quantite }}</td>
+                            <td>{{ vueProduit.prix }}</td>
+                            <td>{{ vueProduit.montant }}</td>
+                            <td>{{ vueProduit.stockQuantite }}</td>
+                            <td>{{ vueProduit.stockPrix }}</td>
+                            <td>{{ vueProduit.stockMontant }}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 </div>
- 

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Produit } from './produit.model';
+import { DetailProduit, Produit } from './produit.model';
 import { ProduitService } from '../produit.service';
 import { GeneratorIdService } from '../generator-id.service';
 import { SortieService } from '../sortie.service';
 import { EntreeService } from '../entree.service';
 import { StockService } from '../stock.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-produit',
@@ -15,14 +16,17 @@ import { StockService } from '../stock.service';
 export class ProduitComponent implements OnInit {
   ajoutProduit: FormGroup;
   produitTab: Produit[] = [];
+  detailTabe: DetailProduit[] =[]; //
   selectedProduitDetails: Produit | undefined;
   selectedProduit: Produit | undefined;
   currentDate = new Date();
   isedit: boolean = false;
+  vueProduit : any;
 
 
   ngOnInit(): void {
     this.produitTab = this.produitService.getDataProduit();
+
   }
   constructor(
     private fb: FormBuilder, 
@@ -31,6 +35,7 @@ export class ProduitComponent implements OnInit {
     private sortieService: SortieService,
     private entreeService: EntreeService,
     private stockService: StockService,
+    private toastr: ToastrService
     
     ) {
 
@@ -50,16 +55,6 @@ export class ProduitComponent implements OnInit {
 
       console.log(produitExists + "je trouver produit")
       if (produitExists == null || produitExists == undefined) {
-        // const sortiMontant = this.ajoutProduit.value.montant;
-        // const quantiteEntrant = this.ajoutProduit.value.quantite;
-        // const montQuantity = produitExists.quantite + quantiteEntrant;
-
-        // console.log(montQuantity + "quantite modifier");
-        // const monontantsortieStock = stockExists.montant - sortiMontant;
-        // this.stockService.updateStock(stockExists.id, monontantsortieStock);
-        // this.produitService.updateQuantite(produitExists.nom, montQuantity);
-
-        // console.log(monontantsortieStock + " stock updated");
         const newProduit = this.ajoutProduit.value;
         // console.log(newProduit.nom + "donnees trouver");
         if (!this.isedit) {
@@ -96,21 +91,24 @@ export class ProduitComponent implements OnInit {
 
   //formulaire de detail de produit
   viewDetails(ajoutProduit: Produit) {
-    // this.selectedProduitDetails = ajoutProduit;
-    // this.produitService.getDataStock();
-    // this.produitService.getDataSortie();
-    // this.produitService.getDataEntree();
-    
-    const entrees = this.entreeService.getProduitEntree(ajoutProduit.nom);
-    const sorties = this.sortieService.getSortieProduit(ajoutProduit.nom);
-    const stock = this.stockService.getStockProduit(ajoutProduit.nom);
-    
-    const detailData ={ entrees, sorties, stock };
+    let entre = this.entreeService.getEntreByProduit(ajoutProduit.id);
+    let sortie = this.sortieService.getSortieByProduit(ajoutProduit.id);
+    this.vueProduit = {
+      date : ajoutProduit.date,
+      nom : ajoutProduit.nom,
+      quantite : entre?.quantite,
+      prix : entre?.montant,
+      montant : entre?.montant,
+      stockQuantite : sortie?.quantite,
+      stockPrix : sortie?.prix_unitaire,
+      stockMontant : sortie?.montant
+    }
+
   }
 
   deleteProduit(index: number) {
     this.produitTab.splice(index, 1);
-    // this.toastr.success('Fournisseur Supprimer avec succès !', 'Warning');
+    this.toastr.success('Fournisseur Supprimer avec succès !', 'Warning');
   }
   printListeFournisseur() {
     var printWindow = window.open('', '_blank');

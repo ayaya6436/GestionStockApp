@@ -8,6 +8,7 @@ export interface Produit{
     
     }
 export interface DetailProduit {
+    id: number;
     date: Date;
     nom: string;
     entreeQuantite: number;

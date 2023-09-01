@@ -16,17 +16,20 @@ import { GeneratorIdService } from '../generator-id.service';
   styleUrls: ['./entree.component.css']
 })
 export class EntreeComponent implements OnInit {
-  entreeProduit: FormGroup ;
+  entreeProduit: FormGroup;
   entrees: Entree[] = [];
   selectedEntree: Entree | undefined;
   currentDate = new Date();
   isedit: boolean = false;
-  toastr: any;
- 
+  //toastr: any;
+  produits: Produit[] = [];
+
 
 
   ngOnInit(): void {
     this.entrees = this.entreeService.getDataEntree();
+    this.produits = this.produitService.getDataProduit();
+
   }
 
   constructor(private fb: FormBuilder, private stockService: StockService, private entreeService: EntreeService, private produitService: ProduitService, private generatorIdService: GeneratorIdService) {
@@ -36,7 +39,6 @@ export class EntreeComponent implements OnInit {
       date: [new Date(), Validators.required],
       quantite: [0, Validators.required],
       prix_unitaire: [0, Validators.required],
-      montant: [0, Validators.required],
       produit: ["", Validators.required],
       fournisseur: ['', Validators.required],
       description: ['', Validators.required],
@@ -44,79 +46,92 @@ export class EntreeComponent implements OnInit {
     });
   }
   submit() {
+    let montant;
     if (this.entreeProduit.valid) {
-      const produitExist = this.produitService.getProduitNom(this.entreeProduit.value.produit);
+      const quantiteEntrant = this.entreeProduit.value.quantite;
+      const prixUnitaire = this.entreeProduit.value.prix_unitaire;
+      const montant = quantiteEntrant * prixUnitaire;
 
-      console.log(produitExist + "je trouver stock")
-      if (produitExist != null) {
-        const entreeMontant = this.entreeProduit.value.montant;
-        const quantiteEntree = this.entreeProduit.value.quantite;
-        const montQuantity = produitExist.quantite + quantiteEntree;
+      const produitExist = this.produitService.getProduitId(this.entreeProduit.value.produit);
+      console.log(this.entreeProduit.value.produit+ ":"+"je trouver un produit");
 
-        const quantiteEntrant = this.entreeProduit.value.quantite;
-        const prixUnitaire = this.entreeProduit.value.prix_unitaire;
-        const montantEntrant = quantiteEntrant * prixUnitaire;
+      if (produitExist != null) { 
+        console.log("je suis dedans");
+        this.entreeProduit.value.id = this.generatorIdService.generateNewId();
+        console.log(this.entreeProduit.value.id, "id entree trouver")
+        const newEntree: Entree = this.entreeProduit.value;
+       
+       
+
+        const saveEntree: Entree = {
+          id: newEntree.id,
+          date: new Date(),
+          description: newEntree.description,
+          produit: newEntree.produit,
+          fournisseur: newEntree.fournisseur,
+          quantite: newEntree.quantite,
+          prix_unitaire: newEntree.prix_unitaire,
+          montant: montant as unknown as number
+        }
+        this.entreeService.saveDataEntree(saveEntree);
         
-         console.log( montQuantity+ ": quantite modifier");
-        //  const monontantEntree = produitExist.quantite - entreeMontant;
-        //  this.stockService.updateStock(produitExist.nom, monontantEntree);
-        this.produitService.updateQuantite(produitExist.nom, montQuantity);
-       
-         this.entreeService.updateMontant(produitExist.id ,montantEntrant);
-
-         console.log(montantEntrant + " stock updated");
-
-      
-      const newEntree: Entree = this.entreeProduit.value;
-      if(!this.isedit){
-       
-        newEntree.id = this.generatorIdService.generateNewId();
-      }
-      console.log(newEntree.id,"id trouver")
-      if (this.isedit && this.selectedEntree) {
-        Object.assign(this.selectedEntree, newEntree);
-       
-      } else {
+        this.entreeService.updateEntreeNewMontant(produitExist.id, montant)
+        
+        console.log(montant + "montant nouveau entree trouver");
         
 
-      }
-      
-      this.selectedEntree = undefined;
-      this.isedit = false;
-      const stok: Stock = {
-        id: 0,
-        date: new Date(),
-        description: newEntree.description,
-        produit: newEntree.produit,
-        quantite: newEntree.quantite,
-        prix_unitaire: newEntree.prix_unitaire,
-        montant: newEntree.montant
+        
+        this.entreeProduit.value.id = this.generatorIdService.generateNewId();
+        console.log(this.entreeProduit.value.id, "id entree trouver")
+        const StockExist = this.stockService.getStockById(this.entreeProduit.value.produit);
+        if (StockExist != null) {
+
+          const newQuantiStockExist = StockExist.quantite + this.entreeProduit.value.quantite;
+          const montStockExist =  StockExist.montant;
+
+          const newMontantstock = StockExist.quantite * StockExist.prix_unitaire;
+          const updatedStockMontant = newMontantstock + montStockExist;
+
+          const stok: Stock = {
+            id: newEntree.id,
+            date: new Date(),
+            description: newEntree.description,
+            produit: newEntree.produit,
+            quantite: newEntree.quantite,
+            prix_unitaire: newEntree.prix_unitaire,
+            montant: newEntree.montant
+          }
+          this.stockService.saveData(stok);
+          this.stockService.newMontant(StockExist.id, updatedStockMontant);
+          console.log(updatedStockMontant + "montant stock trouver");
+          this.stockService.getQuantity(StockExist.produit, newQuantiStockExist);
+          console.log(newQuantiStockExist + "quantite stock trouver");
+        }else{
+          const newStock: Stock = {
+            id: newEntree.id,
+            date: new Date(),
+            description: newEntree.description,
+            produit: newEntree.produit,
+            quantite: newEntree.quantite,
+            prix_unitaire: newEntree.prix_unitaire,
+            montant: newEntree.montant
+          }
+          this.stockService.saveData(newStock);
+          this.stockService.updateEntreeNewMontant(newStock.id, montant);
+          //this.stockService.getQuantity(newStock.produit, newStock.quantite);
+          console.log(newStock.quantite + "quantite stock trouver");
+        }
+
+        console.log("je passe");
+        
+        //sessionStorage.setItem("entreeDonner", JSON.stringify(this.entrees));
       }
 
-      const saveEntree: Entree ={
-        id: 0,
-        date: new Date(),
-        description: newEntree.description,
-        produit: newEntree.produit,
-        fournisseur: newEntree.fournisseur,
-        quantite: newEntree.quantite,
-        prix_unitaire: newEntree.prix_unitaire,
-        montant: newEntree.montant
-      }
-      
-      //verification et comparaison
-      // const produitEntrant = this.entreeService.getProduitEntree(saveEntree.produit );
-      // const idProduit = this.produitService.getProduitId()
-      this.entreeService.saveDataEntree(saveEntree);
-      
-      //this.entrees.push(newEntree);
-      this.stockService.saveData(stok);
-      //sessionStorage.setItem("entreeDonner", JSON.stringify(this.entrees));
-      }  
-    }else
-    console.log("error")
-    // this.toastr.success('Fournisseur mis à jour avec succès !', 'Succès');
+    } else {
+      console.log("error")
+      // this.toastr.success('Fournisseur mis à jour avec succès !', 'Succès');
 
+    }
   }
 
   deleteSortie(index: number) {
@@ -136,10 +151,10 @@ export class EntreeComponent implements OnInit {
   printListeFournisseur() {
     var printWindow = window.open('', '_blank');
     var divToPrint = document.getElementById('divPrint');
-  
+
     if (divToPrint) {
       const content = divToPrint.innerHTML;
-  
+
       printWindow!.document.write(`
         <html>
           <head>
@@ -150,10 +165,9 @@ export class EntreeComponent implements OnInit {
           </body>
         </html>
       `);
-  
+
       printWindow!.print();
       printWindow!.close();
     }
+  }
 }
-}
-

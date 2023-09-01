@@ -7,20 +7,20 @@ import { AuthService } from '../shared/auth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  @Output() sideNavToggled = new EventEmitter<boolean>();
+  @Output() sideNavToggleClicked = new EventEmitter<boolean>();
+  
   menuStatus: boolean = false;
 
-  constructor(private auth: AuthService){
-
-  }
-  ngOnInit(): void {
-   
-  }
-  sideNavToggle(){
+  sideNavToggle() {
     this.menuStatus = !this.menuStatus;
-    this.sideNavToggled.emit(this.menuStatus);
+    this.sideNavToggleClicked.emit(this.menuStatus);
   }
-  logoutUser(){
+
+  
+  constructor(private auth: AuthService) {}
+  ngOnInit(): void {}
+
+  logoutUser() {
     this.auth.logout();
   }
 }
