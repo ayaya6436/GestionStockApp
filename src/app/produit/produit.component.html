@@ -18,7 +18,7 @@
     <div class="text-center" style="font-size: 25px;">Date:{{currentDate | date:'yyyy-MM-dd'}}</div>
     <hr style="color: #9d4edd" />
 
-    <table class="table table table-striped">
+    <table datatable [dtOptions]="dtoptions" id="divPrint" class="table table table-striped">
         <thead>
             <tr>
                 <th>Identifiant</th>

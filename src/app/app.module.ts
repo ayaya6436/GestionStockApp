@@ -4,7 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {AngularFireModule} from '@angular/fire/compat';
 import { environment } from '../environments/environment'; 
- 
+import { CommonModule } from '@angular/common';
+import {DataTablesModule} from 'angular-datatables'
 
 
 
@@ -66,7 +67,9 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
       progressBar:true
     }),
     AngularFireModule.initializeApp(environment.firebase),
-    FormsModule
+    FormsModule,
+    CommonModule,
+    DataTablesModule
   ],
   providers: [], 
   bootstrap: [AppComponent]
