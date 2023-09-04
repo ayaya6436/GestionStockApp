@@ -53,12 +53,11 @@
     </table>
 </div>
 <!-- <<<<<<<<< Temporary merge branch 1
- 
+
 <div mat-dialog-actions>
     <button (click)="closePopup()" color="#9D4EDD">Fermer</button>
     <button color = "#9D4EDD" >Annuler</button>
 </div>  -->
-
 
 <div id="formPopup" style="background-color: #f3f2f323; " class="modal fade" id="exampleModal" tabindex="-1"
     aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
@@ -74,11 +73,7 @@
                     </div>
 
                     <div style="margin: 20px;" class="block1">
-                        <!-- <div>
-                            <label for="name">Identifiant</label><br>
-                            <input id="name" type="number" name="id" formControlName="id" placeholder="id" required>
 
-                        </div> -->
                         <div>
                             <label for="name">Nom</label><br>
                             <input class="form-control" [ngClass]="{'is-invalid': submitted && ajoutProduit.controls['nom'].errors}" id="nameNom" type="text" name="nom" formControlName="nom"
@@ -104,7 +99,7 @@
                                 formControlName="description" placeholder="Ajoutez une description" required></textarea>
                                 <div *ngIf="submitted && ajoutProduit.get('description')!.errors" class="text-danger" >
                                     <p> Ce champs est obligatoire </p>
-                                </div> 
+                                </div>
                         </div>
 
                     </div>
@@ -113,12 +108,12 @@
                             <label for="name">Dates d'ajout</label><br>
                             <input id="nameDate" type="date" name="date" formControlName="date"
                                 placeholder="Saisissez la date du jour" required>
-                           
+
                         </div>
 
                         <button style="margin-left: 70%;" id="bbutton" type="submit" ajoutProduit.valid>Valider</button>
                         <div style="display: none;" *ngIf="submitted && ajoutProduit.invalid">
-                           
+
                         </div>
                     </div>
                 </div>
@@ -126,7 +121,7 @@
         </div>
     </div>
 </div>
-<!-- style="position: fixed; width: 100%; margin-top: 5%; margin-left: 7%;border: #9d4edd 1px solid; " -->
+
 
 <div style="background-color: #f3f2f323; width: fit-content; " class="modal fade" id="detailsModal" tabindex="-1"
     aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
@@ -174,7 +169,7 @@
                             <td>{{ vue.stockQuantite }}</td>
                             <td>{{ vue.stockPrix }}</td>
                             <td>{{ vue.stockMontant }}</td>
-                            
+
                         </tr>
                     </tbody>
                 </table>

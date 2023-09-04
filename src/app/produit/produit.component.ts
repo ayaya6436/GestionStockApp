@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { Component, OnInit,OnDestroy } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DetailProduit, Produit } from './produit.model';
 import { ProduitService } from '../produit.service';
 import { GeneratorIdService } from '../generator-id.service';
@@ -7,18 +7,14 @@ import { SortieService } from '../sortie.service';
 import { EntreeService } from '../entree.service';
 import { StockService } from '../stock.service';
 import { ToastrService } from 'ngx-toastr';
-
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-produit',
   templateUrl: './produit.component.html',
   styleUrls: ['./produit.component.css']
 })
-export class ProduitComponent implements OnInit {
-  // quantiteControl = new FormControl('', [Validators.required, Validators.name]);
-
-
-
+export class ProduitComponent implements OnInit,OnDestroy{
   ajoutProduit: FormGroup;
   produitTab: Produit[] = [];
   detailTabe: DetailProduit[] = []; //
@@ -30,9 +26,28 @@ export class ProduitComponent implements OnInit {
   submitted = false;
 
 
+
+
+//datatable
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject<any>();
+
+
+
+
   ngOnInit(): void {
     this.produitTab = this.produitService.getDataProduit();
 
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 5,
+      processing: true,
+      searching: true
+    };
+  }
+
+  ngOnDestroy(): void {
+    this.dtTrigger.unsubscribe();
   }
   constructor(
     private fb: FormBuilder,
@@ -43,8 +58,7 @@ export class ProduitComponent implements OnInit {
     private stockService: StockService,
     private toastr: ToastrService
 
-
-  ) {
+    ) {
 
     this.ajoutProduit = this.fb.group({
       date: [new Date(), Validators.required],
@@ -93,7 +107,7 @@ export class ProduitComponent implements OnInit {
 
         this.toastr.success('Entree effectuee avec succès !', 'Succès', { timeOut: 5000 });
 
-        } 
+        }
       }
       // Réinitialiser le formulaire et supprimer les erreurs
       this.ajoutProduit.reset();
@@ -114,6 +128,7 @@ export class ProduitComponent implements OnInit {
         this.selectedProduit = undefined;
         this.isedit = false;
       }
+
     }
 
     //formulaire de detail de produit

@@ -3,8 +3,10 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {AngularFireModule} from '@angular/fire/compat';
-import { environment } from '../environments/environment'; 
+import { environment } from '../environments/environment';
 import { CommonModule } from '@angular/common';
+import {DataTablesModule} from 'angular-datatables';
+
 
 
 
@@ -50,7 +52,7 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
     RegisterComponent,
     ForgotPasswordComponent,
     VerifyEmailComponent,
- 
+
   ],
   imports: [
     BrowserModule,
@@ -67,9 +69,10 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
     }),
     AngularFireModule.initializeApp(environment.firebase),
     FormsModule,
-    CommonModule
+    CommonModule,
+    DataTablesModule
   ],
-  providers: [], 
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

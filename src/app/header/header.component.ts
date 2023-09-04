@@ -8,7 +8,7 @@ import { AuthService } from '../shared/auth.service';
 })
 export class HeaderComponent implements OnInit {
   @Output() sideNavToggleClicked = new EventEmitter<boolean>();
-  
+
   menuStatus: boolean = false;
 
   sideNavToggle() {
@@ -16,7 +16,7 @@ export class HeaderComponent implements OnInit {
     this.sideNavToggleClicked.emit(this.menuStatus);
   }
 
-  
+
   constructor(private auth: AuthService) {}
   ngOnInit(): void {}
 
