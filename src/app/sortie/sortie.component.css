@@ -134,7 +134,7 @@ input{
 
 
 
-#detail {
+table {
     border-left: 10%;
     font-family: arial, sans-serif;
     border-collapse: collapse;
@@ -142,7 +142,7 @@ input{
     border: #afacac 1px solid;
   }
   
-  #detail td, th {
+   td, th {
     border: #afacac 1px solid;
     border: 1px solid #dddddd;
     text-align: left;
@@ -160,3 +160,22 @@ input{
 
     
   }
+
+  select{
+    margin-left: 30px;
+    margin-right: 30px;
+    border: #afacac 1px solid;
+    border-radius: 10px;
+    height: 30px;
+    width: 200px;
+    background: #EFEBEB;
+    &::placeholder{
+        color: #9D4EDD;
+        opacity: 1;
+        font-family: 'Inter',sans-serif;
+        margin-left: 10px;
+}
+}
+#label{
+    margin-left: 30px;
+}

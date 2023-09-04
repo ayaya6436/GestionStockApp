@@ -31,11 +31,7 @@ export class FournisseurComponent implements OnInit {
 
     // Vous pouvez initialiser vos données de fournisseurs ici
     // Exemple :
-    // this.fournisseurs = [
-    //   { nom: 'Nom1', prenom: 'Prenom1', email: 'Email1', telephone: 'Telephone1' },
-    //   { nom: 'Nom2', prenom: 'Prenom2', email: 'Email2', telephone: 'Telephone2' },
-
-    // ];
+   
 
     // Faites une copie des données d'origine
     this.fournisseursCopie = [...this.fournisseurs];

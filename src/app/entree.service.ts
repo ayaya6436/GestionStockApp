@@ -19,13 +19,13 @@ export class EntreeService {
   getDataEntree() {
     return this.entree;
   }
-  getProduitEntree(emtreeE: number) {
-    const entreeProduitValue = this.entree.find(e => e.produit === emtreeE);
+  getProduitEntree(emtreeE: String) {
+    const entreeProduitValue = this.entree.find(e => e.produit == emtreeE);
     return entreeProduitValue;
   }
 
-  getEntreeById(isId: number) {
-    const idP = this.entree.find(e => e.id === isId)
+  getEntreeByProduit(produit: String) {
+    const idP = this.entree.find(e => e.produit == produit)
     // this.entree.forEach(el => {
     //   console.log(el.id + "  er  " + isId)
     //   if (el.id == isId) {
@@ -40,39 +40,39 @@ export class EntreeService {
   getProduitById(id: number){
     return this.serviceProduit.find(el => el.id == id)
   }
-  updateEntreeNewMontant( ProduitId: number, montant: number) {
-    let prodTab = this.getEntreeById(ProduitId);
+  updateEntreeNewMontant( ProduitId: String, montant: number) {
+    let prodTab = this.getEntreeByProduit(ProduitId);
     console.log(prodTab + ": " + "produit id trouver");
-    const index = this.entree.findIndex(stoc => stoc.produit  == prodTab?.id);
+    const index = this.entree.findIndex(stoc => stoc.produit  == prodTab?.produit);
     console.log(index + ": " + "produit trouver");
     // this.entree[index].montant = montant;
     console.log(this.entree[index]+": " + "idex trouver");
 
   }
-  updateQuantite(stockTrouver: number, quantite: number,) {
-    let stock = this.getEntreeById(stockTrouver);
-    const index = this.entree.findIndex(entre => entre.id == stock?.id);
+  updateQuantite(stockTrouver: String, quantite: number,) {
+    let stock = this.getEntreeByProduit(stockTrouver);
+    const index = this.entree.findIndex(entre => entre.produit == stock?.produit);
     this.entree[index].quantite = quantite;
   }
 
-  updateMontant(montant: number, produitIdTrouve: number) {
-    let entrProduct = this.getEntreeById(produitIdTrouve);
-    const entrer = this.entree.findIndex(entrer => entrer.montant == entrProduct?.id);
-    this.entree[entrer].montant = montant;
-  }
+  // updateMontant(montant: number, produitIdTrouve: String) {
+  //   let entrProduct = this.getEntreeByProduit(produitIdTrouve);
+  //   const entrer = this.entree.findIndex(entrer => entrer.montant == entrProduct?.id);
+  //   this.entree[entrer].montant = montant;
+  //}
 
-  updateMontantEntree(productEnt: number, montant: number) {
+  updateMontantEntree(productEnt: String, montant: number) {
     let entree = this.getEntreeProduit(productEnt);
     const entrer = this.entree.findIndex(entrer => entrer.produit == entree?.produit);
     this.entree[entrer].montant = montant;
   }
 
-  getEntreeProduit(product: number) {
+  getEntreeProduit(product: String) {
     return this.entree.find(entree => entree.produit == product);
 
   }
   //modification ada commente tout
-  updateMontantEntre(idP: number, montant: number) {
+  updateMontantEntre(idP: String, montant: number) {
     let entree = this.getEntreeProduit(idP);
     const entrer = this.entree.findIndex(entrer => entrer.produit == entree?.produit);
     this.entree[entrer].montant = montant;
@@ -82,5 +82,10 @@ export class EntreeService {
 
   getEntreByProduit(idProduit : any){
     return this.entree.find(entre => entre.produit == idProduit);
+  }
+
+  getAllEntreByProduit(idProduit : any){
+    console.log(this.entree.filter(entre => entre.produit == idProduit))
+    return this.entree.filter(entre => entre.produit == idProduit);
   }
 }

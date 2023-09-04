@@ -52,8 +52,13 @@ export class ProduitService {
     return ligneId;
   }
 
-  getProduitId(idProduit: number){
-    const ligneId = this.produitTabs.find(tab => tab.id == idProduit);
+  getALProduitNom(){
+    const ligneId = this.produitTabs.find(tab => tab.nom);
+    return ligneId;
+  }
+
+  getProduitId(idProduit: String){
+    const ligneId = this.produitTabs.find(tab => tab.nom == idProduit);
     return ligneId;
   }
 
@@ -71,7 +76,7 @@ export class ProduitService {
 
   // rcuperations des donnes stock, sortie, entree
   //////////////////////////////////////////////produits details////////////////
-getDetailProduitId( id:number){
+getDetailProduitId( id:String){
   let produitId = this.getProduitId(id)
   const stkDt = this.detailTab.find(d => d.id == produitId?.id)
 
@@ -143,4 +148,14 @@ getElementSortie(){
 
 }
 
+// :::::::::::::::::::::::::::::::::::::
+
+updateQuantiteProduit(idP: String, quantite : number){
+  const index = this.produitTabs.findIndex(pro => pro.nom == idP);
+    this.produitTabs[index].quantite = this.produitTabs[index].quantite + quantite;
+
+}
+getAllNomProduitTabs(){
+  
+}
 }
