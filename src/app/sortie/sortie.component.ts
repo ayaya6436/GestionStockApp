@@ -117,9 +117,26 @@ export class SortieComponent implements OnInit {
   }
 
   deleteSortie(index: number) {
-    
+    const sortieToDelete = this.sorties[index];
+    const stockExists = this.stockService.getStockByProduitNom(this.sorties[index].produit);
 
+       console.log(stockExists + "je trouver stock")
+      if (stockExists != null && stockExists!=undefined){
+        const quantiteSortie = sortieToDelete.quantite;
+        stockExists!.quantite += quantiteSortie;
+        const montant = stockExists.quantite*stockExists.prix_unitaire;
+
+        this.stockService.updateStock(stockExists.produit, montant );
+
+       
+      }else{
+        
+        this.toastr.error('Aucun stock touver pour ce produit', 'Erreurs, ');
+        return;
+        
+      }
     this.sorties.splice(index, 1);
+      
   }
 
   addmodel(sortie?: Sortie) {
