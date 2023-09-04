@@ -16,10 +16,14 @@
 
 .modal-header h2{
 
-    margin-left: 20%;
+    margin-left: 29%;
     font-weight: bold;
-    text-shadow: black 0.1em 0.2em 0.2em;
+    /* text-shadow: #9D4EDD 0.1em 0.2em 0.1em; */
     font-size: 30px;
+    &:hover{
+        color: #9D4EDD;
+        transition: cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
 
     
 }
@@ -40,7 +44,7 @@
 }
 
 .exampleModal {
-    border: red 3px solid;
+    
     margin-top: 20px;
     font-family: 'Inter',sans-serif;
     
@@ -64,14 +68,14 @@
     margin-bottom: 10px;
     &:hover{
         cursor: pointer;
-        color: red;
+        color: rgb(234, 225, 235);
     }
 }
 h2{
 
     text-align: center;
     font-weight: bold;
-    text-shadow: black 0.1em 0.2em 0.2em;
+    letter-spacing: 2px;
 }
 
 .block1{
@@ -125,9 +129,10 @@ input{
     margin-left: 70%;
     cursor: pointer ;
     width: 200px;
+    justify-content: center;
     height: 30px;
     text-align: center;
-    margin-top: 7%;
+    margin-top: 5%;
     margin-bottom: 20px;
     &:hover{
         cursor: pointer;
@@ -165,3 +170,10 @@ input{
 
     
   }
+
+  .formulaireSortie{
+   
+    width: 700px;
+  }
+
+  

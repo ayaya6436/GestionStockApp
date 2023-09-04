@@ -30,22 +30,22 @@ export class StockService {
     return this.stocks.find(stock => stock.id == isId);
 
   }
-  getStockByNom(produit: number) {
+  getStockByProduitNom(produit: String) {
     return this.stocks.find(stock => stock.produit == produit);
 
   }
-  updateStock(stockTrouver: number, montant: number) {
+  updateStock(stockTrouver: String, montant: number) {
     console.log("hello");
-    let stock = this.getStockById(stockTrouver);
-    const index = this.stocks.findIndex(stoc => stoc.id == stock?.id);
+    let stock = this.getStockByProduitNom(stockTrouver);
+    const index = this.stocks.findIndex(stoc => stoc.produit == stock?.produit);
     console.log("index" + index);
     this.stocks[index].montant = montant;
     console.log("i'm here");
 
   }
-  updateQuantite(stockTrouver: number, quantite: number,) {
-    let stock = this.getStockById(quantite);
-    const index = this.stocks.findIndex(stoc => stoc.id == stock?.id);
+  updateQuantite(stockTrouver: String, quantite: number,) {
+    let stock = this.getStockByProduitNom(stockTrouver);
+    const index = this.stocks.findIndex(stoc => stoc.produit == stock?.produit);
     this.stocks[index].quantite = quantite;
   }
   // getMontantStockById(): Stock | undefined {
@@ -56,20 +56,20 @@ export class StockService {
 
   }
 
-  getStockProduit(produit: number) {
+  getStockProduit(produit: String) {
     //const index = this.stocks.findIndex(stoc => stoc.produit == produit);
     return this.stocks.find(el => el.produit == produit);
   }
 
-  getQuantity(produit: number, quantiStock: number) {
+  getQuantity(produit: String, quantiStock: number) {
     let stock = this.getStockProduit(produit);
     const index = this.stocks.findIndex(stoc => stoc.produit == stock?.produit);
     this.stocks[index].quantite = quantiStock;
   }
 
-  newMontant(id: number, montant: number) {
-    let produitTab = this.getProduitById(id);
-    const index = this.stocks.findIndex(stoc => stoc.produit == produitTab?.id);
+  newMontant(produit: String, montant: number) {
+    let produitTab = this.getStockByProduitNom(produit);
+    const index = this.stocks.findIndex(stoc => stoc.produit == produitTab?.produit);
     console.log(this.stocks[index])
     //this.stocks[index].montant = montant;
 
@@ -80,16 +80,16 @@ export class StockService {
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////
-  updateEntreeNewMontant( ProduitId: number, montant: number) {
-    let produitTab = this.getProduitById(ProduitId);
+  updateEntreeNewMontant( ProduitId: String, montant: number) {
+    let produitTab = this.getStockByProduitNom(ProduitId);
     console.log(produitTab + ": " + "produit id trouver");
-    const index = this.stocks.findIndex(stoc => stoc.produit  == produitTab?.id);
+    const index = this.stocks.findIndex(stoc => stoc.produit  == produitTab?.produit);
     console.log(index + ": " + "produit trouver");
      this.stocks[index].montant = montant;
     console.log(this.stocks[index]+": " + "idex trouver");
 }
   /////////////////////////////////////////////////////////////////////////////////////////////////
-  getStockByIdProduit(idP : number){
+  getStockByIdProduit(idP : String){
     return this.stocks.find(stoc => stoc.produit == idP)
   }
 

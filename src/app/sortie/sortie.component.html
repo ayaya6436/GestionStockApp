@@ -22,10 +22,11 @@
         <thead>
             <tr>
                 <th>Numero</th>
+                <th>Date</th>
                 <th>Stock correspondant</th>
-                <th>Dates</th>
+                <th>Client</th>
                 <th>Description</th>
-                <th>Produits</th>
+                <th>Produits </th>
                 <th>Quantites</th>
                 <th>Prix Unitaire</th>
                 <th>Montant</th>
@@ -38,6 +39,7 @@
                 <th scope="row">{{ sortieProduit.id}}</th>
                 <td>{{ sortieProduit.date | date }}</td>
                 <td>{{ sortieProduit.number_stock }}</td>
+                <td>{{ sortieProduit.client }}</td>
                 <td>{{ sortieProduit.description }}</td>
                 <td>{{ sortieProduit.produit }}</td>
                 <td>{{ sortieProduit.quantite }}</td>
@@ -47,8 +49,8 @@
                     <button class="btn" (click)="addmodel(sortieProduit)"><i data-bs-target="#exampleModal"
                             data-bs-toggle="modal" class="fas fa-edit"></i></button>
                     <button class="btn "><i data-bs-target="#exampleModal" data-bs-toggle="modal"
-                            class="fas fa-trash"></i></button>
-                    <button class="btn"><i class="fa-regular fa-eye"></i></button>
+                            class="fas fa-trash" (click)="deleteSortie(i)"></i></button>
+                    <!-- <button class="btn"><i class="fa-regular fa-eye"></i></button> -->
                 </td>
             </tr>
         </tbody>
@@ -68,48 +70,88 @@
                     <div style="margin: 20px;" class="block1">
                         <div>
                             <label for="name">Quantité</label><br>
-                            <input id="name" type="number" name="quantite" formControlName="quantite"
+                            <input class="form-control" [ngClass]="{'is-invalid': submitted && sortieProduit.controls['quantite'].errors}" id="name" type="number" name="quantite" formControlName="quantite"
                                 placeholder="Quantite" required>
+                                <div *ngIf="submitted && sortieProduit.get('quantite')!.errors" class="text-danger" >
+                                    <p> Ce champs est obligatoire </p>
+                                </div>
 
                         </div>
                         <div>
                             <label for="name">Prix Unitaire</label><br>
-                            <input id="name" type="number" name="prix_unitaire" formControlName="prix_unitaire"
+                            <input  class="form-control" [ngClass]="{'is-invalid': submitted && sortieProduit.controls['prix_unitaire'].errors}"id="name" type="number" name="prix_unitaire" formControlName="prix_unitaire"
                                 placeholder="Prix unitaire" required>
+                                <div *ngIf="submitted && sortieProduit.get('prix_unitaire')!.errors" class="text-danger" >
+                                    <p> Ce champs est obligatoire </p>
+                                </div>
                         </div>
-                        <div>
+                        <div style="display: none;">
                             <label for="name">Montant </label><br>
                             <input id="name" type="number" name="montant" formControlName="montant"
                                 placeholder="Montant" required>
                         </div>
+
+                        <div>
+                            <label id="label" for="name">Produits</label><br>
+                            <select class="form-control" [ngClass]="{'is-invalid':submitted && sortieProduit.get('produit')!.errors}" name="produit" tabindex="nom" id="produitId" formControlName="produit">
+                                <option *ngFor="let produitTabe of produitTabe" [value]="produitTabe.nom">
+                                    {{ produitTabe.nom }}</option>
+                                    <div *ngIf="submitted && sortieProduit.get('produit')!.errors" class="text-danger" >
+                                        <p> Ce champs est obligatoire </p>
+                                    </div>
+                            </select> 
+                            <!-- <input class="form-control" [ngClass]="{'is-invalid': submitted && sortieProduit.controls['produit'].errors}" id="nameProduit" type="text" name="produit" formControlName="produit" placeholder="Produit"
+                                required>
+                                <div *ngIf="submitted && sortieProduit.get('produit')!.errors" class="text-danger" >
+                                    <p> Ce champs est obligatoire </p>
+                                </div> -->
+                        </div>
                     </div>
                     <div style="margin: 20px;" class="block2">
-                        <div>
+                        <div style="display: none;">
                             <label for="name">Dates</label><br>
-                            <input id="name" type="date" name="date" formControlName="date"
+                            <input id="nameDate" type="date" name="date" formControlName="date"
                                 placeholder="Saisissez la date du jour" required>
                         </div>
 
                         <div>
-                            <label for="name">Produits</label><br>
-                            <input id="name" type="number" name="produit" formControlName="produit" placeholder="Produit"
+                            <label for="name">Client</label><br>
+                            <input class="form-control" [ngClass]="{'is-invalid': submitted && sortieProduit.controls['client'].errors}" id="nameClient" type="text" name="client" formControlName="client" placeholder="Produit"
                                 required>
+                                <div *ngIf="submitted && sortieProduit.get('client')!.errors" class="text-danger" >
+                                    <p> Ce champs est obligatoire </p>
+                                </div>
                         </div>
-
-                        <div>
-                            <label for="name">Numero du stock</label><br>
-                            <input id="number_stock" type="number" name="number_stock" formControlName="number_stock" placeholder="Numero du stock correspondant "
+                         <div>
+                            <label id="label" for="name">Stocks correspondant</label><br>
+                            <select class="form-control" [ngClass]="{'is-invalid':submitted && sortieProduit.get('number_stock')!.errors}" name="number_stock" tabindex="nom" id="produitId" formControlName="number_stock">
+                                <option *ngFor="let stockTab of stockTab" [value]="stockTab.produit">
+                                    {{ stockTab.produit }}</option>
+                                    <div *ngIf="submitted && sortieProduit.get('number_stock')!.errors" class="text-danger" >
+                                        <p> Ce champs est obligatoire </p>
+                                    </div>
+                            </select> 
+                            <!-- <input class="form-control" [ngClass]="{'is-invalid': submitted && sortieProduit.controls['number_stock'].errors}" id="number_stock" type="number" name="number_stock" formControlName="number_stock" placeholder="Numero du stock correspondant "
                                 required>
-                        </div>
+                                <div *ngIf="submitted && sortieProduit.get('number_stock')!.errors" class="text-danger" >
+                                    <p> Ce champs est obligatoire </p>
+                                </div> -->
+                        </div> 
                     </div>
                     <div style="margin: 20px; align-items: center;" class="block3">
                         <div>
                             <label for="name">Description</label><br>
-                            <input id="name" id="descrInput" type="text" name="description"
-                                formControlName="description" placeholder="Ajoutez une description" required>
+                            <textarea class="form-control" [ngClass]="{'is-invalid': submitted && sortieProduit.controls['description'].errors}"  id="descrInput" type="text" name="description"
+                                formControlName="description" placeholder="Ajoutez une description" required></textarea>
+                                <div *ngIf="submitted && sortieProduit.get('description')!.errors" class="text-danger" >
+                                    <p> Ce champs est obligatoire </p>
+                                </div>
                         </div>
                     
-                        <button  id="bbutton" type="submit" [disabled]="!sortieProduit.valid">Valider</button>
+                        <button  id="bbutton" type="submit" sortieProduit.valid>Valider</button>
+                        <div style="display: none;" *ngIf="submitted && sortieProduit.invalid">
+                           
+                        </div>
                     </div>
                 </div>
             </form>

@@ -56,7 +56,7 @@
 }
 
 .icone{
-   border: #0000 5px solid;
+   
     height: 10px;
     width: 10px;
     float: right;
@@ -82,17 +82,17 @@ h2{
 }
 .block2{
     display: flex;
-    margin-top: 10%;
+    margin-top: 15%;
     margin-bottom: 10%;
     margin-left: 10px;
     
 }
 .block3{
-    display: flex;
+   
     margin-top: 10px;
     margin-left: 10px;
-    width: 70%;
-    border: #0000 1px solid;
+    width: fit-content;
+   float: right;
 
 }
 label{
@@ -112,22 +112,55 @@ input{
         margin-left: 10px;
     }
 }
+select{
+    margin-left: 30px;
+    margin-right: 30px;
+    border: #afacac 1px solid;
+    border-radius: 10px;
+    height: 30px;
+    width: 200px;
+    background: #EFEBEB;
+    &::placeholder{
+        color: #9D4EDD;
+        opacity: 1;
+        font-family: 'Inter',sans-serif;
+        margin-left: 10px;
+}
+}
+
+#labProduit{
+    margin-left: 30px;
+}
+textarea{
+    
+    margin-right: 30px;
+    border: #afacac 1px solid;
+    border-radius: 10px;
+    height: 100px;
+    width: 200px;
+    background: #EFEBEB;
+    &::placeholder{
+        color: #9D4EDD;
+        opacity: 1;
+        font-family: 'Inter',sans-serif;
+        margin-left: 10px;
+}
+}
+
 #descrInput{
     width: 300px;
 }
 #bbutton{
     
-    background:#9d4edd6a ;
+    background:#9230e26a ;
     border-radius: 5px;
     color: #FFFFFF;
     letter-spacing: 0.1em;
     padding: 10px;
-    margin-left: 40%;
     cursor: pointer ;
-    width: 200px;
+    width: 100px;
     height: 30px;
     text-align: center;
-    margin-top: 7%;
     margin-bottom: 20px;
     &:hover{
         cursor: pointer;

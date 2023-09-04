@@ -7,7 +7,7 @@ import { SortieService } from '../sortie.service';
 import { EntreeService } from '../entree.service';
 import { StockService } from '../stock.service';
 import { ToastrService } from 'ngx-toastr';
-import { MyErrorStateMatcher } from '../sortie/validationInput/validation';
+
 
 @Component({
   selector: 'app-produit',
@@ -15,18 +15,19 @@ import { MyErrorStateMatcher } from '../sortie/validationInput/validation';
   styleUrls: ['./produit.component.css']
 })
 export class ProduitComponent implements OnInit {
-// quantiteControl = new FormControl('', [Validators.required, Validators.name]);
+  // quantiteControl = new FormControl('', [Validators.required, Validators.name]);
 
-  matcher = new MyErrorStateMatcher();
+
 
   ajoutProduit: FormGroup;
   produitTab: Produit[] = [];
-  detailTabe: DetailProduit[] =[]; //
+  detailTabe: DetailProduit[] = []; //
   selectedProduitDetails: Produit | undefined;
   selectedProduit: Produit | undefined;
   currentDate = new Date();
   isedit: boolean = false;
-  vueProduit : any[] = [];
+  vueProduit: any[] = [];
+  submitted = false;
 
 
   ngOnInit(): void {
@@ -34,15 +35,16 @@ export class ProduitComponent implements OnInit {
 
   }
   constructor(
-    private fb: FormBuilder, 
-    private produitService: ProduitService, 
+    private fb: FormBuilder,
+    private produitService: ProduitService,
     private generatorIdService: GeneratorIdService,
     private sortieService: SortieService,
     private entreeService: EntreeService,
     private stockService: StockService,
-    
-    
-    ) {
+    private toastr: ToastrService
+
+
+  ) {
 
     this.ajoutProduit = this.fb.group({
       date: [new Date(), Validators.required],
@@ -55,11 +57,20 @@ export class ProduitComponent implements OnInit {
 
 
   submit() {
-    if (this.ajoutProduit.valid) {
+    this.submitted = true;
+
+    if (this.ajoutProduit.invalid) {
+
+      this.toastr.error('Veuillez remplir tous les champs', 'Erreur', { timeOut: 5000 });
+      return
+
+    } else {
+      console.log("je dedans")
       const produitExists = this.produitService.getProduitNom(this.ajoutProduit.value.nom);
 
       console.log(produitExists + "je trouver produit")
       if (produitExists == null || produitExists == undefined) {
+
         const newProduit = this.ajoutProduit.value;
         // console.log(newProduit.nom + "donnees trouver");
         if (!this.isedit) {
@@ -76,76 +87,95 @@ export class ProduitComponent implements OnInit {
 
         }
         console.log(saveProduit + ": donnees trouver");
+        // this.ajoutProduit.reset();
         this.produitService.saveDataProuit(saveProduit);
         console.log(saveProduit + ": donnees trouver avec succees");
-        // this.ajoutProduit.reset();
 
+        this.toastr.success('Entree effectuee avec succès !', 'Succès', { timeOut: 5000 });
+
+        } 
+      }
+      // Réinitialiser le formulaire et supprimer les erreurs
+      this.ajoutProduit.reset();
+      Object.keys(this.ajoutProduit.controls).forEach(controlName => {
+        this.ajoutProduit.get(controlName)?.setErrors(null);
+      });
+
+      // Réinitialiser le formulaire et marquer comme non soumis
+      // this.submitted = false;
+    }
+
+    addmodel(ajoutProduit ?: Produit) {
+
+      if (ajoutProduit) {
+        this.selectedProduit = { ...ajoutProduit };
+        this.isedit = true;
+      } else {
+        this.selectedProduit = undefined;
+        this.isedit = false;
       }
     }
-  }
-  addmodel(ajoutProduit?: Produit) {
 
-    if (ajoutProduit) {
-      this.selectedProduit = { ...ajoutProduit };
-      this.isedit = true;
-    } else {
-      this.selectedProduit = undefined;
-      this.isedit = false;
+    //formulaire de detail de produit
+    viewDetails(ajoutProduit: Produit) {
+
+      //let entre = this.entreeService.getEntreByProduit(ajoutProduit.id);
+      let entres = this.entreeService.getAllEntreByProduit(ajoutProduit.nom);
+      let sortie = this.sortieService.getAllSortieByProduit(ajoutProduit.nom);
+      let stocks = this.stockService.getAllStockByProduit(ajoutProduit.nom);
+      entres.forEach(entre => {
+        this.vueProduit.push(
+          {
+            date: ajoutProduit.date,
+            nom: ajoutProduit.nom,
+
+            // detail entree par produit
+            entreeQuantite: entre?.quantite,
+            entreePrix: entre?.prix_unitaire,
+            entreMontant: entre?.montant,
+
+            // detail sortie par produit
+            sortieQuantite: null,
+            sortiePrix: null,
+            sortieMontant: null,
+
+            // detail entree par produit
+            stockQuantite: null,
+            stockPrix: null,
+            stockMontant: null,
+          }
+        );
+      });
+      let i = 0;
+      stocks.forEach(stock => {
+        this.vueProduit[i].stockQuantite = stock.quantite;
+        this.vueProduit[i].stockPrix = stock.prix_unitaire;
+        this.vueProduit[i].stockMontant = stock.montant;
+        i++;
+      });
+
+      let j =0;
+      sortie.forEach(sortie => {
+        this.vueProduit[j].sortieQuantite = sortie.quantite;
+        this.vueProduit[j].sortiePrix = sortie.prix_unitaire;
+        this.vueProduit[j].sortieMontant = sortie.montant;
+        j++;
+      })
+
     }
-  }
 
-  //formulaire de detail de produit
-  viewDetails(ajoutProduit: Produit) {
+    deleteProduit(index: number) {
+      this.produitTab.splice(index, 1);
+      this.toastr.success('Produit Supprimer avec succès !', 'Warning', { timeOut: 5000 });
+    }
+    printListeFournisseur() {
+      var printWindow = window.open('', '_blank');
+      var divToPrint = document.getElementById('divPrint');
 
-    //let entre = this.entreeService.getEntreByProduit(ajoutProduit.id);
-    let entres = this.entreeService.getAllEntreByProduit(ajoutProduit.id);
-    let sortie = this.sortieService.getSortieByProduit(ajoutProduit.id);
-    let stocks = this.stockService.getAllStockByProduit(ajoutProduit.id);
-    entres.forEach(entre =>{
-      this.vueProduit.push(
-        {
-          date : ajoutProduit.date,
-          nom : ajoutProduit.nom,
-    
-          // detail entree par produit
-          entreeQuantite : entre?.quantite,
-          entreePrix : entre?.prix_unitaire,
-          entreMontant : entre?.montant,
-    
-          // detail sortie par produit
-          sortieQuantite : null,
-          sortiePrix : null,
-          sortieMontant : null,
-    
-          // detail entree par produit
-          stockQuantite : null,
-          stockPrix : null,
-          stockMontant : null,
-        }
-      );
-    });
-    let i=0;
-    stocks.forEach(stock =>{
-      this.vueProduit[i].stockQuantite = stock.quantite;
-      this.vueProduit[i].stockPrix = stock.prix_unitaire;
-      this.vueProduit[i].stockMontant = stock.montant;
-      i++;
-    });
+      if (divToPrint) {
+        const content = divToPrint.innerHTML;
 
-  }
-
-  deleteProduit(index: number) {
-    this.produitTab.splice(index, 1);
-    // this.toastr.success('Fournisseur Supprimer avec succès !', 'Warning');
-  }
-  printListeFournisseur() {
-    var printWindow = window.open('', '_blank');
-    var divToPrint = document.getElementById('divPrint');
-
-    if (divToPrint) {
-      const content = divToPrint.innerHTML;
-
-      printWindow!.document.write(`
+        printWindow!.document.write(`
         <html>
           <head>
             <title>Imprimer la liste des fournisseurs</title>
@@ -156,8 +186,8 @@ export class ProduitComponent implements OnInit {
         </html>
       `);
 
-      printWindow!.print();
-      printWindow!.close();
+        printWindow!.print();
+        printWindow!.close();
+      }
     }
   }
-}

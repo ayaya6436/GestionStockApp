@@ -46,8 +46,8 @@
                     <button class="btn" (click)="addmodel(entreeProduit)"><i data-bs-target="#exampleModal"
                             data-bs-toggle="modal" class="fas fa-edit"></i></button>
                     <button class="btn "><i  data-bs-toggle="modal"
-                            class="fas fa-trash"></i></button>
-                    <button class="btn"><i class="fa-regular fa-eye"></i></button>
+                            class="fas fa-trash" (click)="deleteEntree(i)"></i></button>
+                    <!-- <button class="btn"><i class="fa-regular fa-eye"></i></button> -->
                 </td>
             </tr>
         </tbody>
@@ -67,42 +67,65 @@
                     <div style="margin: 20px;" class="block1">
                         <div>
                             <label for="name">Quantité</label><br>
-                            <input id="name" type="number" name="quantite" formControlName="quantite"
-                                placeholder="Quantite" required>
-
+                            <input class="form-control" [ngClass]="{'is-invalid':submitted && entreeProduit.get('quantite')!.errors}" id="name" type="number" name="quantite" formControlName="quantite"
+                                placeholder="Quantite" >
+                                <div *ngIf="submitted && entreeProduit.get('quantite')!.errors" class="text-danger" >
+                                    <p> Ce champs est obligatoire </p>
+                                </div>
                         </div>
+
                         <div>
                             <label for="name">Prix Unitaire</label><br>
-                            <input id="name" type="number" name="prix_unitaire" formControlName="prix_unitaire"
+                            <input class="form-control" [ngClass]="{'is-invalid':submitted && entreeProduit.get('prix_unitaire')!.errors}" id="name" type="number" name="prix_unitaire" formControlName="prix_unitaire"
                                 placeholder="Prix unitaire" required>
+                                <div *ngIf="submitted && entreeProduit.get('prix_unitaire')!.errors" class="text-danger" >
+                                    <p> Ce champs est obligatoire </p>
+                                </div>
                         </div>
+
                         <div>
-                            <label for="name">Fournisseur </label><br>
-                            <input id="name" type="text" name="fournisseur" formControlName="fournisseur"
+                            <label id="labProduit" for="name">Fournisseur </label><br>
+                            <select class="form-control" [ngClass]="{'is-invalid':submitted && entreeProduit.get('fournisseur')!.errors}" name="fournisseur" tabindex="nom" id="fournisseurId" formControlName="fournisseur">
+                                <option *ngFor="let fournisseur of fournisseurs" [value]="fournisseur.nom">
+                                    {{ fournisseur.nom }}</option>
+                                    <div *ngIf="submitted && entreeProduit.get('fournisseur')!.errors" class="text-danger" >
+                                        <p> Ce champs est obligatoire </p>
+                                    </div>
+                            </select>  
+                            <!-- <input class="form-control" [ngClass]="{'is-invalid':submitted && entreeProduit.get('quantite')!.errors}" id="name" type="text" name="fournisseur" formControlName="fournisseur"
                                 placeholder="Saisissez un fournisseur" required>
+                                <div *ngIf="submitted && entreeProduit.get('fournisseur')!.errors" class="text-danger" >
+                                    <p> Ce champs est obligatoire </p>
+                                </div> -->
                         </div>
                     </div>
                     <div style="margin: 20px;" class="block2">
                         <div>
                             <label for="name">Description</label><br>
-                            <input id="name" id="descrInput" type="text" name="description"
-                                formControlName="description" placeholder="Ajoutez une description" required>
+                            <textarea class="form-control" [ngClass]="{'is-invalid':submitted && entreeProduit.get('description')!.errors}" id="name" id="descrInput" type="text" name="description"
+                                formControlName="description" placeholder="Ajoutez une description" required> </textarea>
+                                <div *ngIf="submitted && entreeProduit.get('description')!.errors" class="text-danger" >
+                                    <p> Ce champs est obligatoire </p>
+                                </div>
                         </div>
 
                         <div>
-                            <label for="name">Produits correspondant</label><br>
-                            <select name="produit" id="produitId" formControlName="produit">
-                                <option *ngFor="let produit of produits" [value]="produit.id">
+                            <label id="labProduit" for="name">Produits correspondant</label><br>
+                             <select  name="produit" tabindex="nom" id="produitId" formControlName="produit">
+                                <option *ngFor="let produit of produits" [value]="produit.nom">
                                     {{ produit.nom }}</option>
-                            </select> 
-                            <input id="name" type="number" name="produit"  formControlName="produit" placeholder="Produit"
-                                required>
+                            </select>  
+                            <div *ngIf="submitted && entreeProduit.get('produit')!.errors" class="text-danger" >
+                                <p> Ce champs est obligatoire </p>
+                            </div>
+                            <!-- <input (focus)="afficherOption()" (blur)="masqueOption()" id="name"  #inputProduit type="text" name="produit"  formControlName="produit" placeholder="Produit" -->
+                                <!-- required>  -->
                         </div>
 
                         <div style="display: none">
                             <label for="name">Montant</label><br>
                             <input id="name" type="number" name="montant" formControlName="montant" placeholder="montant"
-                                required>
+                                >
                         </div>
                     </div>
                     <div style="margin: 20px; align-items: center;" class="block3">
@@ -111,7 +134,9 @@
                             <input id="name" type="date" name="date" formControlName="date"
                                 placeholder="Saisissez la date du jour" required>
                         </div>
-                        <button  id="bbutton" type="submit">Valider</button>
+                        <button  id="bbutton" type="submit" ajoutProduit.valid>Valider</button>
+                        <div style="display: none;" *ngIf="submitted && entreeProduit.invalid"></div>
+
                     </div>
                 </div>
             </form>

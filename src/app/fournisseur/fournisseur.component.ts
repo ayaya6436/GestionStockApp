@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Fournisseur } from './fournisseur.model';
 import { ToastrService } from 'ngx-toastr';
+import { FournisseurService } from '../fournisseur.service';
 
 
 @Component({
@@ -19,10 +20,10 @@ isedit: boolean=false;
 
 // dtoptions: DataTables.Settings={}
 ngOnInit():void{
- 
+ this.fournisseurs = this.fournisseurService.getFournisseur();
 }
 
-constructor(private fb: FormBuilder,private toastr: ToastrService) {
+constructor(private fb: FormBuilder,private toastr: ToastrService ,private fournisseurService: FournisseurService) {
   this.fournisseurForm = this.fb.group({
     nom: ['', Validators.required],
     prenom: ['', Validators.required],
@@ -32,15 +33,24 @@ constructor(private fb: FormBuilder,private toastr: ToastrService) {
 }
 submit() {
   if (this.fournisseurForm.valid) {
-    const fournisseur: Fournisseur = this.fournisseurForm.value;
+    const newFournisseur = this.fournisseurForm.value;
+    const saveFournisseurs: Fournisseur = {
+      nom: newFournisseur.nom,
+      prenom: newFournisseur.prenom,
+      email: newFournisseur.email,
+      telephone: newFournisseur.telephone
+    }
+    // const fournisseur: Fournisseur = this.fournisseurForm.value;
+
     if (this.isedit && this.selectedFournisseur) {
-      Object.assign(this.selectedFournisseur, fournisseur);
+      Object.assign(this.selectedFournisseur, saveFournisseurs);
       this.toastr.success('Fournisseur mis à jour avec succès !', 'Succès');
     } else {
-      this.fournisseurs.push(fournisseur);
+
       this.toastr.success('Fournisseur ajouté avec succès !', 'Succès');
     }
-    this.fournisseurForm.reset();
+    this.fournisseurService.saveFournisseur(saveFournisseurs);
+    // this.fournisseurForm.reset();
     this.selectedFournisseur = undefined;
     this.isedit = false;
   } else {

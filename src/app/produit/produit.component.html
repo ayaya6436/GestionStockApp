@@ -67,10 +67,10 @@
             <form
                 style="width: min-content; background-color: #ffff; margin-right: 50%;border: #dadada 1px solid; border-radius: 5px;"
                 [formGroup]="ajoutProduit" (ngSubmit)="submit()">
-                <div style="margin-bottom: 0px; width: 100%; border: #9d4edd solid;" class="formulaireSortie">
-                    <div style="border: red;" class="modal-header">
+                <div style="margin-bottom: 0px; " class="formulaireSortie">
+                    <div  class="modal-header">
                         <h2 class="modal-title " id="exampleModalLabel">Ajouter un produit</h2>
-                        <span data-bs-dismiss="modal" aria-label="class" class="close-btn1 p-2 ">X</span>
+                        <span  data-bs-dismiss="modal" aria-label="class" class="close-btn1 p-1 ">X</span>
                     </div>
 
                     <div style="margin: 20px;" class="block1">
@@ -81,12 +81,15 @@
                         </div> -->
                         <div>
                             <label for="name">Nom</label><br>
-                            <input id="nameNom" type="text" name="nom" formControlName="nom"
-                                placeholder="Saisissez le nom du produit" required>
+                            <input class="form-control" [ngClass]="{'is-invalid': submitted && ajoutProduit.controls['nom'].errors}" id="nameNom" type="text" name="nom" formControlName="nom"
+                                placeholder="Saisissez le nom du produit" >
+                                <div *ngIf="submitted && ajoutProduit.get('nom')!.errors" class="text-danger" >
+                                    <p> Ce champs est obligatoire </p>
+                                </div>
                         </div>
                         <div style="display: none;">
                             <label for="nameQuantite">Quantite</label><br>
-                            <input id="nameQuantite" type="text" name="quantite" formControlName="quantite"
+                            <input  id="nameQuantite" type="text" name="quantite" formControlName="quantite"
                                 placeholder="Saisissez la quantite" required>
                                 <!-- <div *ngIf="ajoutProduit.get('quantite').hasError('required') && ajoutProduit.get('quantite').touched!">
                                     Le nom du produit est requis.
@@ -97,12 +100,15 @@
                     <div style="margin: 20px;" class="block2">
                         <div >
                             <label for="name">Description</label><br>
-                            <input id="nameDescription" id="descrInput" type="text" name="description"
-                                formControlName="description" placeholder="Ajoutez une description" required>
+                            <textarea style="height: 80px;" class="form-control" [ngClass]="{'is-invalid':submitted && ajoutProduit.get('description')!.errors}"   id="descrInput" type="text" name="description"
+                                formControlName="description" placeholder="Ajoutez une description" required></textarea>
+                                <div *ngIf="submitted && ajoutProduit.get('description')!.errors" class="text-danger" >
+                                    <p> Ce champs est obligatoire </p>
+                                </div> 
                         </div>
 
                     </div>
-                    <div style="margin: 20px; align-items: center;" class="block3">
+                    <div style="margin: 20px; align-items: center; margin-left: 23%" class="block3">
                         <div style="display: none;">
                             <label for="name">Dates d'ajout</label><br>
                             <input id="nameDate" type="date" name="date" formControlName="date"
@@ -110,7 +116,10 @@
                            
                         </div>
 
-                        <button style="margin-left: 70%;" id="bbutton" type="submit" [disabled]="!ajoutProduit.valid">Valider</button>
+                        <button style="margin-left: 70%;" id="bbutton" type="submit" ajoutProduit.valid>Valider</button>
+                        <div style="display: none;" *ngIf="submitted && ajoutProduit.invalid">
+                           
+                        </div>
                     </div>
                 </div>
             </form>
@@ -122,7 +131,7 @@
 <div style="background-color: #f3f2f323; width: fit-content; " class="modal fade" id="detailsModal" tabindex="-1"
     aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
     <div style="width: 100%;" class="modal-dialog modal-lg modal-dialog-centered">
-        <div style="overflow: auto; height: 500px; width: 100%; border: red;" class="modal-content">
+        <div style="overflow: auto; height: 500px; width: 100%; " class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title " id="exampleModalLabel">Details du produit</h2>
                 <span data-bs-dismiss="modal" aria-label="class" class="close-btn1 p-2 ">X</span>
@@ -152,8 +161,9 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <td>fgyugfugue</td>
                         <tr *ngFor="let vue of vueProduit">
-                            <td>{{ vue.date | date }}</td>
+                            <td>www{{ vue.date | date }}</td>
                             <td>{{ vue.nom }}</td>
                             <td>{{ vue.entreeQuantite }}</td>
                             <td>{{ vue.entreePrix }}</td>
