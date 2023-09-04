@@ -49,7 +49,7 @@ export class SortieComponent implements OnInit {
       quantite: ['', Validators.required],
       number_stock: ['', Validators.required],
       prix_unitaire: ['', Validators.required],
-      montant: ['', Validators.required],
+      montant: ['',],
       produit: ['', Validators.required],
       client: ['', Validators.required],
       description: ['', Validators.required],
@@ -57,18 +57,11 @@ export class SortieComponent implements OnInit {
     });
 
   }
-  nameProduit(){
-    // const Allp = new Array<ProduitService>();
-    // Allp  this.produitTabe 
-
-    // const allP = this.produitService.getALProduitNom();
-    
-    // console.log(allP?.nom);
-    // return allP?.nom;
-  }
+ 
 
   submit() {
     this.submitted = true;
+    console.log(this.sortieProduit.value);
     if (this.sortieProduit.invalid) {
       this.toastr.error('Veuillez remplir tous les champs', 'Erreur', { timeOut: 5000 });
 
@@ -79,7 +72,12 @@ export class SortieComponent implements OnInit {
 
       console.log(stockExists + "je trouver stock")
       if (stockExists != null || stockExists!=undefined) {
-
+        const stockQuantite = stockExists.quantite;
+        if (stockQuantite < quantiteSortie){
+          this.toastr.error('votre stock est insufusant!', 'Erreur', { timeOut: 5000 });
+          return;
+        }else{
+          
        const newQuantiStockExist = stockExists.quantite - quantiteSortie;
         const  montantSortie = quantiteSortie * prixUnitaire;
         console.log(montantSortie + " "+ "montant sortie trouver")
@@ -104,8 +102,10 @@ export class SortieComponent implements OnInit {
         this.stockService.updateQuantite(stockExists.produit, newQuantiStockExist);
         this.stockService.updateStock(stockExists.produit, montExistUpdate );
         //this.sortieService.updateSortie(stockExists.produit, montantSortie);
+        this.toastr.success('Sortie effectuer avec succès !', 'Succès' ,{timeOut: 5000});
 
         console.log(montantSortie + " stock updated");
+      }
 
       }
 
@@ -117,6 +117,8 @@ export class SortieComponent implements OnInit {
   }
 
   deleteSortie(index: number) {
+    
+
     this.sorties.splice(index, 1);
   }
 
