@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DetailProduit, Produit } from './produit.model';
 import { ProduitService } from '../produit.service';
@@ -7,13 +7,14 @@ import { SortieService } from '../sortie.service';
 import { EntreeService } from '../entree.service';
 import { StockService } from '../stock.service';
 import { ToastrService } from 'ngx-toastr';
+import {Subject} from 'rxjs';
 
 @Component({
   selector: 'app-produit',
   templateUrl: './produit.component.html',
   styleUrls: ['./produit.component.css']
 })
-export class ProduitComponent implements OnInit {
+export class ProduitComponent implements OnInit,OnDestroy{
   ajoutProduit: FormGroup;
   produitTab: Produit[] = [];
   detailTabe: DetailProduit[] =[]; //
@@ -24,22 +25,38 @@ export class ProduitComponent implements OnInit {
   vueProduit : any;
 
 
-  
- 
 
-  ngOnInit():void{
+
+//datatable
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject<any>();
+
+
+
+
+  ngOnInit(): void {
     this.produitTab = this.produitService.getDataProduit();
 
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 5,
+      processing: true,
+      searching: true
+    };
+  }
+
+  ngOnDestroy(): void {
+    this.dtTrigger.unsubscribe();
   }
   constructor(
-    private fb: FormBuilder, 
-    private produitService: ProduitService, 
+    private fb: FormBuilder,
+    private produitService: ProduitService,
     private generatorIdService: GeneratorIdService,
     private sortieService: SortieService,
     private entreeService: EntreeService,
     private stockService: StockService,
     private toastr: ToastrService
-    
+
     ) {
 
     this.ajoutProduit = this.fb.group({
@@ -58,7 +75,7 @@ export class ProduitComponent implements OnInit {
 
       console.log(produitExists + "je trouver produit")
       if (produitExists == null || produitExists == undefined) {
-        
+
         const newProduit = this.ajoutProduit.value;
         // console.log(newProduit.nom + "donnees trouver");
         if (!this.isedit) {
@@ -78,9 +95,10 @@ export class ProduitComponent implements OnInit {
         this.produitService.saveDataProuit(saveProduit);
         console.log(saveProduit + ": donnees trouver avec succees");
         // this.ajoutProduit.reset();
-        
-       
+
+
       }
+
     }
   }
   addmodel(ajoutProduit?: Produit) {

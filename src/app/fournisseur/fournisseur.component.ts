@@ -1,93 +1,131 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Fournisseur } from './fournisseur.model';
 import { ToastrService } from 'ngx-toastr';
-
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-fournisseur',
   templateUrl: './fournisseur.component.html',
-  styleUrls: ['./fournisseur.component.css']
+  styleUrls: ['./fournisseur.component.css'],
 })
 export class FournisseurComponent implements OnInit {
-fournisseurForm:FormGroup|any;
-fournisseurs: Fournisseur[] = [];
-selectedFournisseur: Fournisseur | undefined;
-selectedFournisseurDetails: Fournisseur | undefined;
-currentDate= new Date();
-isedit: boolean=false;
-ngOnInit():void{
-}
+  fournisseurForm: FormGroup | any;
+  fournisseurs: Fournisseur[] = [];
+  fournisseursCopie: Fournisseur[] = []; // Copie des données d'origine
+  selectedFournisseur: Fournisseur | undefined;
+  selectedFournisseurDetails: Fournisseur | undefined;
+  currentDate = new Date();
+  isedit: boolean = false;
 
-constructor(private fb: FormBuilder,private toastr: ToastrService) {
-  this.fournisseurForm = this.fb.group({
-    nom: ['', Validators.required],
-    prenom: ['', Validators.required],
-    email: ['', Validators.email],
-    telephone: ['']
-  });
-}
-submit() {
-  if (this.fournisseurForm.valid) {
-    const fournisseur: Fournisseur = this.fournisseurForm.value;
-    if (this.isedit && this.selectedFournisseur) {
-      Object.assign(this.selectedFournisseur, fournisseur);
-      this.toastr.success('Fournisseur mis à jour avec succès !', 'Succès');
+  //datatable
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject<any>();
+
+  ngOnInit(): void {
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 5,
+      processing: true,
+    };
+
+    // Vous pouvez initialiser vos données de fournisseurs ici
+    // Exemple :
+    // this.fournisseurs = [
+    //   { nom: 'Nom1', prenom: 'Prenom1', email: 'Email1', telephone: 'Telephone1' },
+    //   { nom: 'Nom2', prenom: 'Prenom2', email: 'Email2', telephone: 'Telephone2' },
+
+    // ];
+
+    // Faites une copie des données d'origine
+    this.fournisseursCopie = [...this.fournisseurs];
+  }
+
+  constructor(private fb: FormBuilder, private toastr: ToastrService) {
+    this.fournisseurForm = this.fb.group({
+      nom: ['', Validators.required],
+      prenom: ['', Validators.required],
+      email: ['', Validators.email],
+      telephone: [''],
+      recherche: [''], // Champ de recherche
+    });
+  }
+
+  submit() {
+    if (this.fournisseurForm.valid) {
+      const fournisseur: Fournisseur = this.fournisseurForm.value;
+      if (this.isedit && this.selectedFournisseur) {
+        Object.assign(this.selectedFournisseur, fournisseur);
+        this.toastr.success('Fournisseur mis à jour avec succès !', 'Succès');
+      } else {
+        this.fournisseurs.push(fournisseur);
+        this.toastr.success('Fournisseur ajouté avec succès !', 'Succès');
+      }
+      this.fournisseurForm.reset();
+      this.selectedFournisseur = undefined;
+      this.isedit = false;
     } else {
-      this.fournisseurs.push(fournisseur);
-      this.toastr.success('Fournisseur ajouté avec succès !', 'Succès');
+      this.toastr.error('Veuillez remplir tous les champs correctement.', 'Erreur');
     }
-    this.fournisseurForm.reset();
-    this.selectedFournisseur = undefined;
-    this.isedit = false;
-  } else {
-    this.toastr.error('Veuillez remplir tous les champs correctement.', 'Erreur');
   }
-}
 
-deleteFournisseur(index: number) {
-  this.fournisseurs.splice(index, 1);
-  this.toastr.success('Fournisseur Supprimer avec succès !', 'Warning');
-}
-
-addmodel(fournisseur?: Fournisseur) {
-  if (fournisseur) {
-    this.selectedFournisseur = { ...fournisseur };
-    this.isedit = true;
-  } else {
-    this.selectedFournisseur = undefined;
-    this.isedit = false;
+  deleteFournisseur(index: number) {
+    this.fournisseurs.splice(index, 1);
+    this.toastr.success('Fournisseur Supprimer avec succès !', 'Warning');
   }
-}
 
-viewDetails(fournisseur: Fournisseur) {
-  this.selectedFournisseurDetails = fournisseur;
-}
-
-printListeFournisseur() {
-  var printWindow = window.open('', '_blank');
-  var divToPrint = document.getElementById('divPrint');
-
-  if (divToPrint) {
-    const content = divToPrint.innerHTML;
-
-    printWindow!.document.write(`
-      <html>
-        <head>
-          <title>Imprimer la liste des fournisseurs</title>
-        </head>
-        <body>
-          ${content}
-        </body>
-      </html>
-    `);
-
-    printWindow!.print();
-    printWindow!.close();
+  addmodel(fournisseur?: Fournisseur) {
+    if (fournisseur) {
+      this.selectedFournisseur = { ...fournisseur };
+      this.isedit = true;
+    } else {
+      this.selectedFournisseur = undefined;
+      this.isedit = false;
+    }
   }
-}
 
+  viewDetails(fournisseur: Fournisseur) {
+    this.selectedFournisseurDetails = fournisseur;
+  }
 
+  // Fonction de recherche
+  search() {
+    const recherche = this.fournisseurForm.value.recherche.toLowerCase();
+    this.fournisseurs = this.fournisseursCopie.filter((fournisseur: Fournisseur) => {
+      return (
+        fournisseur.nom.toLowerCase().includes(recherche) ||
+        fournisseur.prenom.toLowerCase().includes(recherche) ||
+        fournisseur.email.toLowerCase().includes(recherche) ||
+        fournisseur.telephone.includes(recherche)
+      );
+    });
+  }
 
+  // Réinitialisez la recherche pour afficher toutes les données
+  resetSearch() {
+    this.fournisseurs = [...this.fournisseursCopie];
+  }
 
+  printListeFournisseur() {
+    var printWindow = window.open('', '_blank');
+    var divToPrint = document.getElementById('divPrint');
+
+    if (divToPrint) {
+      const content = divToPrint.innerHTML;
+
+      printWindow!.document.write(`
+        <html>
+          <head>
+            <title>Imprimer la liste des fournisseurs</title>
+          </head>
+          <body>
+            ${content}
+          </body>
+        </html>
+      `);
+
+      printWindow!.print();
+      printWindow!.close();
+    }
+  }
 }

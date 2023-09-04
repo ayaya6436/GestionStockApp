@@ -32,7 +32,7 @@ export class AppComponent {
   } else {
     // Sinon, la sidebar est ouverte normalement
     this.isSidebarReduced = false;
-    // this.sideBarStatus = event;
+    this.sideBarStatus = event;
   }
 }
 

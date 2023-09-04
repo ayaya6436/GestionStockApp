@@ -34,7 +34,7 @@
     <div class="text-center" style="font-size: 25px;">Date:{{currentDate | date:'yyyy-MM-dd'}}</div>
     <hr style="color: #9d4edd;margin-left: 10%;" />
   
-    <table class="table table table-striped" style="width:100%;" id="divPrint" style="margin-left: 10%;" >
+    <table datatable [dtOptions]="dtOptions" class="table table table-striped" style="width:100%;" id="divPrint" style="margin-left: 10%;" >
     
       <thead>
         <tr>
