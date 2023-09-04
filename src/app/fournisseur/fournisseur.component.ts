@@ -1,3 +1,4 @@
+import { FournisseurService } from './../fournisseur.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Fournisseur } from './fournisseur.model';
@@ -28,16 +29,13 @@ export class FournisseurComponent implements OnInit {
       pageLength: 5,
       processing: true,
     };
+    this.fournisseurs = this.fournisseurService.getFournisseur();
 
-    // Vous pouvez initialiser vos données de fournisseurs ici
-    // Exemple :
-   
-
-    // Faites une copie des données d'origine
+  
     this.fournisseursCopie = [...this.fournisseurs];
   }
 
-  constructor(private fb: FormBuilder, private toastr: ToastrService) {
+  constructor(private fb: FormBuilder, private toastr: ToastrService, private fournisseurService: FournisseurService) {
     this.fournisseurForm = this.fb.group({
       nom: ['', Validators.required],
       prenom: ['', Validators.required],
@@ -48,13 +46,23 @@ export class FournisseurComponent implements OnInit {
   }
 
   submit() {
+
     if (this.fournisseurForm.valid) {
+      const newFournisseur = this.fournisseurForm.value;
+      const saveFournisseur : Fournisseur ={
+        nom: newFournisseur.nom,
+        prenom: newFournisseur.prenom,
+        email: newFournisseur.email,
+        telephone: newFournisseur.telephone
+
+      }
       const fournisseur: Fournisseur = this.fournisseurForm.value;
       if (this.isedit && this.selectedFournisseur) {
         Object.assign(this.selectedFournisseur, fournisseur);
         this.toastr.success('Fournisseur mis à jour avec succès !', 'Succès');
       } else {
-        this.fournisseurs.push(fournisseur);
+        this.fournisseurService.saveFournisseur(saveFournisseur)
+        // this.fournisseurs.push(fournisseur);
         this.toastr.success('Fournisseur ajouté avec succès !', 'Succès');
       }
       this.fournisseurForm.reset();
